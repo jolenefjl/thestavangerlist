@@ -3,23 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
-import { reviewBySlugQuery, allReviewsQuery } from "@/sanity/lib/queries";
+import { reviewBySlugQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
+// Always render on demand so new reviews appear without a redeploy
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-// Pre-generate all review pages at build time
-export async function generateStaticParams() {
-  const reviews = await client.fetch(allReviewsQuery);
-  return reviews.map((r: { slug: { current: string } }) => ({
-    slug: r.slug.current,
-  }));
 }
 
 const ratings = [
