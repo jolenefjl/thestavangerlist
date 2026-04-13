@@ -113,6 +113,7 @@ export const review = defineType({
     defineField({
       name: "body",
       title: "Review Body",
+      description: "Write your review. Use the image button in the toolbar to drop photos inline between paragraphs.",
       type: "array",
       of: [
         {
@@ -128,6 +129,23 @@ export const review = defineType({
               { title: "Italic", value: "em" },
             ],
           },
+        },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+              description: "Describe the image for accessibility",
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption (optional)",
+              type: "string",
+            }),
+          ],
         },
       ],
       validation: (Rule) => Rule.required(),

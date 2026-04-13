@@ -131,7 +131,29 @@ export default async function ReviewPage({ params }: PageProps) {
               margin: "32px 0",
             }}
           >
-            <PortableText value={review.body} />
+            <PortableText
+              value={review.body}
+              components={{
+                types: {
+                  image: ({ value }: { value: Record<string, unknown> }) => (
+                    <figure style={{ margin: "32px 0" }}>
+                      <Image
+                        src={urlFor(value).width(800).url()}
+                        alt={(value.alt as string) ?? ""}
+                        width={800}
+                        height={500}
+                        style={{ width: "100%", height: "auto", borderRadius: 3, objectFit: "cover" }}
+                      />
+                      {typeof value.caption === "string" && value.caption && (
+                        <figcaption style={{ fontSize: 11, color: "var(--color-text-hint)", marginTop: 8, textAlign: "center", letterSpacing: "0.04em" }}>
+                          {value.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ),
+                },
+              }}
+            />
           </div>
         )}
 
