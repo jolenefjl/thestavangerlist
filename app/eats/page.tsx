@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { allReviewsQuery, cuisineListQuery } from "@/sanity/lib/queries";
