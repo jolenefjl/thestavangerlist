@@ -136,17 +136,23 @@ export default async function ReviewPage({ params }: PageProps) {
         )}
 
         {/* TikTok Embed */}
-        {review.tiktokUrl && (
+        {review.tiktokUrl && (() => {
+          // Extract the numeric video ID from any TikTok URL format
+          const videoId = review.tiktokUrl.match(/\/video\/(\d+)/)?.[1];
+          if (!videoId) return null;
+          const embedUrl = `https://www.tiktok.com/embed/v2/${videoId}`;
+          return (
           <div className="tiktok-embed-wrap">
             <p className="tiktok-label" style={{ padding: "12px 16px 0" }}>Watch the video</p>
             <iframe
-              src={review.tiktokUrl.replace("www.tiktok.com", "www.tiktok.com/embed")}
+              src={embedUrl}
               style={{ width: "100%", height: 700, border: "none" }}
               allowFullScreen
-              scrolling="no"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>
-        )}
+          );
+        })()}
 
         {/* Photo Gallery */}
         {review.gallery?.length > 0 && (

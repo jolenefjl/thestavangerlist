@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/eats/:slug*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-src 'self' https://www.tiktok.com;",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
