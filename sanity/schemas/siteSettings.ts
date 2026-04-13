@@ -5,6 +5,36 @@ export const siteSettings = defineType({
   title: "Site Settings",
   type: "document",
   fields: [
+    // ── Homepage Hero ─────────────────────────────────────────
+    defineField({
+      name: "heroEyebrow",
+      title: "Homepage — Eyebrow Text",
+      type: "string",
+      description: "Small label above the headline, e.g. 🍽️ Stavanger Eats",
+      initialValue: "🍽️ Stavanger Eats",
+    }),
+    defineField({
+      name: "heroHeadline",
+      title: "Homepage — Hero Headline",
+      type: "string",
+      description: "The big headline. Use | to mark where the italic accent word starts, e.g. The best places to eat in |Stavanger.",
+      initialValue: "The best places to eat in |Stavanger.",
+    }),
+    defineField({
+      name: "heroSubheading",
+      title: "Homepage — Hero Subheading",
+      type: "string",
+      initialValue: "Honest reviews for the Stavanger region — every place tested, never sponsored.",
+    }),
+    // ── Newsletter ────────────────────────────────────────────
+    defineField({
+      name: "newsletterCtaText",
+      title: "Newsletter CTA Text",
+      type: "string",
+      description: "Heading shown above the email signup form",
+      initialValue: "The best of Stavanger, in your inbox.",
+    }),
+    // ── Featured Reviews ──────────────────────────────────────
     defineField({
       name: "featuredReviews",
       title: "Homepage Featured Reviews",
@@ -13,13 +43,7 @@ export const siteSettings = defineType({
       validation: (Rule) => Rule.max(4),
       description: "Choose up to 4 reviews to feature on the homepage",
     }),
-    defineField({
-      name: "newsletterCtaText",
-      title: "Newsletter CTA Text",
-      type: "string",
-      description: "The subheading shown above the email signup form",
-      initialValue: "The best of Stavanger, in your inbox.",
-    }),
+    // ── Social ────────────────────────────────────────────────
     defineField({
       name: "instagramUrl",
       title: "Instagram URL",
@@ -32,7 +56,6 @@ export const siteSettings = defineType({
     }),
   ],
   preview: {
-    select: { title: "newsletterCtaText" },
     prepare() {
       return { title: "Site Settings" };
     },

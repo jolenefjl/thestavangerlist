@@ -38,14 +38,18 @@ export default async function Home() {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="section section-gap" style={{ paddingTop: 56, paddingBottom: 56 }}>
-        <p className="text-eyebrow" style={{ marginBottom: 14 }}>🍽️ Stavanger Eats</p>
+        <p className="text-eyebrow" style={{ marginBottom: 14 }}>
+          {settings?.heroEyebrow ?? "🍽️ Stavanger Eats"}
+        </p>
         <h1 className="text-hero">
-          The best places<br />
-          to eat in{" "}
-          <span className="text-italic">Stavanger.</span>
+          {(() => {
+            const headline: string = settings?.heroHeadline ?? "The best places to eat in |Stavanger.";
+            const [before, after] = headline.split("|");
+            return after ? <>{before}<span className="text-italic">{after}</span></> : <>{before}</>;
+          })()}
         </h1>
         <p className="text-body text-muted" style={{ marginTop: 18, maxWidth: 460 }}>
-          Honest reviews for the Stavanger region — every place tested, never sponsored.
+          {settings?.heroSubheading ?? "Honest reviews for the Stavanger region — every place tested, never sponsored."}
         </p>
         <div style={{ marginTop: 28, display: "flex", gap: 16, alignItems: "center" }}>
           <Link
