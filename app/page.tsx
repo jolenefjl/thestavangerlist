@@ -1,25 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import RatingDots from "@/components/RatingDots";
-
-function avgRating(review: Record<string, number>): number {
-  const scores = [
-    review.didItHitDifferent,
-    review.wouldIPayAgain,
-    review.worthTheHype,
-    review.theRealDeal,
-    review.didStaffCare,
-  ].filter((s): s is number => s != null);
-  if (!scores.length) return 0;
-  return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
-}
 
 export default async function Home() {
   const [settings, latestReviews, topLists] = await Promise.all([
@@ -140,36 +125,13 @@ export default async function Home() {
               <Link href="/eats" className="section-link">See all →</Link>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "var(--color-border)", border: "0.5px solid var(--color-border)", borderRadius: 3, overflow: "hidden" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--color-border)", border: "0.5px solid var(--color-border)", borderRadius: 3, overflow: "hidden" }}>
               {latestReviews.map((review: Record<string, unknown>) => (
-                <Link
+                <ReviewCard
                   key={review._id as string}
-                  href={`/eats/${(review.slug as { current: string }).current}`}
-                  style={{ textDecoration: "none", background: "var(--color-bg)", display: "flex", alignItems: "center", gap: 16, padding: "14px 16px" }}
-                >
-                  {review.heroImage ? (
-                    <Image
-                      src={urlFor(review.heroImage).width(80).height(80).url()}
-                      alt={(review.heroImage as Record<string, unknown>).alt as string ?? review.name as string}
-                      width={56}
-                      height={56}
-                      style={{ borderRadius: 2, objectFit: "cover", flexShrink: 0 }}
-                    />
-                  ) : (
-                    <div style={{ width: 56, height: 56, borderRadius: 2, background: "var(--color-bg-image)", flexShrink: 0 }} />
-                  )}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div className="card-meta">
-                      <span className="card-cuisine">{review.cuisine as string}</span>
-                      <span className="card-price">{review.priceRange as string}</span>
-                    </div>
-                    <p className="card-name card-name-sm" style={{ marginBottom: 2 }}>{review.name as string}</p>
-                    <p className="text-small text-hint">{review.area as string}</p>
-                  </div>
-                  {avgRating(review as Record<string, number>) > 0 && (
-                    <RatingDots score={avgRating(review as Record<string, number>)} />
-                  )}
-                </Link>
+                  review={review as unknown as Parameters<typeof ReviewCard>[0]["review"]}
+                  size="small"
+                />
               ))}
             </div>
           </section>
