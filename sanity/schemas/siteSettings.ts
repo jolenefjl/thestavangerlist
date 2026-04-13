@@ -16,9 +16,10 @@ export const siteSettings = defineType({
     defineField({
       name: "heroHeadline",
       title: "Homepage — Hero Headline",
-      type: "string",
-      description: "Main headline text, e.g. The best places to eat in",
-      initialValue: "The best places to eat in",
+      type: "text",
+      rows: 3,
+      description: "Press Enter for line breaks. The accent word below is appended at the end in italic.",
+      initialValue: "The best places\nto eat in",
     }),
     defineField({
       name: "heroHeadlineAccent",

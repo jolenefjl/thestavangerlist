@@ -29,7 +29,11 @@ export default async function Home() {
           {settings?.heroEyebrow ?? "🍽️ Stavanger Eats"}
         </p>
         <h1 className="text-hero">
-          {settings?.heroHeadline ?? "The best places to eat in"}{" "}
+          {(settings?.heroHeadline ?? "The best places to eat in")
+            .split("\n")
+            .map((line: string, i: number, arr: string[]) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}{" "}
           <span className="text-italic">
             {settings?.heroHeadlineAccent ?? "Stavanger."}
           </span>
