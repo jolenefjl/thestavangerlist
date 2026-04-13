@@ -29,11 +29,10 @@ export default async function Home() {
           {settings?.heroEyebrow ?? "🍽️ Stavanger Eats"}
         </p>
         <h1 className="text-hero">
-          {(() => {
-            const headline: string = settings?.heroHeadline ?? "The best places to eat in |Stavanger.";
-            const [before, after] = headline.split("|");
-            return after ? <>{before}<span className="text-italic">{after}</span></> : <>{before}</>;
-          })()}
+          {settings?.heroHeadline ?? "The best places to eat in"}{" "}
+          <span className="text-italic">
+            {settings?.heroHeadlineAccent ?? "Stavanger."}
+          </span>
         </h1>
         <p className="text-body text-muted" style={{ marginTop: 18, maxWidth: 460 }}>
           {settings?.heroSubheading ?? "Honest reviews for the Stavanger region — every place tested, never sponsored."}

@@ -24,6 +24,7 @@ export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     heroEyebrow,
     heroHeadline,
+    heroHeadlineAccent,
     heroSubheading,
     newsletterCtaText,
     instagramUrl,

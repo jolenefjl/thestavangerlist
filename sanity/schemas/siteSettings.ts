@@ -17,8 +17,15 @@ export const siteSettings = defineType({
       name: "heroHeadline",
       title: "Homepage — Hero Headline",
       type: "string",
-      description: "The big headline. Use | to mark where the italic accent word starts, e.g. The best places to eat in |Stavanger.",
-      initialValue: "The best places to eat in |Stavanger.",
+      description: "Main headline text, e.g. The best places to eat in",
+      initialValue: "The best places to eat in",
+    }),
+    defineField({
+      name: "heroHeadlineAccent",
+      title: "Homepage — Hero Headline Accent",
+      type: "string",
+      description: "This word appears in italic terracotta after the headline, e.g. Stavanger.",
+      initialValue: "Stavanger.",
     }),
     defineField({
       name: "heroSubheading",
