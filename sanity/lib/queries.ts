@@ -22,6 +22,9 @@ const reviewFields = groq`
 // Homepage: site settings (featured reviews + social links)
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheading,
     newsletterCtaText,
     instagramUrl,
     tiktokUrl,

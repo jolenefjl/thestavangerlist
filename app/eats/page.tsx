@@ -66,7 +66,7 @@ export default async function EatsPage({ searchParams }: PageProps) {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 4,
+              gap: 8,
             }}
           >
             {filtered.map((review: Record<string, unknown>) => (
