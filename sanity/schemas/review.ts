@@ -4,34 +4,25 @@ export const review = defineType({
   name: "review",
   title: "Review",
   type: "document",
-  groups: [
-    { name: "info", title: "Restaurant Info", default: true },
-    { name: "content", title: "Content" },
-    { name: "ratings", title: "Ratings" },
-    { name: "media", title: "Media" },
-    { name: "settings", title: "Settings" },
-  ],
   fields: [
     defineField({
       name: "name",
       title: "Restaurant Name",
       type: "string",
-      group: "info",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
-      group: "info",
       options: { source: "name", maxLength: 96 },
+      description: "Click Generate — this becomes the page URL (e.g. toko-bintang)",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "cuisine",
       title: "Cuisine Type",
       type: "string",
-      group: "info",
       description: "e.g. Japanese, Norwegian, Brunch, Fine Dining",
       validation: (Rule) => Rule.required(),
     }),
@@ -39,7 +30,6 @@ export const review = defineType({
       name: "area",
       title: "Area / Location",
       type: "string",
-      group: "info",
       description: "e.g. Stavanger Sentrum, Sandnes, Klepp",
       validation: (Rule) => Rule.required(),
     }),
@@ -47,7 +37,6 @@ export const review = defineType({
       name: "priceRange",
       title: "Price Range",
       type: "string",
-      group: "info",
       options: {
         list: [
           { title: "€ — Inexpensive", value: "€" },
@@ -62,7 +51,6 @@ export const review = defineType({
       name: "bestFor",
       title: "Best For",
       type: "array",
-      group: "info",
       of: [{ type: "string" }],
       options: {
         list: [
@@ -82,13 +70,11 @@ export const review = defineType({
       name: "websiteUrl",
       title: "Website URL",
       type: "url",
-      group: "info",
     }),
     defineField({
       name: "heroImage",
       title: "Hero Image",
       type: "image",
-      group: "media",
       options: { hotspot: true },
       fields: [
         defineField({
@@ -104,7 +90,6 @@ export const review = defineType({
       name: "gallery",
       title: "Photo Gallery",
       type: "array",
-      group: "media",
       of: [
         {
           type: "image",
@@ -123,14 +108,12 @@ export const review = defineType({
       name: "tiktokUrl",
       title: "TikTok Video URL",
       type: "url",
-      group: "media",
       description: "Optional — paste the full TikTok video URL",
     }),
     defineField({
       name: "body",
       title: "Review Body",
       type: "array",
-      group: "content",
       of: [
         {
           type: "block",
@@ -149,12 +132,10 @@ export const review = defineType({
       ],
       validation: (Rule) => Rule.required(),
     }),
-    // ── Ratings ──────────────────────────────────────────────────
     defineField({
       name: "didItHitDifferent",
       title: "😋 Did It Hit Different?",
       type: "number",
-      group: "ratings",
       description: "Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
@@ -162,7 +143,6 @@ export const review = defineType({
       name: "wouldIPayAgain",
       title: "💰 Would I Pay This Price Again?",
       type: "number",
-      group: "ratings",
       description: "Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
@@ -170,7 +150,6 @@ export const review = defineType({
       name: "worthTheHype",
       title: "⭐ Worth the Hype?",
       type: "number",
-      group: "ratings",
       description: "Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
@@ -178,7 +157,6 @@ export const review = defineType({
       name: "theRealDeal",
       title: "🌍 The Real Deal?",
       type: "number",
-      group: "ratings",
       description: "Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
@@ -186,23 +164,19 @@ export const review = defineType({
       name: "didStaffCare",
       title: "👏 Did The Staff Care?",
       type: "number",
-      group: "ratings",
       description: "Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
-    // ── Settings ─────────────────────────────────────────────────
     defineField({
       name: "publishedAt",
       title: "Published Date",
       type: "datetime",
-      group: "settings",
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
       name: "featured",
       title: "Featured on Homepage",
       type: "boolean",
-      group: "settings",
       initialValue: false,
     }),
   ],
