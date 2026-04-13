@@ -65,12 +65,8 @@ export default async function EatsPage({ searchParams }: PageProps) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: 1,
-              background: "var(--color-border)",
-              border: "0.5px solid var(--color-border)",
-              borderRadius: 3,
-              overflow: "hidden",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 4,
             }}
           >
             {filtered.map((review: Record<string, unknown>) => (

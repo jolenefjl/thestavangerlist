@@ -70,7 +70,7 @@ export default async function Home() {
             <Link href="/eats" className="section-link">See all →</Link>
           </div>
 
-          <div className="featured-grid">
+          <div className="featured-grid" style={{ gap: 4, borderRadius: 6 }}>
             {mainFeatured && (
               <ReviewCard review={mainFeatured as unknown as Parameters<typeof ReviewCard>[0]["review"]} size="main" />
             )}
@@ -127,7 +127,7 @@ export default async function Home() {
               <Link href="/eats" className="section-link">See all →</Link>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "var(--color-border)", border: "0.5px solid var(--color-border)", borderRadius: 3, overflow: "hidden" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 4 }}>
               {latestReviews.map((review: Record<string, unknown>) => (
                 <ReviewCard
                   key={review._id as string}
