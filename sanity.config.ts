@@ -30,9 +30,20 @@ export default defineConfig({
                   .documentId("siteSettings")
               ),
             S.divider(),
+            // Singleton: About Page
+            S.listItem()
+              .title("About Page")
+              .id("aboutPage")
+              .child(
+                S.document()
+                  .schemaType("aboutPage")
+                  .documentId("aboutPage")
+              ),
+            S.divider(),
             // Regular document lists
             S.documentTypeListItem("review").title("Reviews"),
             S.documentTypeListItem("topList").title("Top Lists"),
+            S.documentTypeListItem("interview").title("Into the Kitchen"),
           ]),
     }),
     visionTool(),
