@@ -48,8 +48,9 @@ export default async function IntoTheKitchenPage() {
         ) : (
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
             gap: 8,
+            maxWidth: 720,
           }}>
             {interviews.map((interview: Record<string, unknown>) => {
               const slug = (interview.slug as { current: string }).current;
