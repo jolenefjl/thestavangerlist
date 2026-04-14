@@ -6,6 +6,7 @@ import { allReviewsQuery, cuisineListQuery, siteSettingsQuery } from "@/sanity/l
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
+import EatsSubNav from "@/components/EatsSubNav";
 
 interface PageProps {
   searchParams: Promise<{ cuisine?: string }>;
@@ -30,6 +31,8 @@ export default async function EatsPage({ searchParams }: PageProps) {
   return (
     <div className="page-bg">
       <Nav />
+
+      <EatsSubNav active="reviews" />
 
       {/* ── Page Header ──────────────────────────────────────── */}
       <div className="section" style={{ paddingTop: 40, paddingBottom: 24 }}>

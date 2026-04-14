@@ -95,6 +95,39 @@ export const reviewBySlugQuery = groq`
   }
 `;
 
+// Into the Kitchen — interview index
+export const allInterviewsQuery = groq`
+  *[_type == "interview"] | order(publishedAt desc) {
+    _id,
+    founderName,
+    founderRole,
+    restaurantName,
+    linkedReview-> { name, slug },
+    slug,
+    heroPhoto,
+    introStory,
+    publishedAt,
+    featured
+  }
+`;
+
+// Into the Kitchen — individual interview
+export const interviewBySlugQuery = groq`
+  *[_type == "interview" && slug.current == $slug][0] {
+    founderName,
+    founderRole,
+    restaurantName,
+    linkedReview-> { name, slug },
+    slug,
+    heroPhoto,
+    introStory,
+    pullQuote,
+    qAndA,
+    gallery,
+    publishedAt,
+  }
+`;
+
 // About page
 export const aboutPageQuery = groq`
   *[_type == "aboutPage"][0] {
