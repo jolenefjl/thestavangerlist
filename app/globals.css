@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
-.nav-links { display: flex; gap: 22px; list-style: none; }
+.nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
 
 .nav-link {
   font-size: 10px;
