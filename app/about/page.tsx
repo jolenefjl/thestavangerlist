@@ -16,6 +16,16 @@ const portableTextComponents = {
       <p style={{ marginBottom: 20, lineHeight: 1.85 }}>{children}</p>
     ),
   },
+  marks: {
+    strong: ({ children }: { children?: React.ReactNode }) => (
+      <strong style={{
+        fontFamily: "var(--font-spectral), serif",
+        fontWeight: 600,
+        fontStyle: "normal",
+        color: "var(--color-accent)",
+      }}>{children}</strong>
+    ),
+  },
 };
 
 export default async function AboutPage() {
@@ -123,7 +133,7 @@ export default async function AboutPage() {
                 <li key={title} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <span style={{ color: "var(--color-accent)", marginTop: 3, flexShrink: 0 }}>—</span>
                   <span>
-                    <strong style={{ fontWeight: 500 }}>{title}</strong>
+                    <strong style={{ fontFamily: "var(--font-spectral), serif", fontWeight: 600, color: "var(--color-accent)" }}>{title}</strong>
                     <span style={{ color: "var(--color-text-muted)" }}> — </span>
                     <span style={{ color: "var(--color-text-muted)" }} dangerouslySetInnerHTML={{ __html: desc }} />
                   </span>
