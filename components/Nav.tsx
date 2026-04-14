@@ -12,8 +12,8 @@ export default async function Nav() {
       </Link>
       <ul className="nav-links">
         <li className="nav-dropdown">
-          <Link href="/eats" className="nav-link" style={{ display: "flex", alignItems: "center", gap: 4 }}>
-            Eats <span style={{ fontSize: 8, opacity: 0.5 }}>▾</span>
+          <Link href="/eats" className="nav-link" style={{ display: "flex", alignItems: "center", gap: 3 }}>
+            Eats <span style={{ fontSize: 7, lineHeight: 1, marginTop: 1, opacity: 0.45 }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/eats" className="nav-dropdown-item">Food Reviews</Link>

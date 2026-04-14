@@ -7,7 +7,6 @@ import { allInterviewsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import EatsSubNav from "@/components/EatsSubNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 function extractExcerpt(blocks: unknown[], maxLength = 160): string {
@@ -24,7 +23,6 @@ export default async function IntoTheKitchenPage() {
   return (
     <div className="page-bg">
       <Nav />
-      <EatsSubNav active="into-the-kitchen" />
 
       {/* ── Page Header ──────────────────────────────────────── */}
       <div className="section" style={{ paddingTop: 48, paddingBottom: 36, maxWidth: 680 }}>
