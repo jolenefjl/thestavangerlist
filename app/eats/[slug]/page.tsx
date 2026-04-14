@@ -27,11 +27,11 @@ export default async function ReviewPage({ params }: PageProps) {
   if (!review) notFound();
 
   const ratings = [
-    { key: "didItHitDifferent", label: settings?.ratingCaloriesLabel ?? "Worth the Calories?", sub: settings?.ratingCaloriesSub ?? "Food quality" },
-    { key: "wouldIPayAgain",    label: settings?.ratingBillLabel    ?? "Worth the Bill?",      sub: settings?.ratingBillSub    ?? "Value for money" },
-    { key: "worthTheHype",      label: settings?.ratingHypeLabel    ?? "Worth the Hype?",      sub: settings?.ratingHypeSub    ?? "Does it live up to its reputation?" },
-    { key: "theRealDeal",       label: settings?.ratingDetourLabel  ?? "Worth the Detour?",    sub: settings?.ratingDetourSub  ?? "How authentic is it?" },
-    { key: "didStaffCare",      label: settings?.ratingServiceLabel ?? "Worth Going Back For?", sub: settings?.ratingServiceSub ?? "Service" },
+    { key: "didItHitDifferent", blurbKey: "didItHitDifferentBlurb", label: settings?.ratingCaloriesLabel ?? "Worth the Calories?" },
+    { key: "wouldIPayAgain",    blurbKey: "wouldIPayAgainBlurb",    label: settings?.ratingBillLabel    ?? "Worth the Bill?" },
+    { key: "worthTheHype",      blurbKey: "worthTheHypeBlurb",      label: settings?.ratingHypeLabel    ?? "Worth the Hype?" },
+    { key: "theRealDeal",       blurbKey: "theRealDealBlurb",       label: settings?.ratingDetourLabel  ?? "Worth the Detour?" },
+    { key: "didStaffCare",      blurbKey: "didStaffCareBlurb",      label: settings?.ratingServiceLabel ?? "Worth Going Back For?" },
   ];
 
   const scores = ratings.map((r) => review[r.key] as number).filter(Boolean);
@@ -102,27 +102,26 @@ export default async function ReviewPage({ params }: PageProps) {
 
         {/* Rating Panel */}
         <div className="rating-panel">
-          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{settings?.verdictTitle ?? "My Verdict"}</p>
+          <p className="text-eyebrow" style={{ marginBottom: 16 }}>{settings?.verdictTitle ?? "My Verdict"}</p>
           {ratings.map((r) => {
             const score = review[r.key] as number;
+            const blurb = review[r.blurbKey] as string | null;
             if (!score) return null;
             return (
-              <div key={r.key} className="rating-row">
-                <span className="rating-label">
-                  {r.label}
-                  <span style={{ display: "block", fontSize: 10, fontWeight: 400, color: "var(--color-text-muted)", letterSpacing: "0.03em", marginTop: 1 }}>{r.sub}</span>
-                </span>
-                <span className="rating-score">
+              <div key={r.key} className="verdict-item">
+                <div className="verdict-header">
+                  <span className="verdict-title">{r.label}</span>
                   <RatingDots score={score} />
-                </span>
+                </div>
+                {!!blurb && <p className="verdict-blurb">{blurb}</p>}
               </div>
             );
           })}
           {overallDisplay && (
-            <div className="rating-row" style={{ borderTop: "0.5px solid var(--color-border)", marginTop: 4, paddingTop: 12 }}>
-              <span className="rating-label" style={{ fontWeight: 400, color: "var(--color-text-primary)" }}>Overall</span>
-              <span style={{ fontSize: 16, fontFamily: "var(--font-dm-sans)", fontWeight: 700, color: "var(--color-accent)" }}>
-                {overallDisplay}<span style={{ fontSize: 12, fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
+            <div className="verdict-overall">
+              <span style={{ fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 500, color: "var(--color-text-hint)" }}>Overall</span>
+              <span style={{ fontSize: 18, fontFamily: "var(--font-spectral)", fontStyle: "italic", fontWeight: 300, color: "var(--color-accent)" }}>
+                {overallDisplay}<span style={{ fontSize: 13, fontWeight: 300, color: "var(--color-text-muted)" }}>/5</span>
               </span>
             </div>
           )}

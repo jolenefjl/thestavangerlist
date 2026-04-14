@@ -10,11 +10,11 @@ const reviewFields = groq`
   priceRange,
   bestFor,
   heroImage,
-  didItHitDifferent,
-  wouldIPayAgain,
-  worthTheHype,
-  theRealDeal,
-  didStaffCare,
+  didItHitDifferent, didItHitDifferentBlurb,
+  wouldIPayAgain, wouldIPayAgainBlurb,
+  worthTheHype, worthTheHypeBlurb,
+  theRealDeal, theRealDealBlurb,
+  didStaffCare, didStaffCareBlurb,
   publishedAt,
   featured
 `;
