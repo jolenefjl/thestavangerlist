@@ -6,6 +6,7 @@ interface Review {
   _id: string;
   name: string;
   slug: { current: string };
+  cardTeaser?: string;
   cuisine: string;
   area: string;
   priceRange: string;
@@ -71,6 +72,9 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
         <p className="card-desc">{review.area}</p>
+        {!!review.cardTeaser && (
+          <p className="card-teaser">{review.cardTeaser}</p>
+        )}
         {avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
             {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>

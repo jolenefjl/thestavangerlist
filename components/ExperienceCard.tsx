@@ -6,6 +6,7 @@ interface Experience {
   _id: string;
   name: string;
   slug: { current: string };
+  cardTeaser?: string;
   category?: string;
   area?: string;
   priceRange?: string;
@@ -72,6 +73,9 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{experience.name}</p>
         {!!experience.area && <p className="card-desc">{experience.area}</p>}
+        {!!experience.cardTeaser && (
+          <p className="card-teaser">{experience.cardTeaser}</p>
+        )}
         {!!avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
             {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>

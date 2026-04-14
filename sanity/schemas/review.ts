@@ -20,6 +20,13 @@ export const review = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "cardTeaser",
+      title: "Card Teaser",
+      type: "string",
+      description: "One punchy line shown on the card below the location. Max 160 characters. Optional.",
+      validation: (Rule) => Rule.max(160),
+    }),
+    defineField({
       name: "cuisine",
       title: "Cuisine Type",
       type: "string",

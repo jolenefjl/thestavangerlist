@@ -76,6 +76,7 @@ export default async function Home() {
       {/* ── Featured Reviews ─────────────────────────────────── */}
       {featured.length > 0 && (
         <section className="section section-gap">
+          <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
           <div className="section-header">
             <h2 className="section-title">{settings?.homepageFeaturedTitle ?? "Jo's Picks"}</h2>
             <Link href="/eats" className="section-link">See all →</Link>
@@ -101,6 +102,7 @@ export default async function Home() {
         <>
           <div className="divider" />
           <section className="section section-gap">
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
             <div className="section-header">
               <h2 className="section-title">{settings?.homepageTopListsTitle ?? "Top Lists"}</h2>
               <Link href="/lists" className="section-link">See all →</Link>
@@ -133,6 +135,7 @@ export default async function Home() {
         <>
           <div className="divider" />
           <section className="section section-gap">
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
             <div className="section-header">
               <h2 className="section-title">{settings?.homepageLatestTitle ?? "Latest Reviews"}</h2>
               <Link href="/eats" className="section-link">See all →</Link>

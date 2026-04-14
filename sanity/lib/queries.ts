@@ -5,6 +5,7 @@ const reviewFields = groq`
   _id,
   name,
   slug,
+  cardTeaser,
   cuisine,
   area,
   priceRange,
@@ -21,7 +22,7 @@ const reviewFields = groq`
 
 // Experience fields (slim, for cards)
 const experienceFields = groq`
-  _id, name, slug, category, area, priceRange, heroImage, bestFor,
+  _id, name, slug, cardTeaser, category, area, priceRange, heroImage, bestFor,
   worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
   publishedAt, featured
 `;
