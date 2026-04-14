@@ -55,7 +55,7 @@ export const siteSettings = defineType({
       name: "homepageFeaturedTitle",
       title: "Homepage — Featured Section Title",
       type: "string",
-      initialValue: "Editor's Picks",
+      initialValue: "Jo's Picks",
     }),
     defineField({
       name: "homepageTopListsTitle",
@@ -99,7 +99,7 @@ export const siteSettings = defineType({
       name: "verdictTitle",
       title: "Review Page — Verdict Section Title",
       type: "string",
-      initialValue: "Our Verdict",
+      initialValue: "My Verdict",
     }),
     defineField({
       name: "ratingCaloriesLabel",
@@ -179,7 +179,7 @@ export const siteSettings = defineType({
       name: "suggestBody",
       title: "Suggest Section — Body Text",
       type: "string",
-      initialValue: "We eat everywhere so you don't have to. Tell us where to go next.",
+      initialValue: "I eat everywhere so you don't have to. Tell me where to go next.",
     }),
     defineField({
       name: "suggestCtaText",

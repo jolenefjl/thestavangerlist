@@ -69,7 +69,7 @@ export default async function Home() {
       {featured.length > 0 && (
         <section className="section section-gap">
           <div className="section-header">
-            <h2 className="section-title">{settings?.homepageFeaturedTitle ?? "Editor's Picks"}</h2>
+            <h2 className="section-title">{settings?.homepageFeaturedTitle ?? "Jo's Picks"}</h2>
             <Link href="/eats" className="section-link">See all →</Link>
           </div>
 

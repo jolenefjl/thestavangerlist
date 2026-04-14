@@ -198,7 +198,7 @@ export default async function InterviewPage({ params }: PageProps) {
           <>
             <p className="text-eyebrow" style={{ marginBottom: 10 }}>Read the review</p>
             <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, marginBottom: 18, color: "var(--color-text-primary)" }}>
-              Our full review of {linkedReview.name}
+              My full review of {linkedReview.name}
             </h3>
             <Link
               href={`/eats/${linkedReview.slug.current}`}
@@ -222,9 +222,9 @@ export default async function InterviewPage({ params }: PageProps) {
           </>
         ) : null}
         <div style={{ marginTop: linkedReview ? 0 : 0, paddingTop: linkedReview ? 28 : 0, borderTop: linkedReview ? "0.5px solid var(--color-border)" : "none" }}>
-          <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know someone we should talk to?</p>
+          <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know someone I should talk to?</p>
           <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
-            We&apos;re always looking for the next great story from Stavanger&apos;s food scene.
+            I&apos;m always looking for the next great story from Stavanger&apos;s food scene.
           </p>
           <Link href="/suggest" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}>
             Suggest someone for Into the Kitchen →

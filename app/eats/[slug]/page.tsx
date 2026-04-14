@@ -102,7 +102,7 @@ export default async function ReviewPage({ params }: PageProps) {
 
         {/* Rating Panel */}
         <div className="rating-panel">
-          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{settings?.verdictTitle ?? "Our Verdict"}</p>
+          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{settings?.verdictTitle ?? "My Verdict"}</p>
           {ratings.map((r) => {
             const score = review[r.key] as number;
             if (!score) return null;
@@ -220,7 +220,7 @@ export default async function ReviewPage({ params }: PageProps) {
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>{settings?.suggestEyebrow ?? "Know a great spot?"}</p>
           <h3 className="text-h3" style={{ marginBottom: 8 }}>{settings?.suggestHeading ?? "Suggest a restaurant"}</h3>
           <p className="text-body text-muted" style={{ marginBottom: 16 }}>
-            {settings?.suggestBody ?? "We eat everywhere so you don't have to. Tell us where to go next."}
+            {settings?.suggestBody ?? "I eat everywhere so you don't have to. Tell me where to go next."}
           </p>
           <Link
             href="/suggest"
