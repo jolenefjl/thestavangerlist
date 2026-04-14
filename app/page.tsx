@@ -138,7 +138,7 @@ export default async function Home() {
               <Link href="/eats" className="section-link">See all →</Link>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 380px))", gap: 8 }}>
               {latestReviews.map((review: Record<string, unknown>) => (
                 <ReviewCard
                   key={review._id as string}
