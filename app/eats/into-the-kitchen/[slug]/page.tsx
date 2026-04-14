@@ -153,9 +153,10 @@ export default async function InterviewPage({ params }: PageProps) {
               <div key={i} className="qa-block">
                 <p className="qa-question">{qa.question as string}</p>
                 <div className="qa-answer">
-                  {qa.answer && (
+                  {!!qa.answer && (
                     <PortableText
-                      value={qa.answer as Parameters<typeof PortableText>[0]["value"]}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      value={qa.answer as any}
                       components={answerComponents}
                     />
                   )}

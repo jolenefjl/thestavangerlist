@@ -74,8 +74,8 @@ export default async function IntoTheKitchenPage() {
                   <div className="interview-card-body">
                     {restaurant && <p className="interview-card-restaurant">{restaurant}</p>}
                     <p className="interview-card-name">{interview.founderName as string}</p>
-                    {interview.founderRole && (
-                      <p className="interview-card-role">{interview.founderRole as string}</p>
+                    {!!interview.founderRole && (
+                      <p className="interview-card-role">{String(interview.founderRole)}</p>
                     )}
                     {excerpt && <p className="interview-card-excerpt">{excerpt}</p>}
                   </div>
