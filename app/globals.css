@@ -338,6 +338,123 @@ h1, h2, h3, h4, h5, h6 {
 .rounded       { border-radius: 3px; }
 .w-full        { width: 100%; }
 
+/* About page */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.about-hero-img {
+  width: 100%;
+  height: clamp(360px, 80vw, 560px);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.about-hero-img-placeholder {
+  width: 100%;
+  height: clamp(360px, 80vw, 560px);
+  background: var(--color-bg-image);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-hero-text {
+  padding: 40px 28px 36px;
+}
+
+.about-headline {
+  font-family: var(--font-spectral), serif;
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin-bottom: 18px;
+}
+
+.about-intro {
+  font-size: 15px;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  max-width: 520px;
+}
+
+.about-section {
+  padding: 48px 28px;
+  max-width: 640px;
+}
+
+.about-prose {
+  font-size: 15px;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-primary);
+}
+
+.about-prose p { margin-bottom: 20px; }
+.about-prose p:last-child { margin-bottom: 0; }
+
+.about-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 0.5px solid var(--color-border);
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.about-social-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .about-hero {
+    grid-template-columns: 5fr 7fr;
+    min-height: 540px;
+  }
+
+  .about-hero-img,
+  .about-hero-img-placeholder {
+    height: 100%;
+    min-height: 540px;
+  }
+
+  .about-hero-text {
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-section {
+    padding: 56px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-hero-text {
+    padding: 64px 64px;
+  }
+
+  .about-section {
+    padding: 64px 64px;
+  }
+}
+
 /* Responsive */
 @media (min-width: 640px) {
   .page-pad      { padding-left: 40px; padding-right: 40px; }

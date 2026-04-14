@@ -16,6 +16,11 @@ export default async function Nav() {
             Eats
           </Link>
         </li>
+        <li>
+          <Link href="/about" className="nav-link">
+            About
+          </Link>
+        </li>
       </ul>
     </nav>
   );

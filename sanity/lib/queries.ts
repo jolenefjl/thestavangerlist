@@ -95,6 +95,24 @@ export const reviewBySlugQuery = groq`
   }
 `;
 
+// About page
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage"][0] {
+    heroPhoto,
+    heroHeadline,
+    heroIntro,
+    storyBlock1,
+    storyBlock2,
+    storyBlock3,
+    whySection,
+    whatSection,
+    tiktokUrl,
+    instagramUrl,
+    seoTitle,
+    seoDescription,
+  }
+`;
+
 // Top lists index
 export const allTopListsQuery = groq`
   *[_type == "topList"] | order(publishedAt desc) {
