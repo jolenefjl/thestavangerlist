@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
-import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery } from "@/sanity/lib/queries";
+import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery, featuredExperiencesQuery } from "@/sanity/lib/queries";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
@@ -10,11 +10,18 @@ import ExperienceCard from "@/components/ExperienceCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default async function Home() {
-  const [settings, latestReviews, topLists] = await Promise.all([
+  const [settings, latestReviews, topLists, featuredExperiencesFallback] = await Promise.all([
     client.fetch(siteSettingsQuery),
     client.fetch(latestReviewsQuery),
     client.fetch(allTopListsQuery),
+    client.fetch(featuredExperiencesQuery),
   ]);
+
+  // Use Site Settings picks if set, otherwise fall back to experiences marked featured: true
+  const featuredExperiences: unknown[] =
+    settings?.featuredExperiences?.length > 0
+      ? settings.featuredExperiences
+      : (featuredExperiencesFallback ?? []);
 
   const featured: unknown[] = settings?.featuredReviews ?? [];
   const mainFeatured = featured[0] as Record<string, unknown> | undefined;
@@ -145,7 +152,7 @@ export default async function Home() {
       )}
 
       {/* ── Stavanger Play ───────────────────────────────────── */}
-      {(settings?.featuredExperiences?.length ?? 0) > 0 && (
+      {featuredExperiences.length > 0 && (
         <>
           <div className="divider" />
           <section className="section section-gap">
@@ -156,7 +163,7 @@ export default async function Home() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
-              {(settings.featuredExperiences as Record<string, unknown>[]).map((experience) => (
+              {(featuredExperiences as Record<string, unknown>[]).map((experience) => (
                 <ExperienceCard
                   key={experience._id as string}
                   experience={experience as unknown as Parameters<typeof ExperienceCard>[0]["experience"]}
