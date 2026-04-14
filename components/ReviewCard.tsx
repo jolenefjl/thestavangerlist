@@ -53,10 +53,11 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
     >
       {review.heroImage ? (
         <Image
-          src={urlFor(review.heroImage).width(isMain ? 800 : 400).height(isMain ? 400 : 240).url()}
+          src={urlFor(review.heroImage).width(isMain ? 1400 : 900).height(isMain ? 700 : 540).quality(85).url()}
           alt={review.heroImage.alt ?? review.name}
-          width={isMain ? 800 : 400}
-          height={isMain ? 400 : 240}
+          width={isMain ? 1400 : 900}
+          height={isMain ? 700 : 540}
+          sizes={isMain ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
           className={isMain ? "card-img-main" : "card-img-small"}
           style={{ display: "block" }}
         />
