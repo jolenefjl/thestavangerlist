@@ -65,7 +65,8 @@ export default async function AboutPage() {
 
       {/* ── My Story ─────────────────────────────────────────── */}
       <div className="about-section">
-        <p className="text-eyebrow" style={{ marginBottom: 22 }}>My Story</p>
+        <p className="text-eyebrow" style={{ marginBottom: 10 }}>My Story</p>
+        <h2 className="text-h2" style={{ marginBottom: 28 }}>Growing up with food as a language.</h2>
         <div className="about-prose">
           {about?.storyBlock1 ? (
             <PortableText value={about.storyBlock1} components={portableTextComponents} />
@@ -89,7 +90,8 @@ export default async function AboutPage() {
 
       {/* ── Why I Started ────────────────────────────────────── */}
       <div className="about-section">
-        <p className="text-eyebrow" style={{ marginBottom: 22 }}>Why I Started This</p>
+        <p className="text-eyebrow" style={{ marginBottom: 10 }}>Why I Started This</p>
+        <h2 className="text-h2" style={{ marginBottom: 28 }}>I built the thing I wished existed.</h2>
         <div className="about-prose">
           {about?.whySection ? (
             <PortableText value={about.whySection} components={portableTextComponents} />
@@ -106,7 +108,8 @@ export default async function AboutPage() {
 
       {/* ── What You'll Find ─────────────────────────────────── */}
       <div className="about-section">
-        <p className="text-eyebrow" style={{ marginBottom: 22 }}>What You&apos;ll Find Here</p>
+        <p className="text-eyebrow" style={{ marginBottom: 10 }}>What You&apos;ll Find Here</p>
+        <h2 className="text-h2" style={{ marginBottom: 28 }}>Honest, tested, never sponsored.</h2>
         <div className="about-prose">
           {about?.whatSection ? (
             <PortableText value={about.whatSection} components={portableTextComponents} />
@@ -135,7 +138,8 @@ export default async function AboutPage() {
 
       {/* ── Social CTA ───────────────────────────────────────── */}
       <div className="about-section">
-        <p className="text-eyebrow" style={{ marginBottom: 22 }}>Come Find Me</p>
+        <p className="text-eyebrow" style={{ marginBottom: 10 }}>Come Find Me</p>
+        <h2 className="text-h2" style={{ marginBottom: 28 }}>On TikTok and Instagram.</h2>
         <p style={{ fontSize: 15, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, lineHeight: 1.75, color: "var(--color-text-muted)", marginBottom: 28, maxWidth: 440 }}>
           I post food reviews, Stavanger spots, and the occasional overly enthusiastic take on a bowl of ramen.
         </p>
