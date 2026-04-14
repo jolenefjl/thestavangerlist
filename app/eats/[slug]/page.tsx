@@ -33,8 +33,11 @@ export default async function ReviewPage({ params }: PageProps) {
 
   const scores = ratings.map((r) => review[r.key] as number).filter(Boolean);
   const overallAvg = scores.length
-    ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
-    : 0;
+    ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 100) / 100
+    : null;
+  const overallDisplay = overallAvg !== null
+    ? (Number.isInteger(overallAvg) ? `${overallAvg}.0` : String(overallAvg))
+    : null;
 
   return (
     <div className="page-bg">
@@ -109,11 +112,11 @@ export default async function ReviewPage({ params }: PageProps) {
               </div>
             );
           })}
-          {overallAvg > 0 && (
+          {overallDisplay && (
             <div className="rating-row" style={{ borderTop: "0.5px solid var(--color-border)", marginTop: 4, paddingTop: 12 }}>
               <span className="rating-label" style={{ fontWeight: 400, color: "var(--color-text-primary)" }}>Overall</span>
-              <span className="rating-score">
-                <RatingDots score={overallAvg} />
+              <span style={{ fontSize: 16, fontFamily: "var(--font-dm-sans)", fontWeight: 700, color: "var(--color-accent)" }}>
+                {overallDisplay}<span style={{ fontSize: 12, fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
               </span>
             </div>
           )}

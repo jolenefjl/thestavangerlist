@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import RatingDots from "./RatingDots";
 import { urlFor } from "@/sanity/lib/image";
 
 interface Review {
@@ -18,7 +17,7 @@ interface Review {
   didStaffCare?: number;
 }
 
-function avgRating(review: Review): number {
+function avgRating(review: Review): number | null {
   const scores = [
     review.didItHitDifferent,
     review.wouldIPayAgain,
@@ -26,8 +25,8 @@ function avgRating(review: Review): number {
     review.theRealDeal,
     review.didStaffCare,
   ].filter((s): s is number => s != null);
-  if (!scores.length) return 0;
-  return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+  if (!scores.length) return null;
+  return Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 100) / 100;
 }
 
 interface ReviewCardProps {
@@ -38,6 +37,7 @@ interface ReviewCardProps {
 export default function ReviewCard({ review, size = "small" }: ReviewCardProps) {
   const isMain = size === "main";
   const avg = avgRating(review);
+  const avgDisplay = avg !== null ? (Number.isInteger(avg) ? `${avg}.0` : String(avg)) : null;
 
   return (
     <Link
@@ -70,7 +70,11 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
         <p className="card-desc">{review.area}</p>
-        {avg > 0 && <RatingDots score={avg} />}
+        {avgDisplay && (
+          <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
+            {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
+          </p>
+        )}
       </div>
     </Link>
   );
