@@ -94,10 +94,10 @@ export default async function TopListPage({ params }: PageProps) {
               {/* Review thumbnail if linked */}
               {!!review?.heroImage && (
                 <Image
-                  src={urlFor(review.heroImage).width(100).height(100).url()}
+                  src={urlFor(review.heroImage).width(240).height(240).quality(85).url()}
                   alt={(review.heroImage as Record<string, unknown>).alt as string ?? item.placeName as string}
-                  width={100}
-                  height={100}
+                  width={120}
+                  height={120}
                   style={{ borderRadius: 3, objectFit: "cover", flexShrink: 0 }}
                 />
               )}
