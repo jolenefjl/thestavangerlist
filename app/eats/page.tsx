@@ -66,7 +66,7 @@ export default async function EatsPage({ searchParams }: PageProps) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 380px))",
               gap: 8,
             }}
           >
