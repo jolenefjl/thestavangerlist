@@ -138,7 +138,7 @@ export default async function Home() {
               <Link href="/eats" className="section-link">See all →</Link>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 380px))", gap: 8 }}>
+            <div className="card-grid">
               {latestReviews.map((review: Record<string, unknown>) => (
                 <ReviewCard
                   key={review._id as string}
@@ -162,7 +162,7 @@ export default async function Home() {
               <Link href="/play" className="section-link">All experiences →</Link>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
+            <div className="card-grid">
               {(featuredExperiences as Record<string, unknown>[]).map((experience) => (
                 <ExperienceCard
                   key={experience._id as string}

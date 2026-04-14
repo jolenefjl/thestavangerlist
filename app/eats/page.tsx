@@ -63,13 +63,7 @@ export default async function EatsPage({ searchParams }: PageProps) {
             <p className="text-body text-muted">No reviews yet — check back soon.</p>
           </div>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 380px))",
-              gap: 8,
-            }}
-          >
+          <div className="card-grid">
             {filtered.map((review: Record<string, unknown>) => (
               <ReviewCard
                 key={review._id as string}

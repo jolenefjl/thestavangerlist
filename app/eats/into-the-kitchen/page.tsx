@@ -44,12 +44,7 @@ export default async function IntoTheKitchenPage() {
             <p className="text-body text-muted">First interview coming soon.</p>
           </div>
         ) : (
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-            gap: 8,
-            maxWidth: 720,
-          }}>
+          <div className="card-grid">
             {interviews.map((interview: Record<string, unknown>) => {
               const slug = (interview.slug as { current: string }).current;
               const restaurant = (interview.linkedReview as Record<string, unknown> | null)?.name as string

@@ -61,13 +61,7 @@ export default async function PlayPage({ searchParams }: PageProps) {
             <p className="text-body text-muted">No experiences yet — check back soon.</p>
           </div>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 380px))",
-              gap: 8,
-            }}
-          >
+          <div className="card-grid">
             {filtered.map((experience) => (
               <ExperienceCard
                 key={experience._id as string}
