@@ -18,11 +18,11 @@ interface PageProps {
 }
 
 const ratings = [
-  { key: "didItHitDifferent", label: "Worth the Calories?" },
-  { key: "wouldIPayAgain", label: "Worth the Bill?" },
-  { key: "worthTheHype", label: "Worth the Hype?" },
-  { key: "theRealDeal", label: "Worth the Detour?" },
-  { key: "didStaffCare", label: "Worth Going Back For?" },
+  { key: "didItHitDifferent", label: "Worth the Calories?", sub: "Food quality" },
+  { key: "wouldIPayAgain", label: "Worth the Bill?", sub: "Value for money" },
+  { key: "worthTheHype", label: "Worth the Hype?", sub: "Does it live up to its reputation?" },
+  { key: "theRealDeal", label: "Worth the Detour?", sub: "How authentic is it?" },
+  { key: "didStaffCare", label: "Worth Going Back For?", sub: "Service" },
 ];
 
 export default async function ReviewPage({ params }: PageProps) {
@@ -105,7 +105,10 @@ export default async function ReviewPage({ params }: PageProps) {
             if (!score) return null;
             return (
               <div key={r.key} className="rating-row">
-                <span className="rating-label">{r.label}</span>
+                <span className="rating-label">
+                  {r.label}
+                  <span style={{ display: "block", fontSize: 10, fontWeight: 400, color: "var(--color-text-muted)", letterSpacing: "0.03em", marginTop: 1 }}>{r.sub}</span>
+                </span>
                 <span className="rating-score">
                   <RatingDots score={score} />
                 </span>
