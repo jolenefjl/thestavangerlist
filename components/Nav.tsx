@@ -21,6 +21,21 @@ export default async function Nav() {
             <Link href="/eats/into-the-kitchen" className="nav-dropdown-item">Into the Kitchen</Link>
           </div>
         </li>
+        <li className="nav-dropdown">
+          <Link href="/play" className="nav-link">
+            Play <span style={{ fontSize: 7, opacity: 0.45 }}>▾</span>
+          </Link>
+          <div className="nav-dropdown-menu">
+            <Link href="/play" className="nav-dropdown-item">All Experiences</Link>
+            <Link href="/play/suggest" className="nav-dropdown-item">Suggest a Place</Link>
+          </div>
+        </li>
+        <li>
+          <span className="nav-link-coming-soon">Finds <span className="nav-link-soon-badge">Soon</span></span>
+        </li>
+        <li>
+          <span className="nav-link-coming-soon">Stays <span className="nav-link-soon-badge">Soon</span></span>
+        </li>
         <li>
           <Link href="/about" className="nav-link">
             About

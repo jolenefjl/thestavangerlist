@@ -669,6 +669,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Coming soon nav label */
+.nav-link-coming-soon { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-hint); opacity: 0.45; cursor: default; font-family: var(--font-dm-sans), sans-serif; }
+.nav-link-soon-badge { font-size: 7px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-accent-light); margin-left: 4px; font-family: var(--font-dm-sans), sans-serif; }
+
+/* Suggest form */
+.suggest-form { max-width: 520px; }
+.suggest-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.suggest-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; color: var(--color-text-hint); }
+.suggest-input { font-family: var(--font-dm-sans), sans-serif; font-size: 14px; font-weight: 300; color: var(--color-text-primary); background: transparent; border: none; border-bottom: 0.5px solid var(--color-border); padding: 8px 0; width: 100%; outline: none; transition: border-color 0.15s; }
+.suggest-input:focus { border-bottom-color: var(--color-accent); }
+.suggest-textarea { resize: vertical; min-height: 100px; }
+.suggest-submit { background: var(--color-dark); color: var(--color-light); border: none; padding: 10px 24px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; border-radius: 3px; cursor: pointer; transition: opacity 0.2s; }
+.suggest-submit:hover { opacity: 0.8; }
+.suggest-submit:disabled { opacity: 0.4; cursor: default; }
+
 /* Responsive */
 @media (min-width: 640px) {
   .page-pad      { padding-left: 40px; padding-right: 40px; }

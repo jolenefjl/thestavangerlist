@@ -155,6 +155,34 @@ export const aboutPageQuery = groq`
   }
 `;
 
+// Experience fields (slim, for cards)
+const experienceFields = groq`
+  _id, name, slug, category, area, priceRange, heroImage, bestFor,
+  worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
+  publishedAt, featured
+`;
+
+export const allExperiencesQuery = groq`
+  *[_type == "experience"] | order(name asc) { ${experienceFields} }
+`;
+
+export const experienceCategoryListQuery = groq`
+  array::unique(*[_type == "experience"].category)
+`;
+
+export const featuredExperiencesQuery = groq`
+  *[_type == "experience" && featured == true] | order(publishedAt desc) [0...6] { ${experienceFields} }
+`;
+
+export const experienceBySlugQuery = groq`
+  *[_type == "experience" && slug.current == $slug][0] {
+    ${experienceFields},
+    websiteUrl, bookingUrl, tiktokUrl, gallery, body,
+    worthYourTimeBlurb, worthThePriceBlurb, worthTheHypeBlurb,
+    worthBringingAFriendBlurb, worthDoingAgainBlurb
+  }
+`;
+
 // Top lists index
 export const allTopListsQuery = groq`
   *[_type == "topList"] | order(publishedAt desc) {

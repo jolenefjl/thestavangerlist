@@ -44,6 +44,8 @@ export default defineConfig({
             S.documentTypeListItem("review").title("Reviews"),
             S.documentTypeListItem("topList").title("Top Lists"),
             S.documentTypeListItem("interview").title("Into the Kitchen"),
+            S.documentTypeListItem("experience").title("Play Experiences"),
+            S.documentTypeListItem("suggestion").title("Suggestions"),
           ]),
     }),
     visionTool(),

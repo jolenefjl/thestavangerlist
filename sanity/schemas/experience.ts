@@ -1,13 +1,36 @@
 import { defineType, defineField } from "sanity";
 
-export const review = defineType({
-  name: "review",
-  title: "Review",
+const standardBlock = {
+  type: "block",
+  styles: [
+    { title: "Normal", value: "normal" },
+    { title: "H2", value: "h2" },
+  ],
+  lists: [{ title: "Bullet", value: "bullet" }],
+  marks: {
+    decorators: [
+      { title: "Bold", value: "strong" },
+      { title: "Italic", value: "em" },
+    ],
+    annotations: [
+      {
+        type: "object",
+        name: "link",
+        title: "Link",
+        fields: [{ name: "href", type: "url", title: "URL" }],
+      },
+    ],
+  },
+};
+
+export const experience = defineType({
+  name: "experience",
+  title: "Experience",
   type: "document",
   fields: [
     defineField({
       name: "name",
-      title: "Restaurant Name",
+      title: "Experience Name",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -16,22 +39,29 @@ export const review = defineType({
       title: "Slug",
       type: "slug",
       options: { source: "name", maxLength: 96 },
-      description: "Click Generate — this becomes the page URL (e.g. toko-bintang)",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "cuisine",
-      title: "Cuisine Type",
+      name: "category",
+      title: "Category",
       type: "string",
-      description: "e.g. Japanese, Norwegian, Brunch, Fine Dining",
-      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          { title: "Outdoor", value: "Outdoor" },
+          { title: "Workshop", value: "Workshop" },
+          { title: "Day Trip", value: "Day Trip" },
+          { title: "Cultural", value: "Cultural" },
+          { title: "Nightlife", value: "Nightlife" },
+          { title: "Family", value: "Family" },
+        ],
+        layout: "radio",
+      },
     }),
     defineField({
       name: "area",
       title: "Area / Location",
       type: "string",
-      description: "e.g. Stavanger Sentrum, Sandnes, Klepp",
-      validation: (Rule) => Rule.required(),
+      description: "e.g. Stavanger Sentrum, Sandnes, Ryfylke",
     }),
     defineField({
       name: "priceRange",
@@ -39,13 +69,13 @@ export const review = defineType({
       type: "string",
       options: {
         list: [
-          { title: "€ — Inexpensive", value: "€" },
-          { title: "€€ — Moderate", value: "€€" },
-          { title: "€€€ — Expensive", value: "€€€" },
+          { title: "Free", value: "Free" },
+          { title: "€", value: "€" },
+          { title: "€€", value: "€€" },
+          { title: "€€€", value: "€€€" },
         ],
         layout: "radio",
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "bestFor",
@@ -54,14 +84,12 @@ export const review = defineType({
       of: [{ type: "string" }],
       options: {
         list: [
-          { title: "Date Night", value: "Date Night" },
-          { title: "Lunch", value: "Lunch" },
-          { title: "Groups", value: "Groups" },
           { title: "Solo", value: "Solo" },
-          { title: "Family", value: "Family" },
-          { title: "Business", value: "Business" },
-          { title: "Late Night", value: "Late Night" },
-          { title: "Outdoor Seating", value: "Outdoor Seating" },
+          { title: "Couples", value: "Couples" },
+          { title: "Groups", value: "Groups" },
+          { title: "Families", value: "Families" },
+          { title: "Date Night", value: "Date Night" },
+          { title: "Kids", value: "Kids" },
         ],
         layout: "grid",
       },
@@ -70,6 +98,12 @@ export const review = defineType({
       name: "websiteUrl",
       title: "Website URL",
       type: "url",
+    }),
+    defineField({
+      name: "bookingUrl",
+      title: "Booking URL",
+      type: "url",
+      description: "Direct booking link (optional — if different from website)",
     }),
     defineField({
       name: "heroImage",
@@ -100,6 +134,11 @@ export const review = defineType({
               title: "Alt Text",
               type: "string",
             }),
+            defineField({
+              name: "caption",
+              title: "Caption (optional)",
+              type: "string",
+            }),
           ],
         },
       ],
@@ -113,31 +152,9 @@ export const review = defineType({
     defineField({
       name: "body",
       title: "Review Body",
-      description: "Write your review. Use the image button in the toolbar to drop photos inline between paragraphs.",
       type: "array",
       of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-          ],
-          lists: [{ title: "Bullet", value: "bullet" }],
-          marks: {
-            decorators: [
-              { title: "Bold", value: "strong" },
-              { title: "Italic", value: "em" },
-            ],
-            annotations: [
-              {
-                type: "object",
-                name: "link",
-                title: "Link",
-                fields: [{ name: "href", type: "url", title: "URL" }],
-              },
-            ],
-          },
-        },
+        standardBlock,
         {
           type: "image",
           options: { hotspot: true },
@@ -146,7 +163,6 @@ export const review = defineType({
               name: "alt",
               title: "Alt Text",
               type: "string",
-              description: "Describe the image for accessibility",
             }),
             defineField({
               name: "caption",
@@ -158,39 +174,35 @@ export const review = defineType({
       ],
       validation: (Rule) => Rule.required(),
     }),
+    // Rating fields
     defineField({
-      name: "didItHitDifferent",
-      title: "Worth the Calories? — Score",
+      name: "worthYourTime",
+      title: "Worth Your Time? — Score",
       type: "number",
-      description: "Food quality — Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
     defineField({
-      name: "didItHitDifferentBlurb",
-      title: "Worth the Calories? — Blurb",
+      name: "worthYourTimeBlurb",
+      title: "Worth Your Time? — Blurb",
       type: "text",
       rows: 2,
-      description: "One or two sentences. What made it worth it (or not)?",
     }),
     defineField({
-      name: "wouldIPayAgain",
-      title: "Worth the Bill? — Score",
+      name: "worthThePrice",
+      title: "Worth the Price? — Score",
       type: "number",
-      description: "Value for money — Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
     defineField({
-      name: "wouldIPayAgainBlurb",
-      title: "Worth the Bill? — Blurb",
+      name: "worthThePriceBlurb",
+      title: "Worth the Price? — Blurb",
       type: "text",
       rows: 2,
-      description: "One or two sentences. Did the price feel fair?",
     }),
     defineField({
       name: "worthTheHype",
       title: "Worth the Hype? — Score",
       type: "number",
-      description: "Does it live up to its reputation? — Score 1–5. Leave blank if not applicable.",
       validation: (Rule) => Rule.min(1).max(5).integer(),
     }),
     defineField({
@@ -198,35 +210,30 @@ export const review = defineType({
       title: "Worth the Hype? — Blurb",
       type: "text",
       rows: 2,
-      description: "One or two sentences. Does the buzz match reality?",
     }),
     defineField({
-      name: "theRealDeal",
-      title: "Worth the Detour? — Score",
+      name: "worthBringingAFriend",
+      title: "Worth Bringing a Friend? — Score",
       type: "number",
-      description: "Is it worth going out of your way for? — Score 1–5. Leave blank if not applicable.",
       validation: (Rule) => Rule.min(1).max(5).integer(),
     }),
     defineField({
-      name: "theRealDealBlurb",
-      title: "Worth the Detour? — Blurb",
+      name: "worthBringingAFriendBlurb",
+      title: "Worth Bringing a Friend? — Blurb",
       type: "text",
       rows: 2,
-      description: "One or two sentences. Would you cross town for it?",
     }),
     defineField({
-      name: "didStaffCare",
-      title: "Worth Going Back For? — Score",
+      name: "worthDoingAgain",
+      title: "Worth Doing Again? — Score",
       type: "number",
-      description: "Overall — would you return? — Score 1–5",
       validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
     defineField({
-      name: "didStaffCareBlurb",
-      title: "Worth Going Back For? — Blurb",
+      name: "worthDoingAgainBlurb",
+      title: "Worth Doing Again? — Blurb",
       type: "text",
       rows: 2,
-      description: "One or two sentences. What would bring you back?",
     }),
     defineField({
       name: "publishedAt",
@@ -244,7 +251,7 @@ export const review = defineType({
   preview: {
     select: {
       title: "name",
-      subtitle: "cuisine",
+      subtitle: "category",
       media: "heroImage",
     },
   },

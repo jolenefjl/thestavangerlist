@@ -143,6 +143,21 @@ export default async function ReviewPage({ params }: PageProps) {
             <PortableText
               value={review.body}
               components={{
+                block: {
+                  normal: ({ children }) => <p style={{ marginBottom: 20, lineHeight: 1.75 }}>{children}</p>,
+                  h2: ({ children }) => <h2 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, margin: "36px 0 12px", color: "var(--color-text-primary)" }}>{children}</h2>,
+                },
+                list: {
+                  bullet: ({ children }) => <ul style={{ paddingLeft: 20, marginBottom: 20, lineHeight: 1.75 }}>{children}</ul>,
+                },
+                listItem: {
+                  bullet: ({ children }) => <li style={{ marginBottom: 6, color: "var(--color-text-primary)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, fontSize: 15 }}>{children}</li>,
+                },
+                marks: {
+                  link: ({ value, children }: { value?: Record<string, unknown>; children?: React.ReactNode }) => <a href={value?.href as string} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-accent)", textDecoration: "underline" }}>{children}</a>,
+                  strong: ({ children }) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
+                  em: ({ children }) => <em>{children}</em>,
+                },
                 types: {
                   image: ({ value }: { value: Record<string, unknown> }) => (
                     <figure style={{ margin: "32px 0" }}>

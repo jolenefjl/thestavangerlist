@@ -2,17 +2,19 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
-import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery } from "@/sanity/lib/queries";
+import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery, featuredExperiencesQuery } from "@/sanity/lib/queries";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
+import ExperienceCard from "@/components/ExperienceCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default async function Home() {
-  const [settings, latestReviews, topLists] = await Promise.all([
+  const [settings, latestReviews, topLists, featuredExperiences] = await Promise.all([
     client.fetch(siteSettingsQuery),
     client.fetch(latestReviewsQuery),
     client.fetch(allTopListsQuery),
+    client.fetch(featuredExperiencesQuery),
   ]);
 
   const featured: unknown[] = settings?.featuredReviews ?? [];
@@ -135,6 +137,29 @@ export default async function Home() {
                 <ReviewCard
                   key={review._id as string}
                   review={review as unknown as Parameters<typeof ReviewCard>[0]["review"]}
+                  size="small"
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* ── Stavanger Play ───────────────────────────────────── */}
+      {featuredExperiences?.length > 0 && (
+        <>
+          <div className="divider" />
+          <section className="section section-gap">
+            <div className="section-header">
+              <h2 className="section-title">Stavanger Play</h2>
+              <Link href="/play" className="section-link">See all →</Link>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 8 }}>
+              {(featuredExperiences as Record<string, unknown>[]).map((experience) => (
+                <ExperienceCard
+                  key={experience._id as string}
+                  experience={experience as unknown as Parameters<typeof ExperienceCard>[0]["experience"]}
                   size="small"
                 />
               ))}
