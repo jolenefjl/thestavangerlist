@@ -19,6 +19,13 @@ const reviewFields = groq`
   featured
 `;
 
+// Experience fields (slim, for cards)
+const experienceFields = groq`
+  _id, name, slug, category, area, priceRange, heroImage, bestFor,
+  worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
+  publishedAt, featured
+`;
+
 // Homepage: site settings (all editable content)
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
@@ -56,8 +63,12 @@ export const siteSettingsQuery = groq`
     newsletterSuccessText,
     instagramUrl,
     tiktokUrl,
+    homepagePlayTitle,
     featuredReviews[]-> {
       ${reviewFields}
+    },
+    featuredExperiences[]-> {
+      ${experienceFields}
     }
   }
 `;
@@ -153,13 +164,6 @@ export const aboutPageQuery = groq`
     seoTitle,
     seoDescription,
   }
-`;
-
-// Experience fields (slim, for cards)
-const experienceFields = groq`
-  _id, name, slug, category, area, priceRange, heroImage, bestFor,
-  worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
-  publishedAt, featured
 `;
 
 export const allExperiencesQuery = groq`

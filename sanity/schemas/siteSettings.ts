@@ -80,6 +80,23 @@ export const siteSettings = defineType({
       description: "Choose up to 4 reviews to feature on the homepage",
     }),
 
+    // ── Stavanger Play Section ────────────────────────────────
+    defineField({
+      name: "homepagePlayTitle",
+      title: "Homepage — Play Section Heading",
+      type: "string",
+      initialValue: "Things worth doing.",
+      description: "Large heading shown above the featured experiences",
+    }),
+    defineField({
+      name: "featuredExperiences",
+      title: "Homepage Featured Experiences",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "experience" }] }],
+      validation: (Rule) => Rule.max(6),
+      description: "Choose up to 6 experiences to feature in the Play section on the homepage",
+    }),
+
     // ── Eats Page ─────────────────────────────────────────────
     defineField({
       name: "eatsEyebrow",
