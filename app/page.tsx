@@ -58,7 +58,7 @@ export default async function Home() {
               fontWeight: 500,
             }}
           >
-            Browse All Reviews
+            {settings?.homepageCtaText ?? "Browse All Reviews"}
           </Link>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default async function Home() {
       {featured.length > 0 && (
         <section className="section section-gap">
           <div className="section-header">
-            <h2 className="section-title">Editor&apos;s Picks</h2>
+            <h2 className="section-title">{settings?.homepageFeaturedTitle ?? "Editor's Picks"}</h2>
             <Link href="/eats" className="section-link">See all →</Link>
           </div>
 
@@ -94,7 +94,7 @@ export default async function Home() {
           <div className="divider" />
           <section className="section section-gap">
             <div className="section-header">
-              <h2 className="section-title">Top Lists</h2>
+              <h2 className="section-title">{settings?.homepageTopListsTitle ?? "Top Lists"}</h2>
               <Link href="/lists" className="section-link">See all →</Link>
             </div>
 
@@ -126,7 +126,7 @@ export default async function Home() {
           <div className="divider" />
           <section className="section section-gap">
             <div className="section-header">
-              <h2 className="section-title">Latest Reviews</h2>
+              <h2 className="section-title">{settings?.homepageLatestTitle ?? "Latest Reviews"}</h2>
               <Link href="/eats" className="section-link">See all →</Link>
             </div>
 
@@ -145,7 +145,12 @@ export default async function Home() {
 
       {/* ── Newsletter ───────────────────────────────────────── */}
       <div className="divider" style={{ margin: "0 0 28px" }} />
-      <NewsletterSignup ctaText={settings?.newsletterCtaText} />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
 
       <Footer />
     </div>

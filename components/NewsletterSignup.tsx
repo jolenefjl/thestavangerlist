@@ -3,11 +3,17 @@
 import { useState } from "react";
 
 interface NewsletterSignupProps {
+  eyebrow?: string;
   ctaText?: string;
+  subtext?: string;
+  successText?: string;
 }
 
 export default function NewsletterSignup({
+  eyebrow = "Stay in the loop",
   ctaText = "The best of Stavanger, in your inbox.",
+  subtext = "New reviews and curated lists — no spam, ever.",
+  successText = "You're on the list. Talk soon.",
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -35,15 +41,13 @@ export default function NewsletterSignup({
 
   return (
     <div className="newsletter">
-      <p className="text-eyebrow" style={{ marginBottom: 8 }}>Stay in the loop</p>
+      <p className="text-eyebrow" style={{ marginBottom: 8 }}>{eyebrow}</p>
       <h3 className="newsletter-title">{ctaText}</h3>
-      <p className="newsletter-sub">
-        New reviews and curated lists — no spam, ever.
-      </p>
+      <p className="newsletter-sub">{subtext}</p>
 
       {status === "success" ? (
         <p style={{ fontSize: 13, color: "var(--color-accent)" }}>
-          You&apos;re on the list. Talk soon.
+          {successText}
         </p>
       ) : (
         <form className="newsletter-row" onSubmit={handleSubmit}>

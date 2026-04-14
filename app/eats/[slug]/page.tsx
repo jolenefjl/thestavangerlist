@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
-import { reviewBySlugQuery } from "@/sanity/lib/queries";
+import { reviewBySlugQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -17,19 +17,22 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const ratings = [
-  { key: "didItHitDifferent", label: "Worth the Calories?", sub: "Food quality" },
-  { key: "wouldIPayAgain", label: "Worth the Bill?", sub: "Value for money" },
-  { key: "worthTheHype", label: "Worth the Hype?", sub: "Does it live up to its reputation?" },
-  { key: "theRealDeal", label: "Worth the Detour?", sub: "How authentic is it?" },
-  { key: "didStaffCare", label: "Worth Going Back For?", sub: "Service" },
-];
-
 export default async function ReviewPage({ params }: PageProps) {
   const { slug } = await params;
-  const review = await client.fetch(reviewBySlugQuery, { slug });
+  const [review, settings] = await Promise.all([
+    client.fetch(reviewBySlugQuery, { slug }),
+    client.fetch(siteSettingsQuery),
+  ]);
 
   if (!review) notFound();
+
+  const ratings = [
+    { key: "didItHitDifferent", label: settings?.ratingCaloriesLabel ?? "Worth the Calories?", sub: settings?.ratingCaloriesSub ?? "Food quality" },
+    { key: "wouldIPayAgain",    label: settings?.ratingBillLabel    ?? "Worth the Bill?",      sub: settings?.ratingBillSub    ?? "Value for money" },
+    { key: "worthTheHype",      label: settings?.ratingHypeLabel    ?? "Worth the Hype?",      sub: settings?.ratingHypeSub    ?? "Does it live up to its reputation?" },
+    { key: "theRealDeal",       label: settings?.ratingDetourLabel  ?? "Worth the Detour?",    sub: settings?.ratingDetourSub  ?? "How authentic is it?" },
+    { key: "didStaffCare",      label: settings?.ratingServiceLabel ?? "Worth Going Back For?", sub: settings?.ratingServiceSub ?? "Service" },
+  ];
 
   const scores = ratings.map((r) => review[r.key] as number).filter(Boolean);
   const overallAvg = scores.length
@@ -99,7 +102,7 @@ export default async function ReviewPage({ params }: PageProps) {
 
         {/* Rating Panel */}
         <div className="rating-panel">
-          <p className="text-eyebrow" style={{ marginBottom: 12 }}>Our Verdict</p>
+          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{settings?.verdictTitle ?? "Our Verdict"}</p>
           {ratings.map((r) => {
             const score = review[r.key] as number;
             if (!score) return null;
@@ -165,13 +168,12 @@ export default async function ReviewPage({ params }: PageProps) {
 
         {/* TikTok Embed */}
         {review.tiktokUrl && (() => {
-          // Extract the numeric video ID from any TikTok URL format
           const videoId = review.tiktokUrl.match(/\/video\/(\d+)/)?.[1];
           if (!videoId) return null;
           const embedUrl = `https://www.tiktok.com/embed/v2/${videoId}`;
           return (
           <div className="tiktok-embed-wrap">
-            <p className="tiktok-label" style={{ padding: "12px 16px 0" }}>Watch the video</p>
+            <p className="tiktok-label" style={{ padding: "12px 16px 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
             <iframe
               src={embedUrl}
               style={{ width: "100%", height: 700, border: "none" }}
@@ -185,7 +187,7 @@ export default async function ReviewPage({ params }: PageProps) {
         {/* Photo Gallery */}
         {review.gallery?.length > 0 && (
           <div style={{ margin: "32px 0" }}>
-            <p className="text-eyebrow" style={{ marginBottom: 14 }}>More Photos</p>
+            <p className="text-eyebrow" style={{ marginBottom: 14 }}>{settings?.morePhotosLabel ?? "More Photos"}</p>
             <div
               style={{
                 display: "grid",
@@ -215,10 +217,10 @@ export default async function ReviewPage({ params }: PageProps) {
             marginTop: 40,
           }}
         >
-          <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know a great spot?</p>
-          <h3 className="text-h3" style={{ marginBottom: 8 }}>Suggest a restaurant</h3>
+          <p className="text-eyebrow" style={{ marginBottom: 8 }}>{settings?.suggestEyebrow ?? "Know a great spot?"}</p>
+          <h3 className="text-h3" style={{ marginBottom: 8 }}>{settings?.suggestHeading ?? "Suggest a restaurant"}</h3>
           <p className="text-body text-muted" style={{ marginBottom: 16 }}>
-            We eat everywhere so you don&apos;t have to. Tell us where to go next.
+            {settings?.suggestBody ?? "We eat everywhere so you don't have to. Tell us where to go next."}
           </p>
           <Link
             href="/suggest"
@@ -236,13 +238,18 @@ export default async function ReviewPage({ params }: PageProps) {
               fontWeight: 500,
             }}
           >
-            Suggest a Place
+            {settings?.suggestCtaText ?? "Suggest a Place"}
           </Link>
         </div>
       </article>
 
       <div className="divider-full" />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );

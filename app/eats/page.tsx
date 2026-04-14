@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
-import { allReviewsQuery, cuisineListQuery } from "@/sanity/lib/queries";
+import { allReviewsQuery, cuisineListQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
@@ -14,9 +14,10 @@ interface PageProps {
 export default async function EatsPage({ searchParams }: PageProps) {
   const { cuisine: activeCuisine } = await searchParams;
 
-  const [allReviews, cuisines] = await Promise.all([
+  const [allReviews, cuisines, settings] = await Promise.all([
     client.fetch(allReviewsQuery),
     client.fetch(cuisineListQuery),
+    client.fetch(siteSettingsQuery),
   ]);
 
   const filtered = activeCuisine
@@ -32,8 +33,8 @@ export default async function EatsPage({ searchParams }: PageProps) {
 
       {/* ── Page Header ──────────────────────────────────────── */}
       <div className="section" style={{ paddingTop: 40, paddingBottom: 24 }}>
-        <p className="text-eyebrow" style={{ marginBottom: 10 }}>🍽️ Stavanger Eats</p>
-        <h1 className="text-h1">Restaurant Reviews</h1>
+        <p className="text-eyebrow" style={{ marginBottom: 10 }}>{settings?.eatsEyebrow ?? "🍽️ Stavanger Eats"}</p>
+        <h1 className="text-h1">{settings?.eatsPageTitle ?? "Restaurant Reviews"}</h1>
       </div>
 
       {/* ── Cuisine Filter Tabs ───────────────────────────────── */}

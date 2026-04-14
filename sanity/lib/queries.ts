@@ -19,14 +19,41 @@ const reviewFields = groq`
   featured
 `;
 
-// Homepage: site settings (featured reviews + social links)
+// Homepage: site settings (all editable content)
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
+    siteName,
     heroEyebrow,
     heroHeadline,
     heroHeadlineAccent,
     heroSubheading,
+    homepageCtaText,
+    homepageFeaturedTitle,
+    homepageTopListsTitle,
+    homepageLatestTitle,
+    eatsEyebrow,
+    eatsPageTitle,
+    verdictTitle,
+    ratingCaloriesLabel,
+    ratingCaloriesSub,
+    ratingBillLabel,
+    ratingBillSub,
+    ratingHypeLabel,
+    ratingHypeSub,
+    ratingDetourLabel,
+    ratingDetourSub,
+    ratingServiceLabel,
+    ratingServiceSub,
+    suggestEyebrow,
+    suggestHeading,
+    suggestBody,
+    suggestCtaText,
+    morePhotosLabel,
+    watchVideoLabel,
+    newsletterEyebrow,
     newsletterCtaText,
+    newsletterSubtext,
+    newsletterSuccessText,
     instagramUrl,
     tiktokUrl,
     featuredReviews[]-> {
@@ -34,6 +61,9 @@ export const siteSettingsQuery = groq`
     }
   }
 `;
+
+// Slim query for Nav/Footer site name only
+export const siteNameQuery = groq`*[_type == "siteSettings"][0].siteName`;
 
 // Homepage: latest reviews
 export const latestReviewsQuery = groq`

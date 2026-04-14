@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { client } from "@/sanity/lib/client";
+import { siteNameQuery } from "@/sanity/lib/queries";
 
-export default function Nav() {
+export default async function Nav() {
+  const siteName: string = await client.fetch(siteNameQuery) ?? "The Stavanger List";
+
   return (
     <nav className="nav">
       <Link href="/" className="nav-logo">
-        The Stavanger List
+        {siteName}
       </Link>
       <ul className="nav-links">
         <li>
