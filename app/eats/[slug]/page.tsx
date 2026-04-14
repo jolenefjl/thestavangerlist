@@ -18,11 +18,11 @@ interface PageProps {
 }
 
 const ratings = [
-  { key: "didItHitDifferent", label: "😋 Did It Hit Different?" },
-  { key: "wouldIPayAgain", label: "💰 Would I Pay This Price Again?" },
-  { key: "worthTheHype", label: "⭐ Worth the Hype?" },
-  { key: "theRealDeal", label: "🌍 The Real Deal?" },
-  { key: "didStaffCare", label: "👏 Did The Staff Care?" },
+  { key: "didItHitDifferent", label: "Worth the Calories?" },
+  { key: "wouldIPayAgain", label: "Worth the Bill?" },
+  { key: "worthTheHype", label: "Worth the Hype?" },
+  { key: "theRealDeal", label: "Worth the Detour?" },
+  { key: "didStaffCare", label: "Worth Going Back For?" },
 ];
 
 export default async function ReviewPage({ params }: PageProps) {
