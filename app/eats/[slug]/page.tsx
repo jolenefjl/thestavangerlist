@@ -46,60 +46,68 @@ export default async function ReviewPage({ params }: PageProps) {
     <div className="page-bg">
       <Nav />
 
-      {/* ── Hero Image ───────────────────────────────────────── */}
-      {review.heroImage && (
-        <div style={{ width: "100%", height: "clamp(240px, 45vw, 520px)", position: "relative", background: "var(--color-bg-image)" }}>
-          <Image
-            src={urlFor(review.heroImage).width(2800).height(1400).quality(90).url()}
-            alt={review.heroImage.alt ?? review.name}
-            fill
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-            priority
-          />
-        </div>
-      )}
-
-      {/* ── Main Content ─────────────────────────────────────── */}
-      <article className="section" style={{ paddingTop: 36, maxWidth: 720, marginBottom: 48 }}>
-
-        {/* Eyebrow + title */}
-        <p className="text-eyebrow" style={{ marginBottom: 10 }}>{review.cuisine}</p>
-        <h1 className="text-h1" style={{ marginBottom: 6 }}>{review.name}</h1>
-        <p className="text-small text-muted" style={{ marginBottom: 28 }}>
-          {review.area} · {review.priceRange}
-          {review.bestFor?.length > 0 && ` · ${review.bestFor.join(", ")}`}
-        </p>
-
-        {/* Quick Info Panel */}
-        <div className="quick-info" style={{ marginBottom: 32 }}>
-          <div className="quick-info-item">
-            <p className="quick-info-label">Cuisine</p>
-            <p className="quick-info-value">{review.cuisine}</p>
+      {/* ── Hero: Portrait photo left, info right ────────────── */}
+      <div className="review-hero">
+        {/* Photo */}
+        {review.heroImage ? (
+          <div className="review-hero-img-wrap">
+            <Image
+              src={urlFor(review.heroImage).width(900).height(1200).quality(90).url()}
+              alt={review.heroImage.alt ?? review.name}
+              width={900}
+              height={1200}
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="review-hero-img"
+              priority
+            />
           </div>
-          <div className="quick-info-item">
-            <p className="quick-info-label">Area</p>
-            <p className="quick-info-value">{review.area}</p>
-          </div>
-          <div className="quick-info-item">
-            <p className="quick-info-label">Price</p>
-            <p className="quick-info-value">{review.priceRange}</p>
-          </div>
-          {review.websiteUrl && (
+        ) : (
+          <div className="review-hero-img-wrap" style={{ background: "var(--color-bg-image)" }} />
+        )}
+
+        {/* Info panel */}
+        <div className="review-hero-panel">
+          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{review.cuisine}</p>
+          <h1 className="text-h1" style={{ marginBottom: 8 }}>{review.name}</h1>
+          <p className="text-small text-muted" style={{ marginBottom: 28 }}>
+            {review.area} · {review.priceRange}
+            {review.bestFor?.length > 0 && ` · ${review.bestFor.join(", ")}`}
+          </p>
+
+          {/* Quick Info Panel */}
+          <div className="quick-info" style={{ marginBottom: 0 }}>
             <div className="quick-info-item">
-              <p className="quick-info-label">Website</p>
-              <a
-                href={review.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="quick-info-value"
-                style={{ color: "var(--color-accent)", textDecoration: "none" }}
-              >
-                Visit →
-              </a>
+              <p className="quick-info-label">Cuisine</p>
+              <p className="quick-info-value">{review.cuisine}</p>
             </div>
-          )}
+            <div className="quick-info-item">
+              <p className="quick-info-label">Area</p>
+              <p className="quick-info-value">{review.area}</p>
+            </div>
+            <div className="quick-info-item">
+              <p className="quick-info-label">Price</p>
+              <p className="quick-info-value">{review.priceRange}</p>
+            </div>
+            {review.websiteUrl && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Website</p>
+                <a
+                  href={review.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-value"
+                  style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                >
+                  Visit →
+                </a>
+              </div>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* ── Review Content ───────────────────────────────────── */}
+      <article className="section" style={{ paddingTop: 36, maxWidth: 720, marginBottom: 48 }}>
 
         {/* Rating Panel */}
         <div className="rating-panel">

@@ -552,6 +552,36 @@ h1, h2, h3, h4, h5, h6 {
   .interview-body { padding: 0 64px; }
 }
 
+/* Review hero — portrait photo left, info right */
+.review-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 0.5px solid var(--color-border);
+}
+.review-hero-img-wrap {
+  overflow: hidden;
+  background: var(--color-bg-image);
+  min-height: clamp(320px, 80vw, 540px);
+}
+.review-hero-img {
+  width: 100%;
+  height: clamp(320px, 80vw, 540px);
+  object-fit: cover;
+  display: block;
+}
+.review-hero-panel {
+  padding: 36px 28px 40px;
+}
+@media (min-width: 768px) {
+  .review-hero { grid-template-columns: 5fr 7fr; min-height: 560px; }
+  .review-hero-img-wrap { min-height: 560px; }
+  .review-hero-img { height: 100%; min-height: 560px; }
+  .review-hero-panel { padding: 48px 48px; display: flex; flex-direction: column; justify-content: center; }
+}
+@media (min-width: 1024px) {
+  .review-hero-panel { padding: 56px 64px; }
+}
+
 /* About page */
 .about-hero {
   display: grid;
