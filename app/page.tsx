@@ -155,7 +155,7 @@ export default async function Home() {
               <Link href="/play" className="section-link">All experiences →</Link>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
               {(settings.featuredExperiences as Record<string, unknown>[]).map((experience) => (
                 <ExperienceCard
                   key={experience._id as string}
