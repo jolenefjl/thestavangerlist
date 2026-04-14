@@ -31,12 +31,6 @@ export default async function Nav() {
           </div>
         </li>
         <li>
-          <span className="nav-link-coming-soon">Finds <span className="nav-link-soon-badge">Soon</span></span>
-        </li>
-        <li>
-          <span className="nav-link-coming-soon">Stays <span className="nav-link-soon-badge">Soon</span></span>
-        </li>
-        <li>
           <Link href="/about" className="nav-link">
             About
           </Link>
