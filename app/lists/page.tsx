@@ -36,19 +36,8 @@ export default async function ListsPage() {
               <Link
                 key={list._id as string}
                 href={`/lists/${(list.slug as { current: string }).current}`}
-                style={{ textDecoration: "none" }}
+                className="list-row"
               >
-                <div style={{
-                  display: "flex",
-                  gap: 20,
-                  alignItems: "center",
-                  padding: "20px 0",
-                  borderBottom: "0.5px solid var(--color-border-light)",
-                  transition: "opacity 0.2s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                >
                   {/* Number */}
                   <span style={{
                     fontFamily: "var(--font-spectral), serif",
@@ -94,7 +83,6 @@ export default async function ListsPage() {
                   </div>
 
                   <span style={{ fontSize: 14, color: "var(--color-accent-light)", flexShrink: 0 }}>→</span>
-                </div>
               </Link>
             ))}
           </div>
