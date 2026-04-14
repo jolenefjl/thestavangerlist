@@ -50,9 +50,10 @@ export default async function ReviewPage({ params }: PageProps) {
       {review.heroImage && (
         <div style={{ width: "100%", height: "clamp(240px, 45vw, 520px)", position: "relative", background: "var(--color-bg-image)" }}>
           <Image
-            src={urlFor(review.heroImage).width(1400).height(700).url()}
+            src={urlFor(review.heroImage).width(2800).height(1400).quality(90).url()}
             alt={review.heroImage.alt ?? review.name}
             fill
+            sizes="100vw"
             style={{ objectFit: "cover" }}
             priority
           />
@@ -197,7 +198,7 @@ export default async function ReviewPage({ params }: PageProps) {
               {review.gallery.map((img: Record<string, unknown>, i: number) => (
                 <div key={i} style={{ position: "relative", aspectRatio: "1", background: "var(--color-bg-image)", borderRadius: 2, overflow: "hidden" }}>
                   <Image
-                    src={urlFor(img).width(400).height(400).url()}
+                    src={urlFor(img).width(900).height(900).quality(85).url()}
                     alt={(img.alt as string) ?? `${review.name} photo ${i + 1}`}
                     fill
                     style={{ objectFit: "cover" }}

@@ -73,10 +73,11 @@ export default async function InterviewPage({ params }: PageProps) {
       {/* ── Hero Photo ───────────────────────────────────────── */}
       {interview.heroPhoto ? (
         <Image
-          src={urlFor(interview.heroPhoto).width(1400).height(800).url()}
+          src={urlFor(interview.heroPhoto).width(2800).height(1600).quality(90).url()}
           alt={(interview.heroPhoto as Record<string, unknown>).alt as string ?? interview.founderName as string}
-          width={1400}
-          height={800}
+          width={2800}
+          height={1600}
+          sizes="100vw"
           className="interview-hero-img"
           priority
         />
@@ -179,7 +180,7 @@ export default async function InterviewPage({ params }: PageProps) {
               {(interview.gallery as Record<string, unknown>[]).map((img, i) => (
                 <div key={i} className="interview-gallery-item">
                   <Image
-                    src={urlFor(img).width(600).height(600).url()}
+                    src={urlFor(img).width(900).height(900).quality(85).url()}
                     alt={(img.alt as string) ?? `${interview.founderName as string} photo ${i + 1}`}
                     fill
                     style={{ objectFit: "cover" }}

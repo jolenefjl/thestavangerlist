@@ -28,9 +28,10 @@ export default async function TopListPage({ params }: PageProps) {
       {list.heroImage && (
         <div style={{ width: "100%", height: "clamp(200px, 35vw, 400px)", position: "relative", background: "var(--color-bg-image)" }}>
           <Image
-            src={urlFor(list.heroImage).width(1400).height(560).url()}
+            src={urlFor(list.heroImage).width(2800).height(1120).quality(90).url()}
             alt={list.heroImage.alt ?? list.title}
             fill
+            sizes="100vw"
             style={{ objectFit: "cover" }}
             priority
           />
