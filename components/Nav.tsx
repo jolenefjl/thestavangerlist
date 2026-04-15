@@ -13,7 +13,7 @@ export default async function Nav() {
       <ul className="nav-links">
         <li className="nav-dropdown">
           <Link href="/eats" className="nav-link">
-            Eats <span style={{ fontSize: 7, opacity: 0.45 }}>▾</span>
+            Eats <span style={{ fontSize: 10, marginLeft: 2, opacity: 0.7, display: "inline-block", transform: "translateY(-1px)" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/eats" className="nav-dropdown-item">Food Reviews</Link>
@@ -23,7 +23,7 @@ export default async function Nav() {
         </li>
         <li className="nav-dropdown">
           <Link href="/play" className="nav-link">
-            Play <span style={{ fontSize: 7, opacity: 0.45 }}>▾</span>
+            Play <span style={{ fontSize: 10, marginLeft: 2, opacity: 0.7, display: "inline-block", transform: "translateY(-1px)" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/play" className="nav-dropdown-item">All Experiences</Link>
@@ -35,6 +35,14 @@ export default async function Nav() {
         </li>
         <li>
           <Link href="/about" className="nav-link">About</Link>
+        </li>
+        <li>
+          <Link href="/search" className="nav-link nav-search" aria-label="Search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </Link>
         </li>
       </ul>
     </nav>

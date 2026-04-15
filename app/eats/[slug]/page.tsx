@@ -12,7 +12,6 @@ import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { richTextComponents } from "@/components/RichTextComponents";
-import { formatPrice } from "@/lib/formatPrice";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -64,7 +63,7 @@ export default async function ReviewPage({ params }: PageProps) {
           <span className="article-hero-eyebrow">Stavanger Eats</span>
           <h1 className="article-hero-title">{review.name}</h1>
           <p className="article-hero-meta">
-            {[review.cuisine, review.area, formatPrice(review.priceRange)].filter(Boolean).join(" · ")}
+            {[review.cuisine, review.area, review.priceRange].filter(Boolean).join(" · ")}
           </p>
         </div>
       </div>
@@ -137,7 +136,7 @@ export default async function ReviewPage({ params }: PageProps) {
             </div>
             <div className="quick-info-item">
               <p className="quick-info-label">Price</p>
-              <p className="quick-info-value">{formatPrice(review.priceRange)}</p>
+              <p className="quick-info-value">{review.priceRange}</p>
             </div>
             {review.bestFor?.length > 0 && (
               <div className="quick-info-item">

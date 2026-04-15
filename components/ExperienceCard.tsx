@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { formatPrice } from "@/lib/formatPrice";
 
 interface Experience {
   _id: string;
@@ -70,7 +69,7 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
       <div className={isMain ? "card-body" : "card-body-sm"}>
         <div className="card-meta">
           {!!experience.category && <span className="card-cuisine">{experience.category}</span>}
-          {!!experience.priceRange && <span className="card-price">{formatPrice(experience.priceRange)}</span>}
+          {!!experience.priceRange && <span className="card-price">{experience.priceRange}</span>}
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{experience.name}</p>
         {!!experience.area && <p className="card-desc">{experience.area}</p>}

@@ -12,7 +12,6 @@ import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { richTextComponents } from "@/components/RichTextComponents";
-import { formatPrice } from "@/lib/formatPrice";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -94,7 +93,7 @@ export default async function ExperiencePage({ params }: PageProps) {
           <span className="article-hero-eyebrow">Stavanger Play</span>
           <h1 className="article-hero-title">{experience.name as string}</h1>
           <p className="article-hero-meta">
-            {[experience.category, experience.area, formatPrice(experience.priceRange as string)].filter(Boolean).join(" · ")}
+            {[experience.category, experience.area, experience.priceRange].filter(Boolean).join(" · ")}
           </p>
         </div>
       </div>
@@ -175,7 +174,7 @@ export default async function ExperiencePage({ params }: PageProps) {
             {!!(experience.priceRange as string) && (
               <div className="quick-info-item">
                 <p className="quick-info-label">Price</p>
-                <p className="quick-info-value">{formatPrice(experience.priceRange as string)}</p>
+                <p className="quick-info-value">{experience.priceRange as string}</p>
               </div>
             )}
             {!!websiteUrl && (

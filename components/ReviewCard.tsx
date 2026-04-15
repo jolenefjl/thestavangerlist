@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { formatPrice } from "@/lib/formatPrice";
 
 interface Review {
   _id: string;
@@ -69,7 +68,7 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
       <div className={isMain ? "card-body" : "card-body-sm"}>
         <div className="card-meta">
           <span className="card-cuisine">{review.cuisine}</span>
-          <span className="card-price">{formatPrice(review.priceRange)}</span>
+          <span className="card-price">{review.priceRange}</span>
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
         <p className="card-desc">{review.area}</p>

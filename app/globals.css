@@ -124,6 +124,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link:hover, .nav-link.active { color: var(--color-accent); }
 
+.nav-search { display: inline-flex; align-items: center; padding: 4px; }
+.nav-search svg { display: block; }
+
 /* Section headers */
 .section-header {
   display: flex;
