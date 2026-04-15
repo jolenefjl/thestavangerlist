@@ -43,7 +43,7 @@ export const richTextComponents: PortableTextComponents = {
         className="article-body-text"
         style={{
           fontFamily: "var(--font-spectral), serif",
-          fontSize: 17,
+          fontSize: 20,
           fontWeight: 300,
           lineHeight: 1.85,
           marginBottom: 28,
@@ -58,7 +58,7 @@ export const richTextComponents: PortableTextComponents = {
         className="article-body-text"
         style={{
           fontFamily: "var(--font-spectral), serif",
-          fontSize: 26,
+          fontSize: 31,
           fontWeight: 300,
           margin: "52px 0 16px",
           color: "var(--color-text-primary)",
@@ -87,7 +87,7 @@ export const richTextComponents: PortableTextComponents = {
           color: "var(--color-text-primary)",
           fontFamily: "var(--font-spectral), serif",
           fontWeight: 300,
-          fontSize: 17,
+          fontSize: 20,
         }}
       >
         {children}

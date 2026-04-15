@@ -44,7 +44,7 @@ const proseComponents = {
       <p style={{ marginBottom: 22 }}>{children}</p>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 20, fontWeight: 300, margin: "32px 0 14px", color: "var(--color-text-primary)" }}>{children}</h3>
+      <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 24, fontWeight: 300, margin: "32px 0 14px", color: "var(--color-text-primary)" }}>{children}</h3>
     ),
   },
 };
@@ -82,7 +82,7 @@ export default async function InterviewPage({ params }: PageProps) {
           priority
         />
       ) : (
-        <div style={{ height: "clamp(320px, 55vw, 600px)", background: "var(--color-bg-image)" }} />
+        <div style={{ height: "clamp(384px, 66vw, 720px)", background: "var(--color-bg-image)" }} />
       )}
 
       {/* ── Header ───────────────────────────────────────────── */}
@@ -90,7 +90,7 @@ export default async function InterviewPage({ params }: PageProps) {
         <p className="text-eyebrow" style={{ marginBottom: 10 }}>Into the Kitchen</p>
         <h1 style={{
           fontFamily: "var(--font-spectral), serif",
-          fontSize: "clamp(32px, 6vw, 52px)",
+          fontSize: "clamp(38px, 7.2vw, 62px)",
           fontWeight: 300,
           lineHeight: 1.12,
           color: "var(--color-text-primary)",
@@ -100,23 +100,23 @@ export default async function InterviewPage({ params }: PageProps) {
         </h1>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 40 }}>
           {interview.founderRole && (
-            <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
+            <span style={{ fontSize: 16, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
               {interview.founderRole as string}
             </span>
           )}
           {interview.founderRole && restaurantName && (
-            <span style={{ color: "var(--color-border)", fontSize: 12 }}>·</span>
+            <span style={{ color: "var(--color-border)", fontSize: 14 }}>·</span>
           )}
           {restaurantName && (
             linkedReview ? (
               <Link
                 href={`/eats/${linkedReview.slug.current}`}
-                style={{ fontSize: 13, color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}
+                style={{ fontSize: 16, color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}
               >
                 {restaurantName} →
               </Link>
             ) : (
-              <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif" }}>
+              <span style={{ fontSize: 16, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif" }}>
                 {restaurantName}
               </span>
             )
@@ -198,7 +198,7 @@ export default async function InterviewPage({ params }: PageProps) {
         {linkedReview ? (
           <>
             <p className="text-eyebrow" style={{ marginBottom: 10 }}>Read the review</p>
-            <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, marginBottom: 18, color: "var(--color-text-primary)" }}>
+            <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 26, fontWeight: 300, marginBottom: 18, color: "var(--color-text-primary)" }}>
               My full review of {linkedReview.name}
             </h3>
             <Link
@@ -209,7 +209,7 @@ export default async function InterviewPage({ params }: PageProps) {
                 color: "var(--color-light)",
                 padding: "10px 20px",
                 borderRadius: 3,
-                fontSize: 10,
+                fontSize: 12,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 textDecoration: "none",
@@ -224,10 +224,10 @@ export default async function InterviewPage({ params }: PageProps) {
         ) : null}
         <div style={{ marginTop: linkedReview ? 0 : 0, paddingTop: linkedReview ? 28 : 0, borderTop: linkedReview ? "0.5px solid var(--color-border)" : "none" }}>
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know someone I should talk to?</p>
-          <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
+          <p style={{ fontSize: 16, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
             I&apos;m always looking for the next great story from Stavanger&apos;s food scene.
           </p>
-          <Link href="/suggest" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}>
+          <Link href="/suggest" style={{ fontSize: 13, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}>
             Suggest someone for Into the Kitchen →
           </Link>
         </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { siteNameQuery } from "@/sanity/lib/queries";
 
@@ -7,13 +8,20 @@ export default async function Nav() {
 
   return (
     <nav className="nav">
-      <Link href="/" className="nav-logo">
-        {siteName}
+      <Link href="/" className="nav-logo" aria-label={siteName}>
+        <Image
+          src="/logo.svg"
+          alt={siteName}
+          width={391}
+          height={62}
+          priority
+          className="nav-logo-img"
+        />
       </Link>
       <ul className="nav-links">
         <li className="nav-dropdown">
           <Link href="/eats" className="nav-link">
-            Eats <span style={{ fontSize: 10, marginLeft: 2, opacity: 0.7, display: "inline-block", transform: "translateY(-1px)" }}>▾</span>
+            Eats <span style={{ fontSize: 12, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/eats" className="nav-dropdown-item">Food Reviews</Link>
@@ -23,7 +31,7 @@ export default async function Nav() {
         </li>
         <li className="nav-dropdown">
           <Link href="/play" className="nav-link">
-            Play <span style={{ fontSize: 10, marginLeft: 2, opacity: 0.7, display: "inline-block", transform: "translateY(-1px)" }}>▾</span>
+            Play <span style={{ fontSize: 12, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/play" className="nav-dropdown-item">All Experiences</Link>

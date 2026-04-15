@@ -42,7 +42,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
           style={{
             width: "100%",
             padding: "14px 16px",
-            fontSize: 16,
+            fontSize: 19,
             fontFamily: "var(--font-dm-sans), sans-serif",
             fontWeight: 300,
             color: "var(--color-text-primary)",
@@ -74,7 +74,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
                 style={{
                   margin: 0,
                   marginBottom: 4,
-                  fontSize: 9,
+                  fontSize: 11,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "var(--color-accent)",
@@ -88,7 +88,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
                 style={{
                   margin: 0,
                   fontFamily: "var(--font-spectral), serif",
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: 300,
                   lineHeight: 1.3,
                 }}
@@ -99,7 +99,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
                 <p
                   style={{
                     margin: "4px 0 0",
-                    fontSize: 13,
+                    fontSize: 16,
                     color: "var(--color-text-muted)",
                     fontFamily: "var(--font-dm-sans), sans-serif",
                     fontWeight: 300,

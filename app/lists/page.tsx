@@ -41,7 +41,7 @@ export default async function ListsPage() {
                   {/* Number */}
                   <span style={{
                     fontFamily: "var(--font-spectral), serif",
-                    fontSize: 28,
+                    fontSize: 34,
                     fontStyle: "italic",
                     fontWeight: 300,
                     color: "var(--color-accent-light)",
@@ -69,7 +69,7 @@ export default async function ListsPage() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{
                       fontFamily: "var(--font-spectral), serif",
-                      fontSize: 18,
+                      fontSize: 22,
                       fontWeight: 300,
                       color: "var(--color-text-primary)",
                       marginBottom: 4,
@@ -77,12 +77,12 @@ export default async function ListsPage() {
                     }}>
                       {list.title as string}
                     </p>
-                    <p style={{ fontSize: 10, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--color-text-hint)" }}>
+                    <p style={{ fontSize: 12, letterSpacing: "0.10em", textTransform: "uppercase", color: "var(--color-text-hint)" }}>
                       {list.itemCount as number} {(list.itemCount as number) === 1 ? "place" : "places"}
                     </p>
                   </div>
 
-                  <span style={{ fontSize: 14, color: "var(--color-accent-light)", flexShrink: 0 }}>→</span>
+                  <span style={{ fontSize: 17, color: "var(--color-accent-light)", flexShrink: 0 }}>→</span>
               </Link>
             ))}
           </div>

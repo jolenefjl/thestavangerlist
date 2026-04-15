@@ -76,8 +76,8 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
           <p className="card-teaser">{review.cardTeaser}</p>
         )}
         {avgDisplay && (
-          <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
-            <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>My rating</span>
+          <p style={{ margin: 0, fontSize: 13, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
+            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>My rating</span>
             {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
           </p>
         )}
