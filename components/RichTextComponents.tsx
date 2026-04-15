@@ -42,11 +42,11 @@ export const richTextComponents: PortableTextComponents = {
       <p
         className="article-body-text"
         style={{
-          fontFamily: "var(--font-spectral), serif",
-          fontSize: 17,
-          fontWeight: 300,
-          lineHeight: 1.85,
-          marginBottom: 28,
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          fontSize: 18,
+          fontWeight: 400,
+          lineHeight: 1.9,
+          marginBottom: "1.5em",
           color: "var(--color-text-primary)",
         }}
       >
@@ -58,11 +58,11 @@ export const richTextComponents: PortableTextComponents = {
         className="article-body-text"
         style={{
           fontFamily: "var(--font-spectral), serif",
-          fontSize: 26,
+          fontSize: 27,
           fontWeight: 300,
-          margin: "52px 0 16px",
+          margin: "64px 0 20px",
           color: "var(--color-text-primary)",
-          lineHeight: 1.2,
+          lineHeight: 1.15,
         }}
       >
         {children}
@@ -73,7 +73,7 @@ export const richTextComponents: PortableTextComponents = {
     bullet: ({ children }: { children?: React.ReactNode }) => (
       <ul
         className="article-body-text"
-        style={{ paddingLeft: 20, marginBottom: 28, lineHeight: 1.85 }}
+        style={{ paddingLeft: 20, marginBottom: "1.5em", lineHeight: 1.9 }}
       >
         {children}
       </ul>
@@ -83,11 +83,11 @@ export const richTextComponents: PortableTextComponents = {
     bullet: ({ children }: { children?: React.ReactNode }) => (
       <li
         style={{
-          marginBottom: 8,
+          marginBottom: 10,
           color: "var(--color-text-primary)",
-          fontFamily: "var(--font-spectral), serif",
-          fontWeight: 300,
-          fontSize: 17,
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          fontWeight: 400,
+          fontSize: 18,
         }}
       >
         {children}

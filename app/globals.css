@@ -55,7 +55,7 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -71,10 +71,10 @@ h1, h2, h3, h4, h5, h6 {
 .text-h2      { font-size: 22px; font-family: var(--font-spectral), serif; font-weight: 300; }
 .text-h3      { font-size: 18px; font-family: var(--font-spectral), serif; font-weight: 300; }
 .text-card    { font-size: 15px; font-family: var(--font-spectral), serif; font-weight: 300; }
-.text-body    { font-size: 14px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; line-height: 1.65; }
+.text-body    { font-size: 17px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; line-height: 1.8; }
 .text-small   { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; }
 .text-label   { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
-.text-eyebrow { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; letter-spacing: 0.20em; text-transform: uppercase; color: var(--color-accent); }
+.text-eyebrow { font-size: 11px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-accent); }
 .text-italic  { font-style: italic; color: var(--color-accent); }
 .text-listnum { font-family: var(--font-spectral), serif; font-size: 22px; font-style: italic; font-weight: 300; color: var(--color-accent-light); }
 
@@ -122,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: rgba(44, 37, 32, 0.72);
   cursor: pointer;
   text-decoration: none;
   transition: color 0.2s;
@@ -138,13 +138,14 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 18px;
+  margin-bottom: 32px;
 }
 
 .section-title {
   font-family: var(--font-spectral), serif;
-  font-size: 22px;
+  font-size: clamp(26px, 3.5vw, 38px);
   font-weight: 300;
+  line-height: 1.15;
   color: var(--color-text-primary);
 }
 
@@ -161,14 +162,14 @@ h1, h2, h3, h4, h5, h6 {
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: 20px;
   align-items: start;
 }
 @media (min-width: 640px) {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .card-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
 }
 
 /* Filter bar */
@@ -221,13 +222,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Card hover — subtle lift for any anchor card inside .card-grid */
 .card-grid > a {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
 .card-grid > a:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 28px -14px rgba(44, 37, 32, 0.25);
-  border-color: rgba(44, 37, 32, 0.18) !important;
+
 }
 .card-grid > a img { transition: transform 0.5s ease; }
 .card-grid > a:hover img { transform: scale(1.03); }
@@ -251,13 +252,13 @@ h1, h2, h3, h4, h5, h6 {
 .card-small { background: var(--color-bg); }
 .card-img-main  { height: 340px; background: var(--color-bg-image); object-fit: cover; width: 100%; }
 .card-img-small { height: 220px; background: var(--color-bg-image); object-fit: cover; width: 100%; }
-.card-body { padding: 16px; }
-.card-body-sm { padding: 12px; }
+.card-body { padding: 16px 4px; }
+.card-body-sm { padding: 14px 4px; }
 .card-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 5px; }
 .card-cuisine { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); }
 .card-price { font-size: 9px; color: var(--color-text-hint); }
-.card-name { font-family: var(--font-spectral), serif; font-size: 18px; font-weight: 300; color: var(--color-text-primary); margin-bottom: 5px; line-height: 1.25; }
-.card-name-sm { font-size: 15px; }
+.card-name { font-family: var(--font-spectral), serif; font-size: 18px; font-weight: 300; color: var(--color-text-primary); margin-bottom: 6px; line-height: 1.3; }
+.card-name-sm { font-size: 18px; }
 .card-desc { font-size: 12px; color: var(--color-text-muted); line-height: 1.65; margin-bottom: 6px; }
 .card-teaser { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .rating-dots { display: flex; gap: 3px; align-items: center; }
@@ -773,10 +774,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Muted eyebrow variant (homepage section labels) ───── */
 .text-eyebrow-muted {
-  font-size: 10px;
+  font-size: 11px;
   font-family: var(--font-dm-sans), sans-serif;
   font-weight: 500;
-  letter-spacing: 0.20em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-text-hint);
 }
@@ -820,8 +821,8 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   background: var(--color-accent);
   color: white;
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 11px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-family: var(--font-dm-sans), sans-serif;
   font-weight: 600;
@@ -832,7 +833,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-carousel-title {
   font-family: var(--font-spectral), serif;
-  font-size: clamp(24px, 4.5vw, 48px);
+  font-size: clamp(40px, 5.5vw, 64px);
   font-weight: 300;
   color: white;
   line-height: 1.18;
@@ -989,13 +990,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Homepage generous section spacing ─────────────────── */
-.hp-section { padding: 56px 28px 0; }
-.hp-section + .hp-section { padding-top: 64px; }
+.hp-section { padding: 48px 28px 0; }
+.hp-section + .hp-section { padding-top: 80px; }
 
 @media (min-width: 640px) {
-  .hp-section { padding: 64px 40px 0; }
+  .hp-section { padding: 72px 40px 0; }
 }
 
 @media (min-width: 1024px) {
-  .hp-section { padding: 72px 64px 0; }
+  .hp-section { padding: 96px 64px 0; }
 }

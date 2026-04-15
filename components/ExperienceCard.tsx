@@ -46,10 +46,8 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
       style={{
         textDecoration: "none",
         display: "block",
-        borderRadius: 6,
+        borderRadius: 4,
         overflow: "hidden",
-        border: "0.5px solid var(--color-border)",
-        background: "var(--color-bg)",
       }}
     >
       {!!experience.heroImage && (
@@ -78,7 +76,7 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
         )}
         {!!avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 700, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
-            <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>My rating</span>
+            <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>Honest rating</span>
             {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
           </p>
         )}

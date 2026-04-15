@@ -21,10 +21,8 @@ export default function ListCard({ list }: ListCardProps) {
       style={{
         textDecoration: "none",
         display: "block",
-        borderRadius: 6,
+        borderRadius: 4,
         overflow: "hidden",
-        border: "0.5px solid var(--color-border)",
-        background: "var(--color-bg)",
       }}
     >
       {list.heroImage ? (
