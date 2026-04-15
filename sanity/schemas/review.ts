@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { standardRichTextOf } from "../lib/schemaHelpers";
 
 export const review = defineType({
   name: "review",
@@ -94,24 +95,6 @@ export const review = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "gallery",
-      title: "Photo Gallery",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [
-            defineField({
-              name: "alt",
-              title: "Alt Text",
-              type: "string",
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
       name: "tiktokUrl",
       title: "TikTok Video URL",
       type: "url",
@@ -120,49 +103,9 @@ export const review = defineType({
     defineField({
       name: "body",
       title: "Review Body",
-      description: "Write your review. Use the image button in the toolbar to drop photos inline between paragraphs.",
+      description: "Write your review. Use the photo block buttons to insert inline photos.",
       type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-          ],
-          lists: [{ title: "Bullet", value: "bullet" }],
-          marks: {
-            decorators: [
-              { title: "Bold", value: "strong" },
-              { title: "Italic", value: "em" },
-            ],
-            annotations: [
-              {
-                type: "object",
-                name: "link",
-                title: "Link",
-                fields: [{ name: "href", type: "url", title: "URL" }],
-              },
-            ],
-          },
-        },
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [
-            defineField({
-              name: "alt",
-              title: "Alt Text",
-              type: "string",
-              description: "Describe the image for accessibility",
-            }),
-            defineField({
-              name: "caption",
-              title: "Caption (optional)",
-              type: "string",
-            }),
-          ],
-        },
-      ],
+      of: standardRichTextOf,
       validation: (Rule) => Rule.required(),
     }),
     defineField({

@@ -11,6 +11,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { richTextComponents } from "@/components/RichTextComponents";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -43,54 +44,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const portableComponents = {
-  block: {
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <p style={{ marginBottom: 20, lineHeight: 1.75 }}>{children}</p>
-    ),
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, margin: "36px 0 12px", color: "var(--color-text-primary)" }}>{children}</h2>
-    ),
-  },
-  list: {
-    bullet: ({ children }: { children?: React.ReactNode }) => (
-      <ul style={{ paddingLeft: 20, marginBottom: 20, lineHeight: 1.75 }}>{children}</ul>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }: { children?: React.ReactNode }) => (
-      <li style={{ marginBottom: 6, color: "var(--color-text-primary)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, fontSize: 15 }}>{children}</li>
-    ),
-  },
-  marks: {
-    link: ({ value, children }: { value?: Record<string, unknown>; children?: React.ReactNode }) => (
-      <a href={value?.href as string} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-accent)", textDecoration: "underline" }}>{children}</a>
-    ),
-    strong: ({ children }: { children?: React.ReactNode }) => (
-      <strong style={{ fontWeight: 600 }}>{children}</strong>
-    ),
-    em: ({ children }: { children?: React.ReactNode }) => <em>{children}</em>,
-  },
-  types: {
-    image: ({ value }: { value: Record<string, unknown> }) => (
-      <figure style={{ margin: "32px 0" }}>
-        <Image
-          src={urlFor(value).width(800).url()}
-          alt={(value.alt as string) ?? ""}
-          width={800}
-          height={500}
-          style={{ width: "100%", height: "auto", borderRadius: 3 }}
-        />
-        {!!(value.caption as string) && (
-          <figcaption style={{ fontSize: 11, color: "var(--color-text-hint)", marginTop: 8, textAlign: "center", letterSpacing: "0.04em" }}>
-            {value.caption as string}
-          </figcaption>
-        )}
-      </figure>
-    ),
-  },
-};
-
 export default async function ExperiencePage({ params }: PageProps) {
   const { slug } = await params;
   const [experience, settings] = await Promise.all([
@@ -101,11 +54,11 @@ export default async function ExperiencePage({ params }: PageProps) {
   if (!experience) notFound();
 
   const ratings = [
-    { key: "worthYourTime",         blurbKey: "worthYourTimeBlurb",         label: "Worth your time?" },
-    { key: "worthThePrice",         blurbKey: "worthThePriceBlurb",         label: "Worth the price?" },
-    { key: "worthTheHype",          blurbKey: "worthTheHypeBlurb",          label: "Worth the hype?" },
-    { key: "worthBringingAFriend",  blurbKey: "worthBringingAFriendBlurb",  label: "Worth bringing a friend?" },
-    { key: "worthDoingAgain",       blurbKey: "worthDoingAgainBlurb",       label: "Worth doing again?" },
+    { key: "worthYourTime",        blurbKey: "worthYourTimeBlurb",        label: "Worth your time?" },
+    { key: "worthThePrice",        blurbKey: "worthThePriceBlurb",        label: "Worth the price?" },
+    { key: "worthTheHype",         blurbKey: "worthTheHypeBlurb",         label: "Worth the hype?" },
+    { key: "worthBringingAFriend", blurbKey: "worthBringingAFriendBlurb", label: "Worth bringing a friend?" },
+    { key: "worthDoingAgain",      blurbKey: "worthDoingAgainBlurb",      label: "Worth doing again?" },
   ];
 
   const scores = ratings.map((r) => experience[r.key] as number).filter(Boolean);
@@ -123,84 +76,31 @@ export default async function ExperiencePage({ params }: PageProps) {
     <div className="page-bg">
       <Nav />
 
-      {/* Hero Image */}
-      {!!experience.heroImage && (
-        <div style={{ width: "100%", height: "clamp(240px, 45vw, 520px)", position: "relative", background: "var(--color-bg-image)" }}>
+      {/* ── Hero: Full bleed image with centred overlay text ──── */}
+      <div className="article-hero">
+        {!!experience.heroImage && (
           <Image
-            src={urlFor(experience.heroImage).width(2800).height(1400).quality(90).url()}
+            src={urlFor(experience.heroImage as Record<string, unknown>).width(2400).height(1400).quality(90).url()}
             alt={(experience.heroImage as Record<string, unknown>).alt as string ?? experience.name as string}
             fill
             sizes="100vw"
             style={{ objectFit: "cover" }}
             priority
           />
-        </div>
-      )}
-
-      {/* Main Content */}
-      <article className="section" style={{ paddingTop: 36, maxWidth: 720, marginBottom: 48 }}>
-
-        {/* Eyebrow + title */}
-        {!!(experience.category as string) && (
-          <p className="text-eyebrow" style={{ marginBottom: 10 }}>{experience.category as string}</p>
         )}
-        <h1 className="text-h1" style={{ marginBottom: 6 }}>{experience.name as string}</h1>
-        <p className="text-small text-muted" style={{ marginBottom: 28 }}>
-          {[experience.area, experience.priceRange].filter(Boolean).join(" · ")}
-        </p>
-
-        {/* Quick Info Panel */}
-        <div className="quick-info" style={{ marginBottom: 32 }}>
-          {!!(experience.category as string) && (
-            <div className="quick-info-item">
-              <p className="quick-info-label">Category</p>
-              <p className="quick-info-value">{experience.category as string}</p>
-            </div>
-          )}
-          {!!(experience.area as string) && (
-            <div className="quick-info-item">
-              <p className="quick-info-label">Area</p>
-              <p className="quick-info-value">{experience.area as string}</p>
-            </div>
-          )}
-          {!!(experience.priceRange as string) && (
-            <div className="quick-info-item">
-              <p className="quick-info-label">Price</p>
-              <p className="quick-info-value">{experience.priceRange as string}</p>
-            </div>
-          )}
-          {!!websiteUrl && (
-            <div className="quick-info-item">
-              <p className="quick-info-label">Website</p>
-              <a
-                href={websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="quick-info-value"
-                style={{ color: "var(--color-accent)", textDecoration: "none" }}
-              >
-                Visit →
-              </a>
-            </div>
-          )}
-          {!!bookingUrl && bookingUrl !== websiteUrl && (
-            <div className="quick-info-item">
-              <p className="quick-info-label">Book</p>
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="quick-info-value"
-                style={{ color: "var(--color-accent)", textDecoration: "none" }}
-              >
-                Book →
-              </a>
-            </div>
-          )}
+        <div className="article-hero-overlay" />
+        <div className="article-hero-content">
+          <span className="article-hero-eyebrow">Stavanger Play</span>
+          <h1 className="article-hero-title">{experience.name as string}</h1>
+          <p className="article-hero-meta">
+            {[experience.category, experience.area, experience.priceRange].filter(Boolean).join(" · ")}
+          </p>
         </div>
+      </div>
 
-        {/* Rating Panel */}
-        <div className="rating-panel">
+      {/* ── Rating Panel ─────────────────────────────────────── */}
+      <div style={{ background: "var(--color-bg-subtle)", borderBottom: "0.5px solid var(--color-border)" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px clamp(20px, 6vw, 48px)" }}>
           <p className="text-eyebrow" style={{ marginBottom: 16 }}>My Verdict</p>
           {ratings.map((r) => {
             const score = experience[r.key] as number;
@@ -225,77 +125,79 @@ export default async function ExperiencePage({ params }: PageProps) {
             </div>
           )}
         </div>
+      </div>
 
-        {/* Experience Body */}
-        {!!experience.body && (
-          <div
-            style={{
-              fontSize: 15,
-              lineHeight: 1.75,
-              color: "var(--color-text-primary)",
-              fontFamily: "var(--font-dm-sans)",
-              fontWeight: 300,
-              margin: "32px 0",
-            }}
-          >
-            <PortableText
-              value={experience.body as Parameters<typeof PortableText>[0]["value"]}
-              components={portableComponents}
+      {/* ── Article Body ─────────────────────────────────────── */}
+      {!!experience.body && (
+        <div className="article-body">
+          <PortableText
+            value={experience.body as Parameters<typeof PortableText>[0]["value"]}
+            components={richTextComponents}
+          />
+        </div>
+      )}
+
+      {/* ── TikTok Embed ─────────────────────────────────────── */}
+      {!!(experience.tiktokUrl as string) && (() => {
+        const videoId = (experience.tiktokUrl as string).match(/\/video\/(\d+)/)?.[1];
+        if (!videoId) return null;
+        return (
+          <div style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
+            <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
+            <iframe
+              src={`https://www.tiktok.com/embed/v2/${videoId}`}
+              style={{ width: "100%", height: 700, border: "none" }}
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>
-        )}
+        );
+      })()}
 
-        {/* TikTok Embed */}
-        {!!(experience.tiktokUrl as string) && (() => {
-          const videoId = (experience.tiktokUrl as string).match(/\/video\/(\d+)/)?.[1];
-          if (!videoId) return null;
-          const embedUrl = `https://www.tiktok.com/embed/v2/${videoId}`;
-          return (
-            <div className="tiktok-embed-wrap">
-              <p className="tiktok-label" style={{ padding: "12px 16px 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
-              <iframe
-                src={embedUrl}
-                style={{ width: "100%", height: 700, border: "none" }}
-                allowFullScreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              />
-            </div>
-          );
-        })()}
-
-        {/* Photo Gallery */}
-        {!!(experience.gallery as unknown[])?.length && (
-          <div style={{ margin: "32px 0" }}>
-            <p className="text-eyebrow" style={{ marginBottom: 14 }}>{settings?.morePhotosLabel ?? "More Photos"}</p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                gap: 4,
-              }}
-            >
-              {(experience.gallery as Record<string, unknown>[]).map((img, i: number) => (
-                <div key={i} style={{ position: "relative", aspectRatio: "1", background: "var(--color-bg-image)", borderRadius: 2, overflow: "hidden" }}>
-                  <Image
-                    src={urlFor(img).width(900).height(900).quality(85).url()}
-                    alt={(img.alt as string) ?? `${experience.name as string} photo ${i + 1}`}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-              ))}
-            </div>
+      {/* ── Quick Info Panel ─────────────────────────────────── */}
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(20px, 6vw, 48px) 48px" }}>
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 32, marginBottom: 40 }}>
+          <p className="text-eyebrow" style={{ marginBottom: 20 }}>Quick Info</p>
+          <div className="quick-info">
+            {!!(experience.category as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Category</p>
+                <p className="quick-info-value">{experience.category as string}</p>
+              </div>
+            )}
+            {!!(experience.area as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Area</p>
+                <p className="quick-info-value">{experience.area as string}</p>
+              </div>
+            )}
+            {!!(experience.priceRange as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Price</p>
+                <p className="quick-info-value">{experience.priceRange as string}</p>
+              </div>
+            )}
+            {!!websiteUrl && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Website</p>
+                <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="quick-info-value" style={{ color: "var(--color-accent)", textDecoration: "none" }}>
+                  Visit →
+                </a>
+              </div>
+            )}
+            {!!bookingUrl && bookingUrl !== websiteUrl && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Book</p>
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="quick-info-value" style={{ color: "var(--color-accent)", textDecoration: "none" }}>
+                  Book →
+                </a>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
-        {/* Suggest CTA */}
-        <div
-          style={{
-            borderTop: "0.5px solid var(--color-border)",
-            paddingTop: 28,
-            marginTop: 40,
-          }}
-        >
+        {/* ── Suggest CTA ────────────────────────────────────── */}
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 28 }}>
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know something worth doing?</p>
           <h3 className="text-h3" style={{ marginBottom: 8 }}>Suggest an experience</h3>
           <p className="text-body text-muted" style={{ marginBottom: 16 }}>
@@ -320,7 +222,7 @@ export default async function ExperiencePage({ params }: PageProps) {
             Suggest a Place
           </Link>
         </div>
-      </article>
+      </div>
 
       <div className="divider-full" />
       <NewsletterSignup

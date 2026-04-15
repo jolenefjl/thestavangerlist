@@ -1,27 +1,5 @@
 import { defineType, defineField } from "sanity";
-
-const standardBlock = {
-  type: "block",
-  styles: [
-    { title: "Normal", value: "normal" },
-    { title: "H2", value: "h2" },
-  ],
-  lists: [{ title: "Bullet", value: "bullet" }],
-  marks: {
-    decorators: [
-      { title: "Bold", value: "strong" },
-      { title: "Italic", value: "em" },
-    ],
-    annotations: [
-      {
-        type: "object",
-        name: "link",
-        title: "Link",
-        fields: [{ name: "href", type: "url", title: "URL" }],
-      },
-    ],
-  },
-};
+import { standardRichTextOf } from "../lib/schemaHelpers";
 
 export const experience = defineType({
   name: "experience",
@@ -128,29 +106,6 @@ export const experience = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "gallery",
-      title: "Photo Gallery",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [
-            defineField({
-              name: "alt",
-              title: "Alt Text",
-              type: "string",
-            }),
-            defineField({
-              name: "caption",
-              title: "Caption (optional)",
-              type: "string",
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
       name: "tiktokUrl",
       title: "TikTok Video URL",
       type: "url",
@@ -159,26 +114,9 @@ export const experience = defineType({
     defineField({
       name: "body",
       title: "Review Body",
+      description: "Write your review. Use the photo block buttons to insert inline photos.",
       type: "array",
-      of: [
-        standardBlock,
-        {
-          type: "image",
-          options: { hotspot: true },
-          fields: [
-            defineField({
-              name: "alt",
-              title: "Alt Text",
-              type: "string",
-            }),
-            defineField({
-              name: "caption",
-              title: "Caption (optional)",
-              type: "string",
-            }),
-          ],
-        },
-      ],
+      of: standardRichTextOf,
       validation: (Rule) => Rule.required(),
     }),
     // Rating fields

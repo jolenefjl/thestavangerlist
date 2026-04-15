@@ -1,35 +1,5 @@
 import { defineType, defineField } from "sanity";
-
-const richText = (name: string, title: string) =>
-  defineField({
-    name,
-    title,
-    type: "array",
-    of: [
-      {
-        type: "block",
-        styles: [
-          { title: "Normal", value: "normal" },
-          { title: "H2", value: "h2" },
-        ],
-        lists: [{ title: "Bullet", value: "bullet" }],
-        marks: {
-          decorators: [
-            { title: "Bold", value: "strong" },
-            { title: "Italic", value: "em" },
-          ],
-          annotations: [
-            {
-              type: "object",
-              name: "link",
-              title: "Link",
-              fields: [{ name: "href", type: "url", title: "URL" }],
-            },
-          ],
-        },
-      },
-    ],
-  });
+import { standardRichTextOf } from "../lib/schemaHelpers";
 
 export const interview = defineType({
   name: "interview",
@@ -83,7 +53,12 @@ export const interview = defineType({
     }),
 
     // ── Content ───────────────────────────────────────────────
-    richText("introStory", "Intro Story"),
+    defineField({
+      name: "introStory",
+      title: "Intro Story",
+      type: "array",
+      of: standardRichTextOf,
+    }),
     defineField({
       name: "pullQuote",
       title: "Pull Quote",
@@ -110,30 +85,7 @@ export const interview = defineType({
               name: "answer",
               title: "Answer",
               type: "array",
-              of: [
-                {
-                  type: "block",
-                  styles: [
-                    { title: "Normal", value: "normal" },
-                    { title: "H2", value: "h2" },
-                  ],
-                  lists: [{ title: "Bullet", value: "bullet" }],
-                  marks: {
-                    decorators: [
-                      { title: "Bold", value: "strong" },
-                      { title: "Italic", value: "em" },
-                    ],
-                    annotations: [
-                      {
-                        type: "object",
-                        name: "link",
-                        title: "Link",
-                        fields: [{ name: "href", type: "url", title: "URL" }],
-                      },
-                    ],
-                  },
-                },
-              ],
+              of: standardRichTextOf,
             }),
           ],
           preview: {

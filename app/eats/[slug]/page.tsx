@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +11,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
-
-// Always render on demand so new reviews appear without a redeploy
-export const dynamic = "force-dynamic";
+import { richTextComponents } from "@/components/RichTextComponents";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -46,71 +46,31 @@ export default async function ReviewPage({ params }: PageProps) {
     <div className="page-bg">
       <Nav />
 
-      {/* ── Hero: Portrait photo left, info right ────────────── */}
-      <div className="review-hero">
-        {/* Photo */}
-        {review.heroImage ? (
-          <div className="review-hero-img-wrap">
-            <Image
-              src={urlFor(review.heroImage).width(900).height(1200).quality(90).url()}
-              alt={review.heroImage.alt ?? review.name}
-              width={900}
-              height={1200}
-              sizes="(max-width: 768px) 100vw, 42vw"
-              className="review-hero-img"
-              priority
-            />
-          </div>
-        ) : (
-          <div className="review-hero-img-wrap" style={{ background: "var(--color-bg-image)" }} />
+      {/* ── Hero: Full bleed image with centred overlay text ──── */}
+      <div className="article-hero">
+        {review.heroImage && (
+          <Image
+            src={urlFor(review.heroImage).width(2400).height(1400).quality(90).url()}
+            alt={review.heroImage.alt ?? review.name}
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+            priority
+          />
         )}
-
-        {/* Info panel */}
-        <div className="review-hero-panel">
-          <p className="text-eyebrow" style={{ marginBottom: 12 }}>{review.cuisine}</p>
-          <h1 className="text-h1" style={{ marginBottom: 8 }}>{review.name}</h1>
-          <p className="text-small text-muted" style={{ marginBottom: 28 }}>
-            {review.area} · {review.priceRange}
-            {review.bestFor?.length > 0 && ` · ${review.bestFor.join(", ")}`}
+        <div className="article-hero-overlay" />
+        <div className="article-hero-content">
+          <span className="article-hero-eyebrow">Stavanger Eats</span>
+          <h1 className="article-hero-title">{review.name}</h1>
+          <p className="article-hero-meta">
+            {[review.cuisine, review.area, review.priceRange].filter(Boolean).join(" · ")}
           </p>
-
-          {/* Quick Info Panel */}
-          <div className="quick-info" style={{ marginBottom: 0 }}>
-            <div className="quick-info-item">
-              <p className="quick-info-label">Cuisine</p>
-              <p className="quick-info-value">{review.cuisine}</p>
-            </div>
-            <div className="quick-info-item">
-              <p className="quick-info-label">Area</p>
-              <p className="quick-info-value">{review.area}</p>
-            </div>
-            <div className="quick-info-item">
-              <p className="quick-info-label">Price</p>
-              <p className="quick-info-value">{review.priceRange}</p>
-            </div>
-            {review.websiteUrl && (
-              <div className="quick-info-item">
-                <p className="quick-info-label">Website</p>
-                <a
-                  href={review.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-info-value"
-                  style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                >
-                  Visit →
-                </a>
-              </div>
-            )}
-          </div>
         </div>
       </div>
 
-      {/* ── Review Content ───────────────────────────────────── */}
-      <article className="section" style={{ paddingTop: 36, maxWidth: 720, marginBottom: 48 }}>
-
-        {/* Rating Panel */}
-        <div className="rating-panel">
+      {/* ── Rating Panel ─────────────────────────────────────── */}
+      <div style={{ background: "var(--color-bg-subtle)", borderBottom: "0.5px solid var(--color-border)" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px clamp(20px, 6vw, 48px)" }}>
           <p className="text-eyebrow" style={{ marginBottom: 16 }}>{settings?.verdictTitle ?? "My Verdict"}</p>
           {ratings.map((r) => {
             const score = review[r.key] as number;
@@ -135,111 +95,74 @@ export default async function ReviewPage({ params }: PageProps) {
             </div>
           )}
         </div>
+      </div>
 
-        {/* Review Body */}
-        {review.body && (
-          <div
-            style={{
-              fontSize: 15,
-              lineHeight: 1.75,
-              color: "var(--color-text-primary)",
-              fontFamily: "var(--font-dm-sans)",
-              fontWeight: 300,
-              margin: "32px 0",
-            }}
-          >
-            <PortableText
-              value={review.body}
-              components={{
-                block: {
-                  normal: ({ children }) => <p style={{ marginBottom: 20, lineHeight: 1.75 }}>{children}</p>,
-                  h2: ({ children }) => <h2 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, margin: "36px 0 12px", color: "var(--color-text-primary)" }}>{children}</h2>,
-                },
-                list: {
-                  bullet: ({ children }) => <ul style={{ paddingLeft: 20, marginBottom: 20, lineHeight: 1.75 }}>{children}</ul>,
-                },
-                listItem: {
-                  bullet: ({ children }) => <li style={{ marginBottom: 6, color: "var(--color-text-primary)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, fontSize: 15 }}>{children}</li>,
-                },
-                marks: {
-                  link: ({ value, children }: { value?: Record<string, unknown>; children?: React.ReactNode }) => <a href={value?.href as string} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-accent)", textDecoration: "underline" }}>{children}</a>,
-                  strong: ({ children }) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
-                  em: ({ children }) => <em>{children}</em>,
-                },
-                types: {
-                  image: ({ value }: { value: Record<string, unknown> }) => (
-                    <figure style={{ margin: "32px 0" }}>
-                      <Image
-                        src={urlFor(value).width(800).url()}
-                        alt={(value.alt as string) ?? ""}
-                        width={800}
-                        height={500}
-                        style={{ width: "100%", height: "auto", borderRadius: 3, objectFit: "cover" }}
-                      />
-                      {typeof value.caption === "string" && value.caption && (
-                        <figcaption style={{ fontSize: 11, color: "var(--color-text-hint)", marginTop: 8, textAlign: "center", letterSpacing: "0.04em" }}>
-                          {value.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ),
-                },
-              }}
-            />
-          </div>
-        )}
+      {/* ── Article Body ─────────────────────────────────────── */}
+      {review.body && (
+        <div className="article-body">
+          <PortableText value={review.body} components={richTextComponents} />
+        </div>
+      )}
 
-        {/* TikTok Embed */}
-        {review.tiktokUrl && (() => {
-          const videoId = review.tiktokUrl.match(/\/video\/(\d+)/)?.[1];
-          if (!videoId) return null;
-          const embedUrl = `https://www.tiktok.com/embed/v2/${videoId}`;
-          return (
-          <div className="tiktok-embed-wrap">
-            <p className="tiktok-label" style={{ padding: "12px 16px 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
+      {/* ── TikTok Embed ─────────────────────────────────────── */}
+      {review.tiktokUrl && (() => {
+        const videoId = review.tiktokUrl.match(/\/video\/(\d+)/)?.[1];
+        if (!videoId) return null;
+        return (
+          <div className="tiktok-embed-wrap article-body-text" style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
+            <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
             <iframe
-              src={embedUrl}
+              src={`https://www.tiktok.com/embed/v2/${videoId}`}
               style={{ width: "100%", height: 700, border: "none" }}
               allowFullScreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>
-          );
-        })()}
+        );
+      })()}
 
-        {/* Photo Gallery */}
-        {review.gallery?.length > 0 && (
-          <div style={{ margin: "32px 0" }}>
-            <p className="text-eyebrow" style={{ marginBottom: 14 }}>{settings?.morePhotosLabel ?? "More Photos"}</p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                gap: 4,
-              }}
-            >
-              {review.gallery.map((img: Record<string, unknown>, i: number) => (
-                <div key={i} style={{ position: "relative", aspectRatio: "1", background: "var(--color-bg-image)", borderRadius: 2, overflow: "hidden" }}>
-                  <Image
-                    src={urlFor(img).width(900).height(900).quality(85).url()}
-                    alt={(img.alt as string) ?? `${review.name} photo ${i + 1}`}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-              ))}
+      {/* ── Quick Info Panel ─────────────────────────────────── */}
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(20px, 6vw, 48px) 48px" }}>
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 32, marginBottom: 40 }}>
+          <p className="text-eyebrow" style={{ marginBottom: 20 }}>Quick Info</p>
+          <div className="quick-info">
+            <div className="quick-info-item">
+              <p className="quick-info-label">Cuisine</p>
+              <p className="quick-info-value">{review.cuisine}</p>
             </div>
+            <div className="quick-info-item">
+              <p className="quick-info-label">Area</p>
+              <p className="quick-info-value">{review.area}</p>
+            </div>
+            <div className="quick-info-item">
+              <p className="quick-info-label">Price</p>
+              <p className="quick-info-value">{review.priceRange}</p>
+            </div>
+            {review.bestFor?.length > 0 && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Best For</p>
+                <p className="quick-info-value">{review.bestFor.join(", ")}</p>
+              </div>
+            )}
+            {review.websiteUrl && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Website</p>
+                <a
+                  href={review.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-value"
+                  style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                >
+                  Visit →
+                </a>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
-        {/* Suggest a Restaurant CTA */}
-        <div
-          style={{
-            borderTop: "0.5px solid var(--color-border)",
-            paddingTop: 28,
-            marginTop: 40,
-          }}
-        >
+        {/* ── Suggest CTA ────────────────────────────────────── */}
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 28 }}>
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>{settings?.suggestEyebrow ?? "Know a great spot?"}</p>
           <h3 className="text-h3" style={{ marginBottom: 8 }}>{settings?.suggestHeading ?? "Suggest a restaurant"}</h3>
           <p className="text-body text-muted" style={{ marginBottom: 16 }}>
@@ -264,7 +187,7 @@ export default async function ReviewPage({ params }: PageProps) {
             {settings?.suggestCtaText ?? "Suggest a Place"}
           </Link>
         </div>
-      </article>
+      </div>
 
       <div className="divider-full" />
       <NewsletterSignup

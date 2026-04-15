@@ -65,11 +65,33 @@ export const siteSettingsQuery = groq`
     instagramUrl,
     tiktokUrl,
     homepagePlayTitle,
+    homepageListsTitle,
     featuredReviews[]-> {
       ${reviewFields}
     },
     featuredExperiences[]-> {
       ${experienceFields}
+    },
+    featuredCarouselItems[]-> {
+      _type,
+      _id,
+      "title": coalesce(name, title),
+      slug,
+      heroImage,
+      "tag": select(
+        _type == "review" => "STAVANGER EATS",
+        _type == "experience" => "STAVANGER PLAY",
+        _type == "topList" => "STAVANGER LISTS",
+        "FEATURED"
+      )
+    },
+    homepageListsItems[]-> {
+      _id,
+      title,
+      slug,
+      heroImage,
+      cardTeaser,
+      publishedAt
     }
   }
 `;
@@ -195,8 +217,21 @@ export const allTopListsQuery = groq`
     title,
     slug,
     heroImage,
+    cardTeaser,
     publishedAt,
     "itemCount": count(items)
+  }
+`;
+
+// Homepage: latest 3 lists (fallback when no pinned lists in Site Settings)
+export const latestListsQuery = groq`
+  *[_type == "topList"] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    slug,
+    heroImage,
+    cardTeaser,
+    publishedAt
   }
 `;
 

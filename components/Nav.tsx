@@ -31,9 +31,10 @@ export default async function Nav() {
           </div>
         </li>
         <li>
-          <Link href="/about" className="nav-link">
-            About
-          </Link>
+          <Link href="/lists" className="nav-link">Lists</Link>
+        </li>
+        <li>
+          <Link href="/about" className="nav-link">About</Link>
         </li>
       </ul>
     </nav>

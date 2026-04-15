@@ -2,94 +2,69 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
-import { siteSettingsQuery, latestReviewsQuery, allTopListsQuery, featuredExperiencesQuery } from "@/sanity/lib/queries";
+import {
+  siteSettingsQuery,
+  latestReviewsQuery,
+  featuredExperiencesQuery,
+  latestListsQuery,
+} from "@/sanity/lib/queries";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
 import ExperienceCard from "@/components/ExperienceCard";
+import ListCard from "@/components/ListCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import HeroCarousel from "@/components/HeroCarousel";
+import type { CarouselItem } from "@/components/HeroCarousel";
 
 export default async function Home() {
-  const [settings, latestReviews, topLists, featuredExperiencesFallback] = await Promise.all([
-    client.fetch(siteSettingsQuery),
-    client.fetch(latestReviewsQuery),
-    client.fetch(allTopListsQuery),
-    client.fetch(featuredExperiencesQuery),
-  ]);
+  const [settings, latestReviews, featuredExperiencesFallback, latestListsFallback] =
+    await Promise.all([
+      client.fetch(siteSettingsQuery),
+      client.fetch(latestReviewsQuery),
+      client.fetch(featuredExperiencesQuery),
+      client.fetch(latestListsQuery),
+    ]);
 
-  // Use Site Settings picks if set, otherwise fall back to experiences marked featured: true
+  // Carousel items from Site Settings (or empty)
+  const carouselItems: CarouselItem[] = settings?.featuredCarouselItems ?? [];
+
+  // Featured experiences — pinned or featured:true fallback
   const featuredExperiences: unknown[] =
     settings?.featuredExperiences?.length > 0
       ? settings.featuredExperiences
       : (featuredExperiencesFallback ?? []);
 
-  const featured: unknown[] = settings?.featuredReviews ?? [];
-  const mainFeatured = featured[0] as Record<string, unknown> | undefined;
-  const secondaryFeatured = (featured.slice(1, 3) ?? []) as Record<string, unknown>[];
+  // Lists section — pinned or latest 3 fallback
+  const listsItems: unknown[] =
+    settings?.homepageListsItems?.length > 0
+      ? settings.homepageListsItems
+      : (latestListsFallback ?? []);
 
   return (
     <div className="page-bg">
       <Nav />
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="section section-gap" style={{ paddingTop: 56, paddingBottom: 56 }}>
-        <p className="text-eyebrow" style={{ marginBottom: 14 }}>
-          {settings?.heroEyebrow ?? "🍽️ Stavanger Eats"}
-        </p>
-        <h1 className="text-hero">
-          {(settings?.heroHeadline ?? "The best places to eat in")
-            .split("\n")
-            .map((line: string, i: number, arr: string[]) => (
-              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-            ))}{" "}
-          <span className="text-italic">
-            {settings?.heroHeadlineAccent ?? "Stavanger."}
-          </span>
-        </h1>
-        <p className="text-body text-muted" style={{ marginTop: 18, maxWidth: 460 }}>
-          {settings?.heroSubheading ?? "Honest reviews for the Stavanger region — every place tested, never sponsored."}
-        </p>
-        <div style={{ marginTop: 28, display: "flex", gap: 16, alignItems: "center" }}>
-          <Link
-            href="/eats"
-            style={{
-              display: "inline-block",
-              background: "var(--color-dark)",
-              color: "var(--color-light)",
-              padding: "10px 20px",
-              borderRadius: 3,
-              fontSize: 10,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              fontFamily: "var(--font-dm-sans)",
-              fontWeight: 500,
-            }}
-          >
-            {settings?.homepageCtaText ?? "Browse All Reviews"}
-          </Link>
-        </div>
-      </section>
+      {/* ── Hero Carousel ────────────────────────────────────── */}
+      {carouselItems.length > 0 && (
+        <HeroCarousel items={carouselItems} />
+      )}
 
-      <div className="divider" />
-
-      {/* ── Featured Reviews ─────────────────────────────────── */}
-      {featured.length > 0 && (
-        <section className="section section-gap">
-          <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
+      {/* ── Stavanger Eats — Latest Reviews ──────────────────── */}
+      {latestReviews?.length > 0 && (
+        <section className="hp-section" style={{ marginBottom: 8 }}>
+          <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Eats</p>
           <div className="section-header">
-            <h2 className="section-title">{settings?.homepageFeaturedTitle ?? "Jo's Picks"}</h2>
-            <Link href="/eats" className="section-link">See all →</Link>
+            <h2 className="section-title">
+              {settings?.homepageLatestTitle ?? "Latest food reviews"}
+            </h2>
+            <Link href="/eats" className="section-link">View all →</Link>
           </div>
-
-          <div className="featured-grid" style={{ gap: 4, borderRadius: 6 }}>
-            {mainFeatured && (
-              <ReviewCard review={mainFeatured as unknown as Parameters<typeof ReviewCard>[0]["review"]} size="main" />
-            )}
-            {secondaryFeatured.map((r) => (
+          <div className="card-grid">
+            {latestReviews.map((review: Record<string, unknown>) => (
               <ReviewCard
-                key={r._id as string}
-                review={r as unknown as Parameters<typeof ReviewCard>[0]["review"]}
+                key={review._id as string}
+                review={review as unknown as Parameters<typeof ReviewCard>[0]["review"]}
                 size="small"
               />
             ))}
@@ -97,76 +72,20 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── Top Lists ────────────────────────────────────────── */}
-      {topLists?.length > 0 && (
-        <>
-          <div className="divider" />
-          <section className="section section-gap">
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
-            <div className="section-header">
-              <h2 className="section-title">{settings?.homepageTopListsTitle ?? "Top Lists"}</h2>
-              <Link href="/lists" className="section-link">See all →</Link>
-            </div>
-
-            <div>
-              {topLists.slice(0, 4).map((list: Record<string, unknown>, i: number) => (
-                <Link
-                  key={list._id as string}
-                  href={`/lists/${(list.slug as { current: string }).current}`}
-                  className="list-item"
-                >
-                  <div className="list-item-left">
-                    <span className="list-num">{i + 1}</span>
-                    <div>
-                      <p className="list-name">{list.title as string}</p>
-                      <p className="list-tag">{list.itemCount as number} places</p>
-                    </div>
-                  </div>
-                  <span className="list-arrow">→</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* ── Latest Reviews ───────────────────────────────────── */}
-      {latestReviews?.length > 0 && (
-        <>
-          <div className="divider" />
-          <section className="section section-gap">
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
-            <div className="section-header">
-              <h2 className="section-title">{settings?.homepageLatestTitle ?? "Latest Reviews"}</h2>
-              <Link href="/eats" className="section-link">See all →</Link>
-            </div>
-
-            <div className="card-grid">
-              {latestReviews.map((review: Record<string, unknown>) => (
-                <ReviewCard
-                  key={review._id as string}
-                  review={review as unknown as Parameters<typeof ReviewCard>[0]["review"]}
-                  size="small"
-                />
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* ── Stavanger Play ───────────────────────────────────── */}
+      {/* ── Stavanger Play — Featured Experiences ─────────────── */}
       {featuredExperiences.length > 0 && (
         <>
-          <div className="divider" />
-          <section className="section section-gap">
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Play</p>
+          <div className="divider" style={{ margin: "64px 28px 0" }} />
+          <section className="hp-section" style={{ marginBottom: 8 }}>
+            <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Play</p>
             <div className="section-header">
-              <h2 className="section-title">{settings?.homepagePlayTitle ?? "Things worth doing."}</h2>
-              <Link href="/play" className="section-link">All experiences →</Link>
+              <h2 className="section-title">
+                {settings?.homepagePlayTitle ?? "Experiences in and around Stavanger"}
+              </h2>
+              <Link href="/play" className="section-link">View all →</Link>
             </div>
-
             <div className="card-grid">
-              {(featuredExperiences as Record<string, unknown>[]).map((experience) => (
+              {(featuredExperiences as Record<string, unknown>[]).slice(0, 3).map((experience) => (
                 <ExperienceCard
                   key={experience._id as string}
                   experience={experience as unknown as Parameters<typeof ExperienceCard>[0]["experience"]}
@@ -178,8 +97,32 @@ export default async function Home() {
         </>
       )}
 
-      {/* ── Newsletter ───────────────────────────────────────── */}
-      <div className="divider" style={{ margin: "0 0 28px" }} />
+      {/* ── Stavanger Lists ───────────────────────────────────── */}
+      {listsItems.length > 0 && (
+        <>
+          <div className="divider" style={{ margin: "64px 28px 0" }} />
+          <section className="hp-section" style={{ marginBottom: 8 }}>
+            <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Lists</p>
+            <div className="section-header">
+              <h2 className="section-title">
+                {settings?.homepageListsTitle ?? "Curated food and experiences around the city"}
+              </h2>
+              <Link href="/lists" className="section-link">View all lists →</Link>
+            </div>
+            <div className="card-grid">
+              {(listsItems as Record<string, unknown>[]).slice(0, 3).map((list) => (
+                <ListCard
+                  key={list._id as string}
+                  list={list as unknown as Parameters<typeof ListCard>[0]["list"]}
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* ── Newsletter ────────────────────────────────────────── */}
+      <div className="divider" style={{ margin: "64px 28px 28px" }} />
       <NewsletterSignup
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}

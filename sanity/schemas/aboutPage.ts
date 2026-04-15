@@ -1,35 +1,5 @@
 import { defineType, defineField } from "sanity";
-
-const richTextField = (name: string, title: string) =>
-  defineField({
-    name,
-    title,
-    type: "array",
-    of: [
-      {
-        type: "block",
-        styles: [
-          { title: "Normal", value: "normal" },
-          { title: "H2", value: "h2" },
-        ],
-        lists: [{ title: "Bullet", value: "bullet" }],
-        marks: {
-          decorators: [
-            { title: "Bold", value: "strong" },
-            { title: "Italic", value: "em" },
-          ],
-          annotations: [
-            {
-              type: "object",
-              name: "link",
-              title: "Link",
-              fields: [{ name: "href", type: "url", title: "URL" }],
-            },
-          ],
-        },
-      },
-    ],
-  });
+import { standardRichTextOf } from "../lib/schemaHelpers";
 
 export const aboutPage = defineType({
   name: "aboutPage",
@@ -74,9 +44,24 @@ export const aboutPage = defineType({
       type: "string",
       initialValue: "Growing up with food as a language.",
     }),
-    richTextField("storyBlock1", "My Story — Paragraph 1 (KL roots)"),
-    richTextField("storyBlock2", "My Story — Paragraph 2 (Arriving in Stavanger)"),
-    richTextField("storyBlock3", "My Story — Paragraph 3 (The in-between perspective)"),
+    defineField({
+      name: "storyBlock1",
+      title: "My Story — Paragraph 1 (KL roots)",
+      type: "array",
+      of: standardRichTextOf,
+    }),
+    defineField({
+      name: "storyBlock2",
+      title: "My Story — Paragraph 2 (Arriving in Stavanger)",
+      type: "array",
+      of: standardRichTextOf,
+    }),
+    defineField({
+      name: "storyBlock3",
+      title: "My Story — Paragraph 3 (The in-between perspective)",
+      type: "array",
+      of: standardRichTextOf,
+    }),
 
     // ── Why I Started ─────────────────────────────────────────
     defineField({
@@ -91,7 +76,12 @@ export const aboutPage = defineType({
       type: "string",
       initialValue: "I built the thing I wished existed.",
     }),
-    richTextField("whySection", "Why I Started — Body Text"),
+    defineField({
+      name: "whySection",
+      title: "Why I Started — Body Text",
+      type: "array",
+      of: standardRichTextOf,
+    }),
 
     // ── What You'll Find ──────────────────────────────────────
     defineField({
@@ -106,7 +96,12 @@ export const aboutPage = defineType({
       type: "string",
       initialValue: "Honest, tested, never sponsored.",
     }),
-    richTextField("whatSection", "What You'll Find — Body Text"),
+    defineField({
+      name: "whatSection",
+      title: "What You'll Find — Body Text",
+      type: "array",
+      of: standardRichTextOf,
+    }),
 
     // ── Social ────────────────────────────────────────────────
     defineField({

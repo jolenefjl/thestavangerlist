@@ -80,12 +80,22 @@ export const siteSettings = defineType({
       description: "Choose up to 4 reviews to feature on the homepage",
     }),
 
+    // ── Hero Carousel ─────────────────────────────────────────
+    defineField({
+      name: "featuredCarouselItems",
+      title: "Homepage — Featured Carousel",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "review" }, { type: "experience" }, { type: "topList" }] }],
+      validation: (Rule) => Rule.max(6),
+      description: "Choose 3–6 items from any content type. Drag to reorder. Each slide uses the item's hero image automatically.",
+    }),
+
     // ── Stavanger Play Section ────────────────────────────────
     defineField({
       name: "homepagePlayTitle",
       title: "Homepage — Play Section Heading",
       type: "string",
-      initialValue: "Things worth doing.",
+      initialValue: "Experiences in and around Stavanger",
       description: "Large heading shown above the featured experiences",
     }),
     defineField({
@@ -95,6 +105,22 @@ export const siteSettings = defineType({
       of: [{ type: "reference", to: [{ type: "experience" }] }],
       validation: (Rule) => Rule.max(6),
       description: "Choose up to 6 experiences to feature in the Play section on the homepage",
+    }),
+
+    // ── Stavanger Lists Section ───────────────────────────────
+    defineField({
+      name: "homepageListsTitle",
+      title: "Homepage — Lists Section Heading",
+      type: "string",
+      initialValue: "Curated food and experiences around the city",
+    }),
+    defineField({
+      name: "homepageListsItems",
+      title: "Homepage Featured Lists",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "topList" }] }],
+      validation: (Rule) => Rule.max(6),
+      description: "Pin specific lists to the homepage. Leave empty to show the 3 most recent lists automatically.",
     }),
 
     // ── Eats Page ─────────────────────────────────────────────

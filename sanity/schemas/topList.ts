@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { standardRichTextOf } from "../lib/schemaHelpers";
 
 export const topList = defineType({
   name: "topList",
@@ -19,33 +20,30 @@ export const topList = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "cardTeaser",
+      title: "Card Teaser",
+      type: "string",
+      description: "One-line summary shown on the list card. Max 160 characters. Optional.",
+      validation: (Rule) => Rule.max(160),
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "intro",
       title: "Intro Paragraph",
       type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-          ],
-          lists: [{ title: "Bullet", value: "bullet" }],
-          marks: {
-            decorators: [
-              { title: "Bold", value: "strong" },
-              { title: "Italic", value: "em" },
-            ],
-            annotations: [
-              {
-                type: "object",
-                name: "link",
-                title: "Link",
-                fields: [{ name: "href", type: "url", title: "URL" }],
-              },
-            ],
-          },
-        },
-      ],
+      of: standardRichTextOf,
     }),
     defineField({
       name: "items",
@@ -80,19 +78,6 @@ export const topList = defineType({
             select: { title: "placeName", subtitle: "description" },
           },
         },
-      ],
-    }),
-    defineField({
-      name: "heroImage",
-      title: "Hero Image",
-      type: "image",
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: "alt",
-          title: "Alt Text",
-          type: "string",
-        }),
       ],
     }),
     defineField({
