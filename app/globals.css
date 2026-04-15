@@ -113,10 +113,10 @@ h1, h2, h3, h4, h5, h6 {
 .nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
 
 .nav-link {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-text-hint);
+  color: var(--color-text-muted);
   cursor: pointer;
   text-decoration: none;
   transition: color 0.2s;
@@ -770,9 +770,10 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   transition: opacity 0.75s ease;
   display: block;
+  pointer-events: none;
 }
 
-.hero-carousel-slide.active { opacity: 1; }
+.hero-carousel-slide.active { opacity: 1; pointer-events: auto; }
 
 .hero-carousel-overlay {
   position: absolute;

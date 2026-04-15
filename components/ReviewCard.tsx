@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { formatPrice } from "@/lib/formatPrice";
 
 interface Review {
   _id: string;
@@ -68,7 +69,7 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
       <div className={isMain ? "card-body" : "card-body-sm"}>
         <div className="card-meta">
           <span className="card-cuisine">{review.cuisine}</span>
-          <span className="card-price">{review.priceRange}</span>
+          <span className="card-price">{formatPrice(review.priceRange)}</span>
         </div>
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
         <p className="card-desc">{review.area}</p>
@@ -77,6 +78,7 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
         )}
         {avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
+            <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>My rating</span>
             {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
           </p>
         )}

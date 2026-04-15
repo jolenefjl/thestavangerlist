@@ -53,7 +53,7 @@ export default async function Home() {
       {/* ── Stavanger Eats — Latest Reviews ──────────────────── */}
       {latestReviews?.length > 0 && (
         <section className="hp-section" style={{ marginBottom: 8 }}>
-          <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Eats</p>
+          <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
           <div className="section-header">
             <h2 className="section-title">
               {settings?.homepageLatestTitle ?? "Latest food reviews"}
@@ -77,7 +77,7 @@ export default async function Home() {
         <>
           <div className="divider" style={{ margin: "64px 28px 0" }} />
           <section className="hp-section" style={{ marginBottom: 8 }}>
-            <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Play</p>
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Play</p>
             <div className="section-header">
               <h2 className="section-title">
                 {settings?.homepagePlayTitle ?? "Experiences in and around Stavanger"}
@@ -102,7 +102,7 @@ export default async function Home() {
         <>
           <div className="divider" style={{ margin: "64px 28px 0" }} />
           <section className="hp-section" style={{ marginBottom: 8 }}>
-            <p className="text-eyebrow-muted" style={{ marginBottom: 10 }}>Stavanger Lists</p>
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Lists</p>
             <div className="section-header">
               <h2 className="section-title">
                 {settings?.homepageListsTitle ?? "Curated food and experiences around the city"}

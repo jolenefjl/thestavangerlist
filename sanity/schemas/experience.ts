@@ -55,9 +55,9 @@ export const experience = defineType({
       options: {
         list: [
           { title: "Free", value: "Free" },
-          { title: "€", value: "€" },
-          { title: "€€", value: "€€" },
-          { title: "€€€", value: "€€€" },
+          { title: "kr", value: "kr" },
+          { title: "kr kr", value: "kr kr" },
+          { title: "kr kr kr", value: "kr kr kr" },
         ],
         layout: "radio",
       },

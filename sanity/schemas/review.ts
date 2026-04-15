@@ -47,9 +47,9 @@ export const review = defineType({
       type: "string",
       options: {
         list: [
-          { title: "€ — Inexpensive", value: "€" },
-          { title: "€€ — Moderate", value: "€€" },
-          { title: "€€€ — Expensive", value: "€€€" },
+          { title: "kr — Inexpensive", value: "kr" },
+          { title: "kr kr — Moderate", value: "kr kr" },
+          { title: "kr kr kr — Expensive", value: "kr kr kr" },
         ],
         layout: "radio",
       },
