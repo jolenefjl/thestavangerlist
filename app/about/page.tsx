@@ -51,7 +51,7 @@ export default async function AboutPage() {
           <div className="about-hero-img-placeholder">
             <span style={{
               fontFamily: "var(--font-spectral), serif",
-              fontSize: 86,
+              fontSize: 72,
               fontWeight: 300,
               fontStyle: "italic",
               color: "var(--color-accent-light)",
@@ -150,7 +150,7 @@ export default async function AboutPage() {
       <div className="about-section">
         <p className="text-eyebrow" style={{ marginBottom: 10 }}>{about?.socialEyebrow ?? "Come Find Me"}</p>
         <h2 className="text-h2" style={{ marginBottom: 28 }}>{about?.socialHeadline ?? "On TikTok and Instagram."}</h2>
-        <p style={{ fontSize: 18, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, lineHeight: 1.75, color: "var(--color-text-muted)", marginBottom: 28, maxWidth: 440 }}>
+        <p style={{ fontSize: 15, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300, lineHeight: 1.75, color: "var(--color-text-muted)", marginBottom: 28, maxWidth: 440 }}>
           {about?.socialBlurb ?? "I post food reviews, Stavanger spots, and the occasional overly enthusiastic take on a bowl of ramen."}
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>

@@ -40,7 +40,7 @@ export default async function SearchPage() {
   return (
     <div className="page-bg">
       <Nav />
-      <main style={{ maxWidth: 760, margin: "0 auto", padding: "48px clamp(24px, 7.2vw, 58px) 96px" }}>
+      <main style={{ maxWidth: 760, margin: "0 auto", padding: "48px clamp(20px, 6vw, 48px) 96px" }}>
         <p className="text-eyebrow" style={{ marginBottom: 10 }}>Search</p>
         <h1 className="text-h3" style={{ marginBottom: 24 }}>Find a place or a list</h1>
         <SearchClient items={items} />

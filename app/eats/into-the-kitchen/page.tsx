@@ -27,7 +27,7 @@ export default async function IntoTheKitchenPage() {
       {/* ── Page Header ──────────────────────────────────────── */}
       <div className="section" style={{ paddingTop: 48, paddingBottom: 36, maxWidth: 680 }}>
         <p className="text-eyebrow" style={{ marginBottom: 12 }}>Stavanger Eats</p>
-        <h1 className="text-hero" style={{ marginBottom: 16, fontSize: "clamp(38px, 7.2vw, 62px)" }}>
+        <h1 className="text-hero" style={{ marginBottom: 16, fontSize: "clamp(32px, 6vw, 52px)" }}>
           Into the Kitchen
         </h1>
         <p className="text-body text-muted" style={{ maxWidth: 440, lineHeight: 1.75 }}>

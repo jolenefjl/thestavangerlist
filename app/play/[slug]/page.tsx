@@ -100,7 +100,7 @@ export default async function ExperiencePage({ params }: PageProps) {
 
       {/* ── Rating Panel ─────────────────────────────────────── */}
       <div style={{ background: "var(--color-bg-subtle)", borderBottom: "0.5px solid var(--color-border)" }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px clamp(24px, 7.2vw, 58px)" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px clamp(20px, 6vw, 48px)" }}>
           <p className="text-eyebrow" style={{ marginBottom: 16 }}>My Verdict</p>
           {ratings.map((r) => {
             const score = experience[r.key] as number;
@@ -118,9 +118,9 @@ export default async function ExperiencePage({ params }: PageProps) {
           })}
           {!!overallDisplay && (
             <div className="verdict-overall">
-              <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 500, color: "var(--color-text-hint)" }}>Overall</span>
-              <span style={{ fontSize: 22, fontFamily: "var(--font-spectral)", fontStyle: "italic", fontWeight: 300, color: "var(--color-accent)" }}>
-                {overallDisplay}<span style={{ fontSize: 16, fontWeight: 300, color: "var(--color-text-muted)" }}>/5</span>
+              <span style={{ fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 500, color: "var(--color-text-hint)" }}>Overall</span>
+              <span style={{ fontSize: 18, fontFamily: "var(--font-spectral)", fontStyle: "italic", fontWeight: 300, color: "var(--color-accent)" }}>
+                {overallDisplay}<span style={{ fontSize: 13, fontWeight: 300, color: "var(--color-text-muted)" }}>/5</span>
               </span>
             </div>
           )}
@@ -142,7 +142,7 @@ export default async function ExperiencePage({ params }: PageProps) {
         const videoId = (experience.tiktokUrl as string).match(/\/video\/(\d+)/)?.[1];
         if (!videoId) return null;
         return (
-          <div style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(24px, 7.2vw, 58px)" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
             <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
             <iframe
               src={`https://www.tiktok.com/embed/v2/${videoId}`}
@@ -155,7 +155,7 @@ export default async function ExperiencePage({ params }: PageProps) {
       })()}
 
       {/* ── Quick Info Panel ─────────────────────────────────── */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(24px, 7.2vw, 58px) 48px" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(20px, 6vw, 48px) 48px" }}>
         <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 32, marginBottom: 40 }}>
           <p className="text-eyebrow" style={{ marginBottom: 20 }}>Quick Info</p>
           <div className="quick-info">
@@ -211,7 +211,7 @@ export default async function ExperiencePage({ params }: PageProps) {
               color: "var(--color-light)",
               padding: "10px 20px",
               borderRadius: 3,
-              fontSize: 12,
+              fontSize: 10,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
               textDecoration: "none",

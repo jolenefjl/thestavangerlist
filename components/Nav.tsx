@@ -21,7 +21,7 @@ export default async function Nav() {
       <ul className="nav-links">
         <li className="nav-dropdown">
           <Link href="/eats" className="nav-link">
-            Eats <span style={{ fontSize: 12, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
+            Eats <span style={{ fontSize: 10, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/eats" className="nav-dropdown-item">Food Reviews</Link>
@@ -31,7 +31,7 @@ export default async function Nav() {
         </li>
         <li className="nav-dropdown">
           <Link href="/play" className="nav-link">
-            Play <span style={{ fontSize: 12, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
+            Play <span style={{ fontSize: 10, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/play" className="nav-dropdown-item">All Experiences</Link>

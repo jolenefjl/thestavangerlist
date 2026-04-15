@@ -26,7 +26,7 @@ export default async function TopListPage({ params }: PageProps) {
 
       {/* ── Hero Image ───────────────────────────────────────── */}
       {list.heroImage && (
-        <div style={{ width: "100%", height: "clamp(240px, 42vw, 480px)", position: "relative", background: "var(--color-bg-image)" }}>
+        <div style={{ width: "100%", height: "clamp(200px, 35vw, 400px)", position: "relative", background: "var(--color-bg-image)" }}>
           <Image
             src={urlFor(list.heroImage).width(2800).height(1120).quality(90).url()}
             alt={list.heroImage.alt ?? list.title}
@@ -47,7 +47,7 @@ export default async function TopListPage({ params }: PageProps) {
 
         {list.intro && (
           <div style={{
-            fontSize: 18,
+            fontSize: 15,
             fontFamily: "var(--font-dm-sans), sans-serif",
             fontWeight: 300,
             lineHeight: 1.75,
@@ -79,7 +79,7 @@ export default async function TopListPage({ params }: PageProps) {
               {/* Number */}
               <span style={{
                 fontFamily: "var(--font-spectral), serif",
-                fontSize: 38,
+                fontSize: 32,
                 fontStyle: "italic",
                 fontWeight: 300,
                 color: "var(--color-accent-light)",
@@ -107,7 +107,7 @@ export default async function TopListPage({ params }: PageProps) {
                 <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 6, flexWrap: "wrap" }}>
                   <p style={{
                     fontFamily: "var(--font-spectral), serif",
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: 300,
                     color: "var(--color-text-primary)",
                     lineHeight: 1.25,
@@ -115,7 +115,7 @@ export default async function TopListPage({ params }: PageProps) {
                     {item.placeName as string}
                   </p>
                   {!!review?.cuisine && (
-                    <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-accent)" }}>
+                    <span style={{ fontSize: 9, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-accent)" }}>
                       {review.cuisine as string}
                     </span>
                   )}
@@ -123,7 +123,7 @@ export default async function TopListPage({ params }: PageProps) {
 
                 {!!item.description && (
                   <p style={{
-                    fontSize: 16,
+                    fontSize: 13,
                     fontFamily: "var(--font-dm-sans), sans-serif",
                     fontWeight: 300,
                     color: "var(--color-text-muted)",
@@ -138,7 +138,7 @@ export default async function TopListPage({ params }: PageProps) {
                   <Link
                     href={`/eats/${reviewSlug}`}
                     style={{
-                      fontSize: 12,
+                      fontSize: 10,
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       color: "var(--color-accent)",

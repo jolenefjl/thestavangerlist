@@ -46,7 +46,7 @@ export default function NewsletterSignup({
       <p className="newsletter-sub">{subtext}</p>
 
       {status === "success" ? (
-        <p style={{ fontSize: 16, color: "var(--color-accent)" }}>
+        <p style={{ fontSize: 13, color: "var(--color-accent)" }}>
           {successText}
         </p>
       ) : (
@@ -67,7 +67,7 @@ export default function NewsletterSignup({
       )}
 
       {status === "error" && (
-        <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginTop: 8 }}>
+        <p style={{ fontSize: 11, color: "var(--color-text-muted)", marginTop: 8 }}>
           Something went wrong — please try again.
         </p>
       )}
