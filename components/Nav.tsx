@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { siteNameQuery } from "@/sanity/lib/queries";
+import NavMobileMenu from "./NavMobileMenu";
 
 export default async function Nav() {
   const siteName: string = await client.fetch(siteNameQuery) ?? "The Stavanger List";
@@ -53,6 +54,7 @@ export default async function Nav() {
           </Link>
         </li>
       </ul>
+      <NavMobileMenu />
     </nav>
   );
 }

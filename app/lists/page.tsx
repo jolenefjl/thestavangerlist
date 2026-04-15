@@ -39,30 +39,21 @@ export default async function ListsPage() {
                 className="list-row"
               >
                   {/* Number */}
-                  <span style={{
-                    fontFamily: "var(--font-spectral), serif",
-                    fontSize: 28,
-                    fontStyle: "italic",
-                    fontWeight: 300,
-                    color: "var(--color-accent-light)",
-                    width: 32,
-                    flexShrink: 0,
-                    lineHeight: 1,
-                  }}>
+                  <span className="list-row-num">
                     {i + 1}
                   </span>
 
                   {/* Thumbnail */}
                   {list.heroImage ? (
                     <Image
-                      src={urlFor(list.heroImage).width(120).height(80).url()}
+                      src={urlFor(list.heroImage).width(200).height(140).url()}
                       alt={(list.heroImage as Record<string, unknown>).alt as string ?? list.title as string}
-                      width={120}
-                      height={80}
-                      style={{ borderRadius: 3, objectFit: "cover", flexShrink: 0 }}
+                      width={200}
+                      height={140}
+                      className="list-row-thumb"
                     />
                   ) : (
-                    <div style={{ width: 120, height: 80, background: "var(--color-bg-image)", borderRadius: 3, flexShrink: 0 }} />
+                    <div className="list-row-thumb list-row-thumb-placeholder" />
                   )}
 
                   {/* Text */}
