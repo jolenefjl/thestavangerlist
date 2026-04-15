@@ -9,6 +9,7 @@ export interface CarouselItem {
   _id: string;
   _type: string;
   title: string;
+  cardTeaser?: string;
   slug: { current: string };
   heroImage?: { asset: { _ref: string }; alt?: string };
   tag: string;
@@ -85,6 +86,9 @@ export default function HeroCarousel({ items }: { items: CarouselItem[] }) {
           <div className="hero-carousel-content">
             <span className="hero-carousel-tag">{item.tag}</span>
             <p className="hero-carousel-title">{item.title}</p>
+            {!!item.cardTeaser && (
+              <p className="hero-carousel-teaser">{item.cardTeaser}</p>
+            )}
           </div>
         </Link>
       ))}
