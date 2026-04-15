@@ -100,7 +100,7 @@ export default async function InterviewPage({ params }: PageProps) {
         </h1>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 40 }}>
           {interview.founderRole && (
-            <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
+            <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}>
               {interview.founderRole as string}
             </span>
           )}
@@ -111,7 +111,7 @@ export default async function InterviewPage({ params }: PageProps) {
             linkedReview ? (
               <Link
                 href={`/eats/${linkedReview.slug.current}`}
-                style={{ fontSize: 13, color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}
+                style={{ fontSize: 13, color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}
               >
                 {restaurantName} →
               </Link>
@@ -214,7 +214,7 @@ export default async function InterviewPage({ params }: PageProps) {
                 textTransform: "uppercase",
                 textDecoration: "none",
                 fontFamily: "var(--font-dm-sans), sans-serif",
-                fontWeight: 500,
+                fontWeight: 600,
                 marginBottom: 28,
               }}
             >
@@ -224,10 +224,10 @@ export default async function InterviewPage({ params }: PageProps) {
         ) : null}
         <div style={{ marginTop: linkedReview ? 0 : 0, paddingTop: linkedReview ? 28 : 0, borderTop: linkedReview ? "0.5px solid var(--color-border)" : "none" }}>
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know someone I should talk to?</p>
-          <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 300 }}>
+          <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}>
             I&apos;m always looking for the next great story from Stavanger&apos;s food scene.
           </p>
-          <Link href="/suggest" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}>
+          <Link href="/suggest" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 600 }}>
             Suggest someone for Into the Kitchen →
           </Link>
         </div>

@@ -58,7 +58,7 @@ export default function SuggestPage() {
 
         {success ? (
           <div style={{ maxWidth: 520 }}>
-            <p style={{ fontSize: 15, fontFamily: "var(--font-dm-sans)", fontWeight: 300, color: "var(--color-text-primary)", lineHeight: 1.75 }}>
+            <p style={{ fontSize: 15, fontFamily: "var(--font-dm-sans)", fontWeight: 400, color: "var(--color-text-primary)", lineHeight: 1.75 }}>
               Thanks for the suggestion. I will check it out.
             </p>
           </div>
@@ -114,7 +114,7 @@ export default function SuggestPage() {
             </div>
 
             {!!error && (
-              <p style={{ fontSize: 12, color: "var(--color-accent)", fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}>
+              <p style={{ fontSize: 12, color: "var(--color-accent)", fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}>
                 {error}
               </p>
             )}

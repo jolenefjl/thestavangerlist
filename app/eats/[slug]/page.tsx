@@ -88,7 +88,7 @@ export default async function ReviewPage({ params }: PageProps) {
           })}
           {overallDisplay && (
             <div className="verdict-overall">
-              <span style={{ fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 500, color: "var(--color-text-hint)" }}>Overall</span>
+              <span style={{ fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-text-hint)" }}>Overall</span>
               <span style={{ fontSize: 18, fontFamily: "var(--font-spectral)", fontStyle: "italic", fontWeight: 300, color: "var(--color-accent)" }}>
                 {overallDisplay}<span style={{ fontSize: 13, fontWeight: 300, color: "var(--color-text-muted)" }}>/5</span>
               </span>
@@ -181,7 +181,7 @@ export default async function ReviewPage({ params }: PageProps) {
               textTransform: "uppercase",
               textDecoration: "none",
               fontFamily: "var(--font-dm-sans)",
-              fontWeight: 500,
+              fontWeight: 600,
             }}
           >
             {settings?.suggestCtaText ?? "Suggest a Place"}

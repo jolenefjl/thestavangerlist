@@ -44,7 +44,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
             padding: "14px 16px",
             fontSize: 16,
             fontFamily: "var(--font-dm-sans), sans-serif",
-            fontWeight: 300,
+            fontWeight: 400,
             color: "var(--color-text-primary)",
             background: "var(--color-bg)",
             border: "0.5px solid var(--color-border)",
@@ -79,7 +79,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
                   textTransform: "uppercase",
                   color: "var(--color-accent)",
                   fontFamily: "var(--font-dm-sans), sans-serif",
-                  fontWeight: 500,
+                  fontWeight: 600,
                 }}
               >
                 {KIND_LABEL[r.kind]}
@@ -102,7 +102,7 @@ export default function SearchClient({ items }: { items: SearchItem[] }) {
                     fontSize: 13,
                     color: "var(--color-text-muted)",
                     fontFamily: "var(--font-dm-sans), sans-serif",
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   {r.subtitle}

@@ -49,7 +49,7 @@ export default async function TopListPage({ params }: PageProps) {
           <div style={{
             fontSize: 15,
             fontFamily: "var(--font-dm-sans), sans-serif",
-            fontWeight: 300,
+            fontWeight: 400,
             lineHeight: 1.75,
             color: "var(--color-text-muted)",
             marginBottom: 32,
@@ -125,7 +125,7 @@ export default async function TopListPage({ params }: PageProps) {
                   <p style={{
                     fontSize: 13,
                     fontFamily: "var(--font-dm-sans), sans-serif",
-                    fontWeight: 300,
+                    fontWeight: 400,
                     color: "var(--color-text-muted)",
                     lineHeight: 1.7,
                     marginBottom: reviewSlug ? 10 : 0,
@@ -144,7 +144,7 @@ export default async function TopListPage({ params }: PageProps) {
                       color: "var(--color-accent)",
                       textDecoration: "none",
                       fontFamily: "var(--font-dm-sans), sans-serif",
-                      fontWeight: 500,
+                      fontWeight: 600,
                     }}
                   >
                     Read the review →

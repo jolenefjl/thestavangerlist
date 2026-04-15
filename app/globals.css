@@ -54,7 +54,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 
@@ -71,10 +71,10 @@ h1, h2, h3, h4, h5, h6 {
 .text-h2      { font-size: 22px; font-family: var(--font-spectral), serif; font-weight: 300; }
 .text-h3      { font-size: 18px; font-family: var(--font-spectral), serif; font-weight: 300; }
 .text-card    { font-size: 15px; font-family: var(--font-spectral), serif; font-weight: 300; }
-.text-body    { font-size: 14px; font-family: var(--font-dm-sans), sans-serif; font-weight: 300; line-height: 1.65; }
-.text-small   { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 300; }
-.text-label   { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; }
-.text-eyebrow { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; letter-spacing: 0.20em; text-transform: uppercase; color: var(--color-accent); }
+.text-body    { font-size: 14px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; line-height: 1.65; }
+.text-small   { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; }
+.text-label   { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+.text-eyebrow { font-size: 10px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; letter-spacing: 0.20em; text-transform: uppercase; color: var(--color-accent); }
 .text-italic  { font-style: italic; color: var(--color-accent); }
 .text-listnum { font-family: var(--font-spectral), serif; font-size: 22px; font-style: italic; font-weight: 300; color: var(--color-accent-light); }
 
@@ -213,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: var(--color-text-primary);
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   width: 100%;
   outline: none;
 }
@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 .card-name { font-family: var(--font-spectral), serif; font-size: 18px; font-weight: 300; color: var(--color-text-primary); margin-bottom: 5px; line-height: 1.25; }
 .card-name-sm { font-size: 15px; }
 .card-desc { font-size: 12px; color: var(--color-text-muted); line-height: 1.65; margin-bottom: 6px; }
-.card-teaser { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 300; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-teaser { font-size: 12px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .rating-dots { display: flex; gap: 3px; align-items: center; }
 .rating-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }
 .rating-dot.empty { background: var(--color-accent-light); }
@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: var(--color-light);
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   transition: opacity 0.2s;
@@ -334,7 +334,7 @@ h1, h2, h3, h4, h5, h6 {
 .verdict-item:first-of-type { padding-top: 0; }
 .verdict-item:last-of-type { border-bottom: none; padding-bottom: 0; }
 .verdict-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
-.verdict-title { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; color: var(--color-accent); }
+.verdict-title { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; color: var(--color-accent); }
 .verdict-blurb { font-size: 13px; font-style: italic; font-family: var(--font-spectral), serif; font-weight: 300; color: var(--color-text-muted); line-height: 1.72; margin: 0; }
 .verdict-overall { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 0.5px solid var(--color-border); margin-top: 4px; }
 
@@ -355,7 +355,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: var(--color-text-primary);
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -371,7 +371,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: var(--color-light);
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   align-self: flex-start;
   transition: opacity 0.2s;
@@ -440,7 +440,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-hint);
   text-decoration: none;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   white-space: nowrap;
   transition: color 0.15s;
 }
@@ -471,7 +471,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   transition: color 0.2s, border-color 0.2s;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 400;
+  font-weight: 500;
 }
 .eats-subnav-link:hover { color: var(--color-text-muted); }
 .eats-subnav-link.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
@@ -519,7 +519,7 @@ h1, h2, h3, h4, h5, h6 {
 .interview-prose {
   font-size: 16px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.9;
   color: var(--color-text-primary);
 }
@@ -559,13 +559,13 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: var(--color-accent);
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 .qa-answer {
   font-size: 15px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.85;
   color: var(--color-text-primary);
 }
@@ -664,7 +664,7 @@ h1, h2, h3, h4, h5, h6 {
 .about-intro {
   font-size: 15px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.75;
   color: var(--color-text-muted);
   max-width: 520px;
@@ -678,7 +678,7 @@ h1, h2, h3, h4, h5, h6 {
 .about-prose {
   font-size: 15px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.85;
   color: var(--color-text-primary);
 }
@@ -698,7 +698,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-primary);
   transition: border-color 0.2s, color 0.2s;
 }
@@ -750,10 +750,10 @@ h1, h2, h3, h4, h5, h6 {
 .suggest-form { max-width: 520px; }
 .suggest-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
 .suggest-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; color: var(--color-text-hint); }
-.suggest-input { font-family: var(--font-dm-sans), sans-serif; font-size: 14px; font-weight: 300; color: var(--color-text-primary); background: transparent; border: none; border-bottom: 0.5px solid var(--color-border); padding: 8px 0; width: 100%; outline: none; transition: border-color 0.15s; }
+.suggest-input { font-family: var(--font-dm-sans), sans-serif; font-size: 14px; font-weight: 400; color: var(--color-text-primary); background: transparent; border: none; border-bottom: 0.5px solid var(--color-border); padding: 8px 0; width: 100%; outline: none; transition: border-color 0.15s; }
 .suggest-input:focus { border-bottom-color: var(--color-accent); }
 .suggest-textarea { resize: vertical; min-height: 100px; }
-.suggest-submit { background: var(--color-dark); color: var(--color-light); border: none; padding: 10px 24px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; border-radius: 3px; cursor: pointer; transition: opacity 0.2s; }
+.suggest-submit { background: var(--color-dark); color: var(--color-light); border: none; padding: 10px 24px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; border-radius: 3px; cursor: pointer; transition: opacity 0.2s; }
 .suggest-submit:hover { opacity: 0.8; }
 .suggest-submit:disabled { opacity: 0.4; cursor: default; }
 
@@ -775,7 +775,7 @@ h1, h2, h3, h4, h5, h6 {
 .text-eyebrow-muted {
   font-size: 10px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: var(--color-text-hint);
@@ -824,7 +824,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   padding: 4px 12px;
   border-radius: 20px;
   margin-bottom: 14px;
@@ -843,7 +843,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-carousel-teaser {
   font-family: var(--font-dm-sans), sans-serif;
   font-size: clamp(13px, 1.4vw, 16px);
-  font-weight: 300;
+  font-weight: 400;
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.55;
   max-width: 520px;
@@ -909,7 +909,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   font-size: 10px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -928,7 +928,7 @@ h1, h2, h3, h4, h5, h6 {
 .article-hero-meta {
   font-family: var(--font-dm-sans), sans-serif;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   color: rgba(255,255,255,0.7);
   letter-spacing: 0.06em;
 }
@@ -981,7 +981,7 @@ h1, h2, h3, h4, h5, h6 {
 .list-card-eyebrow {
   font-size: 9px;
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-hint);
