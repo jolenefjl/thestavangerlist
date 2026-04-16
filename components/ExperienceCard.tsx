@@ -40,15 +40,14 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
   const avg = avgRating(experience);
   const avgDisplay = avg !== null ? (Number.isInteger(avg) ? `${avg}.0` : String(avg)) : null;
 
+  const hasCategory = !!experience.category;
+  const hasPrice    = !!experience.priceRange;
+  const hasArea     = !!experience.area;
+
   return (
     <Link
       href={`/play/${experience.slug.current}`}
-      style={{
-        textDecoration: "none",
-        display: "block",
-        borderRadius: 4,
-        overflow: "hidden",
-      }}
+      style={{ textDecoration: "none", display: "block", borderRadius: 4, overflow: "hidden" }}
     >
       {!!experience.heroImage && (
         <Image
@@ -64,20 +63,37 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
       {!experience.heroImage && (
         <div className={isMain ? "card-img-main" : "card-img-small"} />
       )}
+
       <div className={isMain ? "card-body" : "card-body-sm"}>
-        <div className="card-meta">
-          {!!experience.category && <span className="card-cuisine">{experience.category}</span>}
-          {!!experience.priceRange && <span className="card-price">{experience.priceRange}</span>}
-        </div>
+        {/* Single metadata row: CATEGORY · LOCATION · PRICE */}
+        {(hasCategory || hasPrice || hasArea) && (
+          <div className="card-meta">
+            {hasCategory && <span className="card-cuisine">{experience.category}</span>}
+            {hasArea && (
+              <>
+                {hasCategory && <span className="card-meta-sep">·</span>}
+                <span className="card-location">{experience.area}</span>
+              </>
+            )}
+            {hasPrice && (
+              <>
+                {(hasCategory || hasArea) && <span className="card-meta-sep">·</span>}
+                <span className="card-price">{experience.priceRange}</span>
+              </>
+            )}
+          </div>
+        )}
+
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{experience.name}</p>
-        {!!experience.area && <p className="card-desc">{experience.area}</p>}
+
         {!!experience.cardTeaser && (
           <p className="card-teaser">{experience.cardTeaser}</p>
         )}
+
         {!!avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 700, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
             <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>Honest rating</span>
-            {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
+            {avgDisplay}<span style={{ fontWeight: 400, color: "#8C857F" }}>/5</span>
           </p>
         )}
       </div>

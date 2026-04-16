@@ -40,15 +40,14 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
   const avg = avgRating(review);
   const avgDisplay = avg !== null ? (Number.isInteger(avg) ? `${avg}.0` : String(avg)) : null;
 
+  const hasCuisine = !!review.cuisine;
+  const hasPrice   = !!review.priceRange;
+  const hasArea    = !!review.area;
+
   return (
     <Link
       href={`/eats/${review.slug.current}`}
-      style={{
-        textDecoration: "none",
-        display: "block",
-        borderRadius: 4,
-        overflow: "hidden",
-      }}
+      style={{ textDecoration: "none", display: "block", borderRadius: 4, overflow: "hidden" }}
     >
       {review.heroImage ? (
         <Image
@@ -63,20 +62,35 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
       ) : (
         <div className={isMain ? "card-img-main" : "card-img-small"} />
       )}
+
       <div className={isMain ? "card-body" : "card-body-sm"}>
+        {/* Single metadata row: CATEGORY · LOCATION · PRICE */}
         <div className="card-meta">
-          <span className="card-cuisine">{review.cuisine}</span>
-          <span className="card-price">{review.priceRange}</span>
+          {hasCuisine && <span className="card-cuisine">{review.cuisine}</span>}
+          {hasArea && (
+            <>
+              {hasCuisine && <span className="card-meta-sep">·</span>}
+              <span className="card-location">{review.area}</span>
+            </>
+          )}
+          {hasPrice && (
+            <>
+              {(hasCuisine || hasArea) && <span className="card-meta-sep">·</span>}
+              <span className="card-price">{review.priceRange}</span>
+            </>
+          )}
         </div>
+
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
-        <p className="card-desc">{review.area}</p>
+
         {!!review.cardTeaser && (
           <p className="card-teaser">{review.cardTeaser}</p>
         )}
+
         {avgDisplay && (
           <p style={{ margin: 0, fontSize: 11, fontFamily: "var(--font-dm-sans)", fontWeight: 700, color: "var(--color-accent)", letterSpacing: "0.04em" }}>
             <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-text-hint)", marginRight: 8 }}>Honest rating</span>
-            {avgDisplay}<span style={{ fontWeight: 400, color: "var(--color-text-muted)" }}>/5</span>
+            {avgDisplay}<span style={{ fontWeight: 400, color: "#8C857F" }}>/5</span>
           </p>
         )}
       </div>
