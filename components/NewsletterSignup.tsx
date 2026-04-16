@@ -41,12 +41,12 @@ export default function NewsletterSignup({
 
   return (
     <div className="newsletter">
-      <p className="text-eyebrow" style={{ marginBottom: 8 }}>{eyebrow}</p>
+      <p className="text-eyebrow" style={{ marginBottom: 12 }}>{eyebrow}</p>
       <h3 className="newsletter-title">{ctaText}</h3>
       <p className="newsletter-sub">{subtext}</p>
 
       {status === "success" ? (
-        <p style={{ fontSize: 13, color: "var(--color-accent)" }}>
+        <p style={{ fontSize: 14, color: "var(--color-accent)", fontFamily: "var(--font-spectral)", fontWeight: 300, fontStyle: "italic" }}>
           {successText}
         </p>
       ) : (
@@ -67,7 +67,7 @@ export default function NewsletterSignup({
       )}
 
       {status === "error" && (
-        <p style={{ fontSize: 11, color: "var(--color-text-muted)", marginTop: 8 }}>
+        <p style={{ fontSize: 11, color: "rgba(247, 243, 238, 0.45)", marginTop: 10 }}>
           Something went wrong — please try again.
         </p>
       )}

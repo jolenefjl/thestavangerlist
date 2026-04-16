@@ -50,9 +50,18 @@ export default async function Home() {
         <HeroCarousel items={carouselItems} />
       )}
 
+      {/* ── Editorial bridge — separates hero from content ───── */}
+      {carouselItems.length > 0 && (
+        <div className="hero-bridge">
+          <span>Stavanger, Norway</span>
+          <span className="hero-bridge-sep">·</span>
+          <span>Independent editorial city guide</span>
+        </div>
+      )}
+
       {/* ── Stavanger Eats — Latest Reviews ──────────────────── */}
       {latestReviews?.length > 0 && (
-        <section className="hp-section" style={{ marginBottom: 8 }}>
+        <section className="hp-section hp-section-padded">
           <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Eats</p>
           <div className="section-header">
             <h2 className="section-title">
@@ -74,9 +83,8 @@ export default async function Home() {
 
       {/* ── Stavanger Play — Featured Experiences ─────────────── */}
       {featuredExperiences.length > 0 && (
-        <>
-          <div className="divider" style={{ margin: "64px 28px 0" }} />
-          <section className="hp-section" style={{ marginBottom: 8 }}>
+        <div className="section-band">
+          <section className="hp-section hp-section-padded">
             <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Play</p>
             <div className="section-header">
               <h2 className="section-title">
@@ -94,35 +102,31 @@ export default async function Home() {
               ))}
             </div>
           </section>
-        </>
+        </div>
       )}
 
       {/* ── Stavanger Lists ───────────────────────────────────── */}
       {listsItems.length > 0 && (
-        <>
-          <div className="divider" style={{ margin: "64px 28px 0" }} />
-          <section className="hp-section" style={{ marginBottom: 8 }}>
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Lists</p>
-            <div className="section-header">
-              <h2 className="section-title">
-                {settings?.homepageListsTitle ?? "Curated food and experiences around the city"}
-              </h2>
-              <Link href="/lists" className="section-link">View all lists →</Link>
-            </div>
-            <div className="card-grid">
-              {(listsItems as Record<string, unknown>[]).slice(0, 3).map((list) => (
-                <ListCard
-                  key={list._id as string}
-                  list={list as unknown as Parameters<typeof ListCard>[0]["list"]}
-                />
-              ))}
-            </div>
-          </section>
-        </>
+        <section className="hp-section hp-section-padded">
+          <p className="text-eyebrow" style={{ marginBottom: 10 }}>Stavanger Lists</p>
+          <div className="section-header">
+            <h2 className="section-title">
+              {settings?.homepageListsTitle ?? "Curated food and experiences around the city"}
+            </h2>
+            <Link href="/lists" className="section-link">View all lists →</Link>
+          </div>
+          <div className="card-grid">
+            {(listsItems as Record<string, unknown>[]).slice(0, 3).map((list) => (
+              <ListCard
+                key={list._id as string}
+                list={list as unknown as Parameters<typeof ListCard>[0]["list"]}
+              />
+            ))}
+          </div>
+        </section>
       )}
 
       {/* ── Newsletter ────────────────────────────────────────── */}
-      <div className="divider" style={{ margin: "64px 28px 28px" }} />
       <NewsletterSignup
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
