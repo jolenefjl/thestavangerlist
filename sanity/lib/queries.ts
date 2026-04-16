@@ -9,6 +9,7 @@ const reviewFields = groq`
   cuisine,
   area,
   address,
+  googleMapsUrl,
   priceRange,
   bestFor,
   heroImage,
@@ -23,7 +24,7 @@ const reviewFields = groq`
 
 // Experience fields (slim, for cards)
 const experienceFields = groq`
-  _id, name, slug, cardTeaser, category, area, address, priceRange, heroImage, bestFor,
+  _id, name, slug, cardTeaser, category, area, address, googleMapsUrl, priceRange, heroImage, bestFor,
   worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
   publishedAt, featured
 `;

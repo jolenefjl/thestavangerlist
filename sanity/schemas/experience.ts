@@ -55,6 +55,12 @@ export const experience = defineType({
       description: "Street address — e.g. Øvre Holmegate 20, 4006 Stavanger. Optional.",
     }),
     defineField({
+      name: "googleMapsUrl",
+      title: "Google Maps Link",
+      type: "url",
+      description: "Paste the Google Maps link to this place. Adds a Directions button on the page.",
+    }),
+    defineField({
       name: "priceRange",
       title: "Price Range",
       type: "string",
