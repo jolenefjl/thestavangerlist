@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Spectral, Plus_Jakarta_Sans } from "next/font/google";
+import { Spectral, Public_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -10,7 +10,7 @@ const spectral = Spectral({
   variable: "--font-spectral",
 });
 
-const dmSans = Plus_Jakarta_Sans({
+const dmSans = Public_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-dm-sans",
