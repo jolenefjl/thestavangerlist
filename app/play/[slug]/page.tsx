@@ -127,24 +127,6 @@ export default async function ExperiencePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* ── Visit Strip ──────────────────────────────────────── */}
-      {(experience.googleMapsUrl || experience.websiteUrl) && (
-        <div style={{ borderBottom: "0.5px solid var(--color-border)" }}>
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "20px clamp(20px, 6vw, 48px)", display: "flex", gap: 12 }}>
-            {!!(experience.googleMapsUrl as string) && (
-              <a href={experience.googleMapsUrl as string} target="_blank" rel="noopener noreferrer" className="visit-btn">
-                ↗ Directions
-              </a>
-            )}
-            {!!(experience.websiteUrl as string) && (
-              <a href={experience.websiteUrl as string} target="_blank" rel="noopener noreferrer" className="visit-btn visit-btn-outline">
-                Website
-              </a>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* ── Article Body ─────────────────────────────────────── */}
       {!!experience.body && (
         <div className="article-body">
