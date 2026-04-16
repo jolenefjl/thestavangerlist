@@ -49,6 +49,12 @@ export const experience = defineType({
       description: "e.g. Stavanger Sentrum, Sandnes, Ryfylke",
     }),
     defineField({
+      name: "address",
+      title: "Address",
+      type: "string",
+      description: "Street address — e.g. Øvre Holmegate 20, 4006 Stavanger. Optional.",
+    }),
+    defineField({
       name: "priceRange",
       title: "Price Range",
       type: "string",

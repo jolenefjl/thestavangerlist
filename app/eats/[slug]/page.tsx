@@ -134,6 +134,12 @@ export default async function ReviewPage({ params }: PageProps) {
               <p className="quick-info-label">Area</p>
               <p className="quick-info-value">{review.area}</p>
             </div>
+            {review.address && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Address</p>
+                <p className="quick-info-value">{review.address}</p>
+              </div>
+            )}
             <div className="quick-info-item">
               <p className="quick-info-label">Price</p>
               <p className="quick-info-value">{review.priceRange}</p>

@@ -171,6 +171,12 @@ export default async function ExperiencePage({ params }: PageProps) {
                 <p className="quick-info-value">{experience.area as string}</p>
               </div>
             )}
+            {!!(experience.address as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Address</p>
+                <p className="quick-info-value">{experience.address as string}</p>
+              </div>
+            )}
             {!!(experience.priceRange as string) && (
               <div className="quick-info-item">
                 <p className="quick-info-label">Price</p>

@@ -42,6 +42,12 @@ export const review = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "address",
+      title: "Address",
+      type: "string",
+      description: "Street address — e.g. Øvre Holmegate 20, 4006 Stavanger. Optional.",
+    }),
+    defineField({
       name: "priceRange",
       title: "Price Range",
       type: "string",
