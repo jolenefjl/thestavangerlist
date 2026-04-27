@@ -357,13 +357,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
-.newsletter-form { max-width: 600px; margin: 0 auto; }
+.newsletter-form { max-width: 640px; margin: 0 auto; }
 .newsletter-row {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
 }
-.newsletter-row .newsletter-input { flex: 1 1 160px; min-width: 0; }
+.newsletter-row .newsletter-input { flex: 1 1 0; min-width: 0; }
 .newsletter-row .newsletter-btn   { flex-shrink: 0; }
 
 .newsletter-input {
