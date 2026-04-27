@@ -15,15 +15,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Newsletter not configured" }, { status: 500 });
   }
 
-  const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
+  // Kit v4 API (api.kit.com) — uses Bearer token auth
+  const res = await fetch(`https://api.kit.com/v4/forms/${formId}/subscribers`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ api_key: apiKey, email }),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({ email_address: email }),
   });
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    console.error("Kit API error:", data);
+    console.error("Kit API error:", JSON.stringify(data));
     return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 
