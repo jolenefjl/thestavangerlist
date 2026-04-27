@@ -23,7 +23,7 @@ export const experience = defineType({
       name: "subtitle",
       title: "Subtitle",
       type: "string",
-      description: "Editorial line shown under the experience name on the page. e.g. "Stavanger's best kept trail secret". Optional.",
+      description: "Editorial line shown under the experience name on the page. e.g. 'Stavanger's best kept trail secret'. Optional.",
     }),
     defineField({
       name: "cardTeaser",
