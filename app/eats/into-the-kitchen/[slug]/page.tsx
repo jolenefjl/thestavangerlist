@@ -176,7 +176,7 @@ export default async function InterviewPage({ params }: PageProps) {
         <>
           <div className="divider-full" />
           <div className="section" style={{ paddingTop: 40, paddingBottom: 0 }}>
-            <p className="text-eyebrow" style={{ marginBottom: 18 }}>More Photos</p>
+            <p className="text-eyebrow" style={{ marginBottom: 18 }}>{settings?.morePhotosLabel ?? "More Photos"}</p>
           </div>
           <div style={{ padding: "0 28px" }}>
             <div className="interview-gallery">

@@ -401,7 +401,8 @@ h1, h2, h3, h4, h5, h6 {
 .verdict-item:first-of-type { padding-top: 0; }
 .verdict-item:last-of-type  { border-bottom: none; padding-bottom: 0; }
 .verdict-left    { flex: 1; min-width: 0; }
-.verdict-title   { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; color: var(--color-accent); margin-bottom: 8px; }
+.verdict-title   { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; color: var(--color-accent); margin-bottom: 4px; }
+.verdict-sub     { display: block; font-size: 11px; font-family: var(--font-dm-sans), sans-serif; font-weight: 400; color: var(--color-text-muted); letter-spacing: 0.02em; margin-bottom: 6px; }
 .verdict-blurb   { font-size: 14px; font-style: italic; font-family: var(--font-spectral), serif; font-weight: 400; color: #4A443F; line-height: 1.75; margin: 0; }
 .verdict-overall { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 0.5px solid var(--color-border); margin-top: 4px; }
 
@@ -446,8 +447,11 @@ h1, h2, h3, h4, h5, h6 {
 .form-submit:hover    { opacity: 0.85; }
 
 /* Footer */
-.footer      { padding: 20px 28px; border-top: 0.5px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; }
+.footer      { padding: 20px 28px; border-top: 0.5px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .footer-logo { font-family: var(--font-spectral), serif; font-size: 12px; font-weight: 300; color: var(--color-text-hint); text-decoration: none; }
+.footer-social { display: flex; gap: 16px; }
+.footer-social-link { font-size: 10px; color: rgba(44, 37, 32, 0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; text-decoration: none; transition: color 0.15s; }
+.footer-social-link:hover { color: var(--color-accent); }
 .footer-sub  { font-size: 10px; color: rgba(44, 37, 32, 0.20); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; }
 
 /* TikTok embed */

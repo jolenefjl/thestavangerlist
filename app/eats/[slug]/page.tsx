@@ -27,11 +27,11 @@ export default async function ReviewPage({ params }: PageProps) {
   if (!review) notFound();
 
   const ratings = [
-    { key: "didItHitDifferent", blurbKey: "didItHitDifferentBlurb", label: settings?.ratingCaloriesLabel ?? "Worth the Calories?" },
-    { key: "wouldIPayAgain",    blurbKey: "wouldIPayAgainBlurb",    label: settings?.ratingBillLabel    ?? "Worth the Bill?" },
-    { key: "worthTheHype",      blurbKey: "worthTheHypeBlurb",      label: settings?.ratingHypeLabel    ?? "Worth the Hype?" },
-    { key: "theRealDeal",       blurbKey: "theRealDealBlurb",       label: settings?.ratingDetourLabel  ?? "Worth the Detour?" },
-    { key: "didStaffCare",      blurbKey: "didStaffCareBlurb",      label: settings?.ratingServiceLabel ?? "Worth Going Back For?" },
+    { key: "didItHitDifferent", blurbKey: "didItHitDifferentBlurb", label: settings?.ratingCaloriesLabel ?? "Worth the Calories?", sub: settings?.ratingCaloriesSub ?? "Food quality" },
+    { key: "wouldIPayAgain",    blurbKey: "wouldIPayAgainBlurb",    label: settings?.ratingBillLabel    ?? "Worth the Bill?",      sub: settings?.ratingBillSub    ?? "Value for money" },
+    { key: "worthTheHype",      blurbKey: "worthTheHypeBlurb",      label: settings?.ratingHypeLabel    ?? "Worth the Hype?",      sub: settings?.ratingHypeSub    ?? "Does it live up to its reputation?" },
+    { key: "theRealDeal",       blurbKey: "theRealDealBlurb",       label: settings?.ratingDetourLabel  ?? "Worth the Detour?",    sub: settings?.ratingDetourSub  ?? "How authentic is it?" },
+    { key: "didStaffCare",      blurbKey: "didStaffCareBlurb",      label: settings?.ratingServiceLabel ?? "Worth Going Back For?", sub: settings?.ratingServiceSub ?? "Service" },
   ];
 
   const scores = ratings.map((r) => review[r.key] as number).filter(Boolean);
@@ -80,6 +80,7 @@ export default async function ReviewPage({ params }: PageProps) {
               <div key={r.key} className="verdict-item">
                 <div className="verdict-left">
                   <span className="verdict-title">{r.label}</span>
+                  {!!r.sub && <span className="verdict-sub">{r.sub}</span>}
                   {!!blurb && <p className="verdict-blurb">{blurb}</p>}
                 </div>
                 <RatingDots score={score} />

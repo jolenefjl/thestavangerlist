@@ -101,7 +101,7 @@ export default async function ExperiencePage({ params }: PageProps) {
       {/* ── Rating Panel ─────────────────────────────────────── */}
       <div style={{ background: "var(--color-bg-subtle)", borderBottom: "0.5px solid var(--color-border)" }}>
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px clamp(20px, 6vw, 48px)" }}>
-          <p className="text-eyebrow" style={{ marginBottom: 16 }}>My Verdict</p>
+          <p className="text-eyebrow" style={{ marginBottom: 16 }}>{settings?.verdictTitle ?? "My Verdict"}</p>
           {ratings.map((r) => {
             const score = experience[r.key] as number;
             const blurb = experience[r.blurbKey] as string | null;
