@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json();
+  const { email, firstName } = await req.json();
 
   if (!email || !email.includes("@")) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ api_secret: apiSecret, email }),
+    body: JSON.stringify({ api_secret: apiSecret, email, ...(firstName ? { first_name: firstName } : {}) }),
   });
 
   const data = await res.json().catch(() => ({}));
