@@ -46,7 +46,7 @@ export default function NewsletterSignup({
       <p className="newsletter-sub">{subtext}</p>
 
       {status === "success" ? (
-        <p style={{ fontSize: 14, color: "var(--color-accent)", fontFamily: "var(--font-spectral)", fontWeight: 300, fontStyle: "italic" }}>
+        <p style={{ fontSize: 17, color: "var(--color-light)", fontFamily: "var(--font-spectral)", fontWeight: 300, fontStyle: "italic", opacity: 0.9 }}>
           {successText}
         </p>
       ) : (
