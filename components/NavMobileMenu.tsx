@@ -58,14 +58,10 @@ export default function NavMobileMenu() {
         <nav className="nav-mobile-nav">
           <p className="nav-mobile-section-label">Eats</p>
           <Link href="/eats" className="nav-mobile-link">Food Reviews</Link>
-          <Link href="/lists" className="nav-mobile-link">Top Lists</Link>
           <Link href="/eats/into-the-kitchen" className="nav-mobile-link">Into the Kitchen</Link>
 
-          <p className="nav-mobile-section-label" style={{ marginTop: 28 }}>Play</p>
-          <Link href="/play" className="nav-mobile-link">All Experiences</Link>
-          <Link href="/play/suggest" className="nav-mobile-link">Suggest a Place</Link>
-
           <div className="nav-mobile-divider" />
+          <Link href="/play" className="nav-mobile-link">Play</Link>
           <Link href="/lists" className="nav-mobile-link">Lists</Link>
           <Link href="/about" className="nav-mobile-link">About</Link>
           <Link href="/search" className="nav-mobile-link">Search</Link>

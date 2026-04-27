@@ -26,18 +26,11 @@ export default async function Nav() {
           </Link>
           <div className="nav-dropdown-menu">
             <Link href="/eats" className="nav-dropdown-item">Food Reviews</Link>
-            <Link href="/lists" className="nav-dropdown-item">Top Lists</Link>
             <Link href="/eats/into-the-kitchen" className="nav-dropdown-item">Into the Kitchen</Link>
           </div>
         </li>
-        <li className="nav-dropdown">
-          <Link href="/play" className="nav-link">
-            Play <span style={{ fontSize: 10, marginLeft: 4, opacity: 0.7, display: "inline-block" }}>▾</span>
-          </Link>
-          <div className="nav-dropdown-menu">
-            <Link href="/play" className="nav-dropdown-item">All Experiences</Link>
-            <Link href="/play/suggest" className="nav-dropdown-item">Suggest a Place</Link>
-          </div>
+        <li>
+          <Link href="/play" className="nav-link">Play</Link>
         </li>
         <li>
           <Link href="/lists" className="nav-link">Lists</Link>
