@@ -13,7 +13,7 @@ export default function NewsletterSignup({
   eyebrow = "Stay in the loop",
   ctaText = "The best of Stavanger, in your inbox.",
   subtext = "New reviews and curated lists — no spam, ever.",
-  successText = "You're on the list. Talk soon.",
+  successText = "Check your inbox — verify your email to get on The Stavanger List.",
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
