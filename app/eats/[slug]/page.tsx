@@ -78,11 +78,11 @@ export default async function ReviewPage({ params }: PageProps) {
             if (!score) return null;
             return (
               <div key={r.key} className="verdict-item">
-                <div className="verdict-header">
+                <div className="verdict-left">
                   <span className="verdict-title">{r.label}</span>
-                  <RatingDots score={score} />
+                  {!!blurb && <p className="verdict-blurb">{blurb}</p>}
                 </div>
-                {!!blurb && <p className="verdict-blurb">{blurb}</p>}
+                <RatingDots score={score} />
               </div>
             );
           })}
