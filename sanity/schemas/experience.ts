@@ -20,6 +20,12 @@ export const experience = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      description: "Editorial line shown under the experience name on the page. e.g. "Stavanger's best kept trail secret". Optional.",
+    }),
+    defineField({
       name: "cardTeaser",
       title: "Card Teaser",
       type: "string",

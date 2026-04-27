@@ -21,6 +21,12 @@ export const review = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      description: "Editorial line shown under the restaurant name on the review page. e.g. "A slice of Indonesia in Bryne sentrum". Optional.",
+    }),
+    defineField({
       name: "cardTeaser",
       title: "Card Teaser",
       type: "string",

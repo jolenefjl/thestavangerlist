@@ -5,6 +5,7 @@ import { urlFor } from "@/sanity/lib/image";
 interface Review {
   _id: string;
   name: string;
+  subtitle?: string;
   slug: { current: string };
   cardTeaser?: string;
   cuisine: string;
@@ -82,6 +83,10 @@ export default function ReviewCard({ review, size = "small" }: ReviewCardProps) 
         </div>
 
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{review.name}</p>
+
+        {!!review.subtitle && (
+          <p className="card-subtitle">{review.subtitle}</p>
+        )}
 
         {!!review.cardTeaser && (
           <p className="card-teaser">{review.cardTeaser}</p>

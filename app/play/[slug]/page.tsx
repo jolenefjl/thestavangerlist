@@ -92,6 +92,9 @@ export default async function ExperiencePage({ params }: PageProps) {
         <div className="article-hero-content">
           <span className="article-hero-eyebrow">Stavanger Play</span>
           <h1 className="article-hero-title">{experience.name as string}</h1>
+          {!!(experience.subtitle as string) && (
+            <h2 className="article-hero-subtitle">{experience.subtitle as string}</h2>
+          )}
           <p className="article-hero-meta">
             {[experience.category, experience.area, experience.priceRange].filter(Boolean).join(" · ")}
           </p>

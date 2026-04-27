@@ -5,6 +5,7 @@ import { urlFor } from "@/sanity/lib/image";
 interface Experience {
   _id: string;
   name: string;
+  subtitle?: string;
   slug: { current: string };
   cardTeaser?: string;
   category?: string;
@@ -85,6 +86,10 @@ export default function ExperienceCard({ experience, size = "small" }: Experienc
         )}
 
         <p className={`card-name${isMain ? "" : " card-name-sm"}`}>{experience.name}</p>
+
+        {!!experience.subtitle && (
+          <p className="card-subtitle">{experience.subtitle}</p>
+        )}
 
         {!!experience.cardTeaser && (
           <p className="card-teaser">{experience.cardTeaser}</p>

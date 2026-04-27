@@ -62,6 +62,9 @@ export default async function ReviewPage({ params }: PageProps) {
         <div className="article-hero-content">
           <span className="article-hero-eyebrow">Stavanger Eats</span>
           <h1 className="article-hero-title">{review.name}</h1>
+          {review.subtitle && (
+            <h2 className="article-hero-subtitle">{review.subtitle}</h2>
+          )}
           <p className="article-hero-meta">
             {[review.cuisine, review.area, review.priceRange].filter(Boolean).join(" · ")}
           </p>
