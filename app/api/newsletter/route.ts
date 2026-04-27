@@ -23,9 +23,9 @@ export async function POST(req: NextRequest) {
   });
 
   const data = await res.json().catch(() => ({}));
+  console.log("Kit API response:", res.status, JSON.stringify(data));
 
   if (!res.ok) {
-    console.error("Kit API error:", JSON.stringify(data));
     return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 
