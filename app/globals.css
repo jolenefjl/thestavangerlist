@@ -890,6 +890,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.hero-carousel-arrow { display: none; }
+@media (min-width: 768px) {
 .hero-carousel-arrow {
   position: absolute;
   top: 50%;
@@ -910,6 +912,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-carousel-arrow:hover { background: rgba(0, 0, 0, 0.52); }
 .hero-carousel-arrow-prev { left: clamp(14px, 3vw, 36px); }
 .hero-carousel-arrow-next { right: clamp(14px, 3vw, 36px); }
+}
 
 .hero-carousel-dots {
   position: absolute;

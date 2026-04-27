@@ -50,14 +50,6 @@ export default async function Home() {
         <HeroCarousel items={carouselItems} />
       )}
 
-      {/* ── Editorial bridge — separates hero from content ───── */}
-      {carouselItems.length > 0 && (
-        <div className="hero-bridge">
-          <span>Stavanger, Norway</span>
-          <span className="hero-bridge-sep">·</span>
-          <span>Independent editorial city guide</span>
-        </div>
-      )}
 
       {/* ── Stavanger Eats — Latest Reviews ──────────────────── */}
       {latestReviews?.length > 0 && (
