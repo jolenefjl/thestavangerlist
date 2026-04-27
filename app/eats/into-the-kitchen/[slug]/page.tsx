@@ -241,6 +241,7 @@ export default async function InterviewPage({ params }: PageProps) {
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
         subtext={settings?.newsletterSubtext}
+        buttonText={settings?.newsletterButtonText}
         successText={settings?.newsletterSuccessText}
       />
       <Footer />

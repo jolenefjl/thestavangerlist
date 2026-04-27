@@ -64,6 +64,7 @@ export const siteSettingsQuery = groq`
     newsletterEyebrow,
     newsletterCtaText,
     newsletterSubtext,
+    newsletterButtonText,
     newsletterSuccessText,
     instagramUrl,
     tiktokUrl,

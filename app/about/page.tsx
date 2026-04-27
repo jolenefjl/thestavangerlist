@@ -187,6 +187,7 @@ export default async function AboutPage() {
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
         subtext={settings?.newsletterSubtext}
+        buttonText={settings?.newsletterButtonText}
         successText={settings?.newsletterSuccessText}
       />
       <Footer />

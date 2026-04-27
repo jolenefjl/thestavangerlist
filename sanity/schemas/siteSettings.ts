@@ -265,6 +265,13 @@ export const siteSettings = defineType({
       initialValue: "New reviews and curated lists — no spam, ever.",
     }),
     defineField({
+      name: "newsletterButtonText",
+      title: "Newsletter — Button Text",
+      type: "string",
+      initialValue: "Subscribe",
+      description: "Label on the subscribe button.",
+    }),
+    defineField({
       name: "newsletterSuccessText",
       title: "Newsletter — Success Message",
       type: "string",

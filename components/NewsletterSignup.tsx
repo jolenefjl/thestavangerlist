@@ -6,6 +6,7 @@ interface NewsletterSignupProps {
   eyebrow?: string;
   ctaText?: string;
   subtext?: string;
+  buttonText?: string;
   successText?: string;
 }
 
@@ -13,6 +14,7 @@ export default function NewsletterSignup({
   eyebrow = "Stay in the loop",
   ctaText = "The best of Stavanger, in your inbox.",
   subtext = "New reviews and curated lists — no spam, ever.",
+  buttonText = "Subscribe",
   successText = "Check your inbox — verify your email to get on The Stavanger List.",
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
@@ -61,7 +63,7 @@ export default function NewsletterSignup({
             disabled={status === "loading"}
           />
           <button type="submit" className="newsletter-btn" disabled={status === "loading"}>
-            {status === "loading" ? "..." : "Subscribe"}
+            {status === "loading" ? "..." : buttonText}
           </button>
         </form>
       )}

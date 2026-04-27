@@ -88,6 +88,7 @@ export default async function ListsPage() {
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
         subtext={settings?.newsletterSubtext}
+        buttonText={settings?.newsletterButtonText}
         successText={settings?.newsletterSuccessText}
       />
       <Footer />

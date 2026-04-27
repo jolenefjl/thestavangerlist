@@ -204,6 +204,7 @@ export default async function ReviewPage({ params }: PageProps) {
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
         subtext={settings?.newsletterSubtext}
+        buttonText={settings?.newsletterButtonText}
         successText={settings?.newsletterSuccessText}
       />
       <Footer />

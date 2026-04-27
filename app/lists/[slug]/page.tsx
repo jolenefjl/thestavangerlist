@@ -164,6 +164,7 @@ export default async function TopListPage({ params }: PageProps) {
         eyebrow={settings?.newsletterEyebrow}
         ctaText={settings?.newsletterCtaText}
         subtext={settings?.newsletterSubtext}
+        buttonText={settings?.newsletterButtonText}
         successText={settings?.newsletterSuccessText}
       />
       <Footer />
