@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
-import { aboutPageQuery } from "@/sanity/lib/queries";
+import { aboutPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -29,7 +29,10 @@ const portableTextComponents = {
 };
 
 export default async function AboutPage() {
-  const about = await client.fetch(aboutPageQuery);
+  const [about, settings] = await Promise.all([
+    client.fetch(aboutPageQuery),
+    client.fetch(siteSettingsQuery),
+  ]);
 
   return (
     <div className="page-bg">
@@ -180,7 +183,12 @@ export default async function AboutPage() {
       </div>
 
       <div className="divider-full" />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );

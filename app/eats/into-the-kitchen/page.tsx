@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import { allInterviewsQuery } from "@/sanity/lib/queries";
+import { allInterviewsQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -18,7 +18,10 @@ function extractExcerpt(blocks: unknown[], maxLength = 160): string {
 }
 
 export default async function IntoTheKitchenPage() {
-  const interviews = await client.fetch(allInterviewsQuery);
+  const [interviews, settings] = await Promise.all([
+    client.fetch(allInterviewsQuery),
+    client.fetch(siteSettingsQuery),
+  ]);
 
   return (
     <div className="page-bg">
@@ -81,7 +84,12 @@ export default async function IntoTheKitchenPage() {
       </section>
 
       <div className="divider" style={{ margin: "0 0 28px" }} />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );

@@ -3,14 +3,17 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import { allTopListsQuery } from "@/sanity/lib/queries";
+import { allTopListsQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default async function ListsPage() {
-  const lists = await client.fetch(allTopListsQuery);
+  const [lists, settings] = await Promise.all([
+    client.fetch(allTopListsQuery),
+    client.fetch(siteSettingsQuery),
+  ]);
 
   return (
     <div className="page-bg">
@@ -81,7 +84,12 @@ export default async function ListsPage() {
       </section>
 
       <div className="divider" style={{ marginTop: 16 }} />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );

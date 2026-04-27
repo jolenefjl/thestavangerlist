@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
-import { topListBySlugQuery } from "@/sanity/lib/queries";
+import { topListBySlugQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -17,7 +17,10 @@ interface PageProps {
 
 export default async function TopListPage({ params }: PageProps) {
   const { slug } = await params;
-  const list = await client.fetch(topListBySlugQuery, { slug });
+  const [list, settings] = await Promise.all([
+    client.fetch(topListBySlugQuery, { slug }),
+    client.fetch(siteSettingsQuery),
+  ]);
   if (!list) notFound();
 
   return (
@@ -157,7 +160,12 @@ export default async function TopListPage({ params }: PageProps) {
       </section>
 
       <div className="divider-full" />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );

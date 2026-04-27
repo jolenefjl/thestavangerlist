@@ -268,7 +268,7 @@ export const siteSettings = defineType({
       name: "newsletterSuccessText",
       title: "Newsletter — Success Message",
       type: "string",
-      initialValue: "You're on the list. Talk soon.",
+      initialValue: "Check your inbox — verify your email to get on The Stavanger List.",
     }),
 
     // ── Social ────────────────────────────────────────────────

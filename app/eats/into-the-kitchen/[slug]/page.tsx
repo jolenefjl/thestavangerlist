@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
-import { interviewBySlugQuery } from "@/sanity/lib/queries";
+import { interviewBySlugQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -59,7 +59,10 @@ const answerComponents = {
 
 export default async function InterviewPage({ params }: PageProps) {
   const { slug } = await params;
-  const interview = await client.fetch(interviewBySlugQuery, { slug });
+  const [interview, settings] = await Promise.all([
+    client.fetch(interviewBySlugQuery, { slug }),
+    client.fetch(siteSettingsQuery),
+  ]);
   if (!interview) notFound();
 
   const linkedReview = interview.linkedReview as { name: string; slug: { current: string } } | null;
@@ -234,7 +237,12 @@ export default async function InterviewPage({ params }: PageProps) {
       </div>
 
       <div className="divider-full" />
-      <NewsletterSignup />
+      <NewsletterSignup
+        eyebrow={settings?.newsletterEyebrow}
+        ctaText={settings?.newsletterCtaText}
+        subtext={settings?.newsletterSubtext}
+        successText={settings?.newsletterSuccessText}
+      />
       <Footer />
     </div>
   );
