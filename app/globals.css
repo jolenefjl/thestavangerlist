@@ -286,9 +286,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Legacy — kept for non-card uses */
 .card-desc    { font-size: 11px; font-family: var(--font-dm-sans), sans-serif; color: #8C857F; line-height: 1.4; margin-bottom: 10px; letter-spacing: 0.04em; }
 
-.rating-dots { display: flex; gap: 3px; align-items: center; }
-.rating-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }
-.rating-dot.empty { background: var(--color-accent-light); }
+.rating-dots { display: flex; gap: 1px; align-items: center; }
+.rating-dot  { font-size: 14px; line-height: 1; color: var(--color-accent); }
+.rating-dot.empty { color: var(--color-accent-light); }
 
 /* Lists index page rows */
 .list-row {

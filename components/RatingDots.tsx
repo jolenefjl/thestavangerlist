@@ -10,7 +10,9 @@ export default function RatingDots({ score, max = 5 }: RatingDotsProps) {
         <span
           key={i}
           className={`rating-dot${i < score ? "" : " empty"}`}
-        />
+        >
+          ★
+        </span>
       ))}
     </span>
   );
