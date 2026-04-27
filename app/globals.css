@@ -1006,7 +1006,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Photo Blocks ──────────────────────────────────────── */
-.photo-block { margin: 40px 0; width: 100%; }
+.photo-block {
+  margin: 40px auto;
+  max-width: 680px;
+  padding-left: clamp(20px, 6vw, 48px);
+  padding-right: clamp(20px, 6vw, 48px);
+}
 
 .photo-block-img-wrap {
   position: relative;
