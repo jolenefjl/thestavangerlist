@@ -43,7 +43,7 @@ export const richTextComponents: PortableTextComponents = {
         className="article-body-text"
         style={{
           fontFamily: "var(--font-dm-sans), sans-serif",
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: 400,
           lineHeight: 1.9,
           marginBottom: "1.5em",
@@ -87,7 +87,7 @@ export const richTextComponents: PortableTextComponents = {
           color: "var(--color-text-primary)",
           fontFamily: "var(--font-dm-sans), sans-serif",
           fontWeight: 400,
-          fontSize: 18,
+          fontSize: 16,
         }}
       >
         {children}

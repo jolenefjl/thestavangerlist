@@ -397,12 +397,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Rating panel — editorial verdict */
 .rating-panel { background: var(--color-bg-subtle); border-radius: 3px; padding: 24px; margin: 24px 0; }
-.verdict-item { padding: 18px 0; border-bottom: 0.5px solid var(--color-border-light); }
+.verdict-item { padding: 22px 0; border-bottom: 0.5px solid var(--color-border-light); }
 .verdict-item:first-of-type { padding-top: 0; }
 .verdict-item:last-of-type  { border-bottom: none; padding-bottom: 0; }
-.verdict-header  { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
-.verdict-title   { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; color: var(--color-accent); }
-.verdict-blurb   { font-size: 13px; font-style: italic; font-family: var(--font-spectral), serif; font-weight: 300; color: #8C857F; line-height: 1.72; margin: 0; }
+.verdict-header  { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.verdict-title   { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; font-weight: 600; color: var(--color-accent); }
+.verdict-blurb   { font-size: 14px; font-style: italic; font-family: var(--font-spectral), serif; font-weight: 400; color: #4A443F; line-height: 1.75; margin: 0; }
 .verdict-overall { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 0.5px solid var(--color-border); margin-top: 4px; }
 
 /* Quick info panel */
