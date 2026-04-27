@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Newsletter not configured" }, { status: 500 });
   }
 
-  // Kit v3 (Legacy) API — create subscriber directly, bypasses opt-in
-  const res = await fetch(`https://api.convertkit.com/v3/subscribers`, {
+  // Kit v3 (Legacy) API — subscribe via form using api_secret
+  const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ api_secret: apiSecret, email }),
