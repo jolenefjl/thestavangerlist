@@ -7,21 +7,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  const apiKey = process.env.KIT_API_KEY;
+  const apiSecret = process.env.KIT_API_SECRET;
+  const formId = process.env.KIT_FORM_ID;
 
-  if (!apiKey) {
-    console.error("KIT_API_KEY not set");
+  if (!apiSecret || !formId) {
+    console.error("KIT_API_SECRET or KIT_FORM_ID not set");
     return NextResponse.json({ error: "Newsletter not configured" }, { status: 500 });
   }
 
-  // Kit v4 API — create subscriber directly
-  const res = await fetch("https://api.kit.com/v4/subscribers", {
+  // Kit v3 (Legacy) API — uses api_secret for server-side subscriber creation
+  const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({ email_address: email }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ api_secret: apiSecret, email }),
   });
 
   const data = await res.json().catch(() => ({}));
