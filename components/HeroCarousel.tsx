@@ -9,7 +9,7 @@ export interface CarouselItem {
   _id: string;
   _type: string;
   title: string;
-  cardTeaser?: string;
+  subtitle?: string;
   slug: { current: string };
   heroImage?: { asset: { _ref: string }; alt?: string };
   tag: string;
@@ -86,24 +86,36 @@ export default function HeroCarousel({ items }: { items: CarouselItem[] }) {
           <div className="hero-carousel-content">
             <span className="hero-carousel-tag">{item.tag}</span>
             <p className="hero-carousel-title">{item.title}</p>
-            {!!item.cardTeaser && (
-              <p className="hero-carousel-teaser">{item.cardTeaser}</p>
+            {!!item.subtitle && (
+              <p className="hero-carousel-subtitle">{item.subtitle}</p>
             )}
           </div>
         </Link>
       ))}
 
       {items.length > 1 && (
-        <div className="hero-carousel-dots">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              className={`hero-carousel-dot${i === current ? " active" : ""}`}
-              onClick={() => setCurrent(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        <>
+          <button className="hero-carousel-arrow hero-carousel-arrow-prev" onClick={(e) => { e.preventDefault(); prev(); }} aria-label="Previous slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M13 16L7 10L13 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <button className="hero-carousel-arrow hero-carousel-arrow-next" onClick={(e) => { e.preventDefault(); next(); }} aria-label="Next slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7 4L13 10L7 16" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <div className="hero-carousel-dots">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                className={`hero-carousel-dot${i === current ? " active" : ""}`}
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

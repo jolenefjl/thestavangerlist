@@ -79,7 +79,7 @@ export const siteSettingsQuery = groq`
       _type,
       _id,
       "title": coalesce(name, title),
-      "cardTeaser": cardTeaser,
+      "subtitle": subtitle,
       slug,
       heroImage,
       "tag": select(
