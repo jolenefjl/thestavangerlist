@@ -4,7 +4,23 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function NavMobileMenu() {
+interface NavMobileMenuProps {
+  eatsLabel: string;
+  eatsItem1: string;
+  eatsItem2: string;
+  playLabel: string;
+  listsLabel: string;
+  aboutLabel: string;
+}
+
+export default function NavMobileMenu({
+  eatsLabel,
+  eatsItem1,
+  eatsItem2,
+  playLabel,
+  listsLabel,
+  aboutLabel,
+}: NavMobileMenuProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -56,14 +72,14 @@ export default function NavMobileMenu() {
         </div>
 
         <nav className="nav-mobile-nav">
-          <p className="nav-mobile-section-label">Eats</p>
-          <Link href="/eats" className="nav-mobile-link">Food Reviews</Link>
-          <Link href="/eats/into-the-kitchen" className="nav-mobile-link">Into the Kitchen</Link>
+          <p className="nav-mobile-section-label">{eatsLabel}</p>
+          <Link href="/eats" className="nav-mobile-link">{eatsItem1}</Link>
+          <Link href="/eats/into-the-kitchen" className="nav-mobile-link">{eatsItem2}</Link>
 
           <div className="nav-mobile-divider" />
-          <Link href="/play" className="nav-mobile-link">Play</Link>
-          <Link href="/lists" className="nav-mobile-link">Lists</Link>
-          <Link href="/about" className="nav-mobile-link">About</Link>
+          <Link href="/play" className="nav-mobile-link">{playLabel}</Link>
+          <Link href="/lists" className="nav-mobile-link">{listsLabel}</Link>
+          <Link href="/about" className="nav-mobile-link">{aboutLabel}</Link>
           <Link href="/search" className="nav-mobile-link">Search</Link>
         </nav>
       </div>

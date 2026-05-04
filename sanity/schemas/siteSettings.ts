@@ -10,8 +10,75 @@ export const siteSettings = defineType({
       name: "siteName",
       title: "Site Name",
       type: "string",
-      description: "Used in the nav logo and footer",
+      description: "Used as alt text on the logo and in the browser tab title",
       initialValue: "The Stavanger List",
+    }),
+    defineField({
+      name: "logoImage",
+      title: "Logo Image",
+      type: "image",
+      description: "Upload your logo here. Replaces the default SVG logo in the header. Use a wide PNG or SVG exported as PNG — ideally 400px+ wide.",
+      options: { hotspot: false },
+    }),
+    defineField({
+      name: "faviconImage",
+      title: "Favicon",
+      type: "image",
+      description: "The small icon shown in browser tabs and bookmarks. Use a square image — at least 64×64px, ideally 512×512px PNG.",
+      options: { hotspot: false },
+    }),
+
+    // ── Navigation Labels ─────────────────────────────────────
+    defineField({
+      name: "navEatsLabel",
+      title: "Nav — Eats Label",
+      type: "string",
+      initialValue: "Eats",
+    }),
+    defineField({
+      name: "navEatsItem1Label",
+      title: "Nav — Eats: First Dropdown Item",
+      type: "string",
+      initialValue: "Food Reviews",
+    }),
+    defineField({
+      name: "navEatsItem2Label",
+      title: "Nav — Eats: Second Dropdown Item",
+      type: "string",
+      initialValue: "Into the Kitchen",
+    }),
+    defineField({
+      name: "navPlayLabel",
+      title: "Nav — Play Label",
+      type: "string",
+      initialValue: "Play",
+    }),
+    defineField({
+      name: "navListsLabel",
+      title: "Nav — Lists Label",
+      type: "string",
+      initialValue: "Lists",
+    }),
+    defineField({
+      name: "navAboutLabel",
+      title: "Nav — About Label",
+      type: "string",
+      initialValue: "About",
+    }),
+
+    // ── Footer ────────────────────────────────────────────────
+    defineField({
+      name: "footerTagline",
+      title: "Footer — Tagline",
+      type: "string",
+      description: "Short line shown under the logo in the footer. Optional.",
+      initialValue: "An independent guide to Stavanger.",
+    }),
+    defineField({
+      name: "footerCopyrightName",
+      title: "Footer — Copyright Name",
+      type: "string",
+      description: "Name shown after © and the year. Defaults to Site Name if left blank.",
     }),
 
     // ── Homepage Hero ─────────────────────────────────────────

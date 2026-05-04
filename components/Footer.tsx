@@ -5,14 +5,22 @@ import { siteSettingsQuery } from "@/sanity/lib/queries";
 export default async function Footer() {
   const settings = await client.fetch(siteSettingsQuery);
   const siteName: string = settings?.siteName ?? "The Stavanger List";
+  const footerTagline: string | null = settings?.footerTagline ?? null;
+  const copyrightName: string = settings?.footerCopyrightName ?? siteName;
   const instagramUrl: string | null = settings?.instagramUrl ?? null;
   const tiktokUrl: string | null = settings?.tiktokUrl ?? null;
 
   return (
     <footer className="footer">
-      <Link href="/" className="footer-logo">
-        {siteName}
-      </Link>
+      <div className="footer-brand">
+        <Link href="/" className="footer-logo">
+          {siteName}
+        </Link>
+        {footerTagline && (
+          <p className="footer-tagline">{footerTagline}</p>
+        )}
+      </div>
+
       {(instagramUrl || tiktokUrl) && (
         <div className="footer-social">
           {instagramUrl && (
@@ -35,7 +43,8 @@ export default async function Footer() {
           )}
         </div>
       )}
-      <span className="footer-sub">© {new Date().getFullYear()}</span>
+
+      <span className="footer-sub">© {new Date().getFullYear()} {copyrightName}</span>
     </footer>
   );
 }

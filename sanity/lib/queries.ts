@@ -34,6 +34,9 @@ const experienceFields = groq`
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     siteName,
+    faviconImage,
+    footerTagline,
+    footerCopyrightName,
     heroEyebrow,
     heroHeadline,
     heroHeadlineAccent,
@@ -105,6 +108,20 @@ export const siteSettingsQuery = groq`
 
 // Slim query for Nav/Footer site name only
 export const siteNameQuery = groq`*[_type == "siteSettings"][0].siteName`;
+
+// Nav-specific query — only what the header needs
+export const navSettingsQuery = groq`
+  *[_type == "siteSettings"][0] {
+    siteName,
+    logoImage,
+    navEatsLabel,
+    navEatsItem1Label,
+    navEatsItem2Label,
+    navPlayLabel,
+    navListsLabel,
+    navAboutLabel,
+  }
+`;
 
 // Homepage: latest reviews
 export const latestReviewsQuery = groq`

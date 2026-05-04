@@ -474,8 +474,10 @@ h1, h2, h3, h4, h5, h6 {
 .form-submit:hover    { opacity: 0.85; }
 
 /* Footer */
-.footer      { padding: 20px 28px; border-top: 0.5px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.footer-logo { font-family: var(--font-spectral), serif; font-size: 12px; font-weight: 300; color: var(--color-text-hint); text-decoration: none; }
+.footer         { padding: 20px 28px; border-top: 0.5px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.footer-brand   { display: flex; flex-direction: column; gap: 4px; }
+.footer-logo    { font-family: var(--font-spectral), serif; font-size: 12px; font-weight: 300; color: var(--color-text-hint); text-decoration: none; }
+.footer-tagline { font-family: var(--font-dm-sans), sans-serif; font-size: 10px; color: rgba(44,37,32,0.30); letter-spacing: 0.03em; margin: 0; }
 .footer-social { display: flex; gap: 20px; }
 .footer-social-link { display: flex; align-items: center; gap: 7px; font-size: 10px; color: rgba(44, 37, 32, 0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; text-decoration: none; transition: color 0.15s; }
 .footer-social-link svg { flex-shrink: 0; opacity: 0.7; }

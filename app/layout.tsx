@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Spectral, Public_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
 import "./globals.css";
 
 const spectral = Spectral({
@@ -17,10 +20,20 @@ const dmSans = Public_Sans({
   variable: "--font-dm-sans",
 });
 
-export const metadata: Metadata = {
-  title: "The Stavanger List",
-  description: "The go-to guide for eating and living well in Stavanger.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await client.fetch(siteSettingsQuery);
+  const siteName: string = settings?.siteName ?? "The Stavanger List";
+
+  const icons: Metadata["icons"] = settings?.faviconImage
+    ? { icon: urlFor(settings.faviconImage).width(512).url() }
+    : { icon: "/favicon.ico" };
+
+  return {
+    title: siteName,
+    description: "The go-to guide for eating and living well in Stavanger.",
+    icons,
+  };
+}
 
 export default function RootLayout({
   children,
