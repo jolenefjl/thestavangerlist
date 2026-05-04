@@ -38,9 +38,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       }
     }
   }
+  const ogImageUrl: string | null = experience.ogImage
+    ? urlFor(experience.ogImage as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+    : experience.heroImage
+    ? urlFor(experience.heroImage as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+    : null;
   return {
     title: `${name} — The Stavanger List`,
     description: description || `Experience review: ${name}`,
+    ...(ogImageUrl && {
+      openGraph: {
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: name }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        images: [ogImageUrl],
+      },
+    }),
   };
 }
 

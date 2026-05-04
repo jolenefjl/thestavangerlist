@@ -12,9 +12,50 @@ import Footer from "@/components/Footer";
 import RatingDots from "@/components/RatingDots";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { richTextComponents } from "@/components/RichTextComponents";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const review = await client.fetch(reviewBySlugQuery, { slug });
+  if (!review) return {};
+  const name = review.name as string;
+  let description = "";
+  const body = review.body as unknown[] | null;
+  if (body && Array.isArray(body)) {
+    const firstBlock = body.find(
+      (b): b is Record<string, unknown> =>
+        typeof b === "object" && b !== null && (b as Record<string, unknown>)._type === "block"
+    );
+    if (firstBlock) {
+      const children = firstBlock.children as Array<Record<string, unknown>> | undefined;
+      if (children) {
+        const text = children.map((c) => c.text ?? "").join("").trim();
+        description = text.split(".")[0] + ".";
+      }
+    }
+  }
+  const ogImageUrl: string | null = review.ogImage
+    ? urlFor(review.ogImage as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+    : review.heroImage
+    ? urlFor(review.heroImage as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+    : null;
+  return {
+    title: `${name} — The Stavanger List`,
+    description: description || `Restaurant review: ${name}`,
+    ...(ogImageUrl && {
+      openGraph: {
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: name }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        images: [ogImageUrl],
+      },
+    }),
+  };
 }
 
 export default async function ReviewPage({ params }: PageProps) {

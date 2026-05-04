@@ -131,6 +131,13 @@ export const experience = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "ogImage",
+      title: "Share Image (optional override)",
+      type: "image",
+      description: "Custom image for link previews (iMessage, WhatsApp, Twitter etc). Leave blank to use the hero image automatically. Recommended: 1200×630px landscape crop.",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "tiktokUrl",
       title: "TikTok Video URL",
       type: "url",

@@ -27,6 +27,13 @@ export const siteSettings = defineType({
       description: "The small icon shown in browser tabs and bookmarks. Use a square image — at least 64×64px, ideally 512×512px PNG.",
       options: { hotspot: false },
     }),
+    defineField({
+      name: "ogImage",
+      title: "Default Share Image",
+      type: "image",
+      description: "The image shown when someone shares the homepage, or any page that doesn't have its own image. Recommended size: 1200×630px (landscape). This is what appears in iMessage, WhatsApp, Twitter previews etc.",
+      options: { hotspot: true },
+    }),
 
     // ── Navigation Labels ─────────────────────────────────────
     defineField({

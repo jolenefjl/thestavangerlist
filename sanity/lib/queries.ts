@@ -36,6 +36,7 @@ export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     siteName,
     faviconImage,
+    ogImage,
     footerTagline,
     footerCopyrightName,
     heroEyebrow,
@@ -147,6 +148,7 @@ export const cuisineListQuery = groq`
 export const reviewBySlugQuery = groq`
   *[_type == "review" && slug.current == $slug][0] {
     ${reviewFields},
+    ogImage,
     websiteUrl,
     tiktokUrl,
     gallery,
@@ -229,7 +231,7 @@ export const featuredExperiencesQuery = groq`
 export const experienceBySlugQuery = groq`
   *[_type == "experience" && slug.current == $slug][0] {
     ${experienceFields},
-    websiteUrl, bookingUrl, tiktokUrl, gallery, body,
+    ogImage, websiteUrl, bookingUrl, tiktokUrl, gallery, body,
     worthYourTimeBlurb, worthThePriceBlurb, worthTheHypeBlurb,
     worthBringingAFriendBlurb, worthDoingAgainBlurb
   }
