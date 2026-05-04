@@ -115,13 +115,15 @@ export default async function ReviewPage({ params }: PageProps) {
         return (
           <div className="tiktok-embed-wrap article-body-text" style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
             <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
-            <iframe
-              src={`https://www.tiktok.com/embed/v2/${videoId}`}
-              style={{ width: "100%", height: 760, border: "none", display: "block" }}
-              scrolling="no"
-              allowFullScreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+            <div className="tiktok-frame-wrap">
+              <iframe
+                src={`https://www.tiktok.com/embed/v2/${videoId}`}
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                scrolling="no"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
           </div>
         );
       })()}
