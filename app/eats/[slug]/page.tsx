@@ -170,6 +170,27 @@ export default async function ReviewPage({ params }: PageProps) {
               </div>
             )}
           </div>
+
+          {/* ── Map embed ──────────────────────────────────────── */}
+          {review.address && (
+            <div className="quick-info-map-wrap">
+              <iframe
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(review.address as string)}&output=embed&z=15`}
+                className="quick-info-map"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Map for ${review.name as string}`}
+              />
+              <a
+                href={review.googleMapsUrl as string ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(review.address as string)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="quick-info-map-link"
+              >
+                Get directions →
+              </a>
+            </div>
+          )}
         </div>
 
         {/* ── Suggest CTA ────────────────────────────────────── */}
