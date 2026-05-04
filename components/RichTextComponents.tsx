@@ -121,18 +121,14 @@ export const richTextComponents: PortableTextComponents = {
     // Legacy single inline image — keep for backward compat
     image: ({ value }: { value: Record<string, unknown> }) => (
       <figure className="photo-block">
-        <div
-          className="photo-block-img-wrap photo-block-img-wrap-landscape"
-          style={{ position: "relative" }}
-        >
-          <Image
-            src={urlFor(value).width(1600).quality(88).url()}
-            alt={(value.alt as string) ?? ""}
-            fill
-            sizes="(max-width: 640px) 100vw, 80vw"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
+        <Image
+          src={urlFor(value).width(1600).quality(88).url()}
+          alt={(value.alt as string) ?? ""}
+          width={0}
+          height={0}
+          sizes="(max-width: 640px) 100vw, 80vw"
+          style={{ width: "100%", height: "auto", display: "block" }}
+        />
         {typeof value.caption === "string" && value.caption && (
           <figcaption className="photo-block-caption">{value.caption}</figcaption>
         )}
@@ -142,18 +138,14 @@ export const richTextComponents: PortableTextComponents = {
     photoBlockSingle: ({ value }: { value: PhotoBlockValue }) => (
       <figure className="photo-block">
         {value.image1 && (
-          <div
-            className="photo-block-img-wrap photo-block-img-wrap-landscape"
-            style={{ position: "relative" }}
-          >
-            <Image
-              src={urlFor(value.image1).width(1600).quality(88).url()}
-              alt={value.image1.alt ?? ""}
-              fill
-              sizes="(max-width: 640px) 100vw, 80vw"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+          <Image
+            src={urlFor(value.image1).width(1600).quality(88).url()}
+            alt={value.image1.alt ?? ""}
+            width={0}
+            height={0}
+            sizes="(max-width: 640px) 100vw, 80vw"
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
         )}
         {value.caption && (
           <figcaption className="photo-block-caption">{value.caption}</figcaption>
