@@ -117,7 +117,8 @@ export default async function ReviewPage({ params }: PageProps) {
             <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
             <iframe
               src={`https://www.tiktok.com/embed/v2/${videoId}`}
-              style={{ width: "100%", height: 700, border: "none" }}
+              style={{ width: "100%", height: 760, border: "none", display: "block" }}
+              scrolling="no"
               allowFullScreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
