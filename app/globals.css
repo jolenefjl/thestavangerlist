@@ -484,7 +484,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer-sub  { font-size: 10px; color: rgba(44, 37, 32, 0.20); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; }
 
 /* TikTok embed */
-.tiktok-embed-wrap { margin: 24px 0; border-radius: 3px; overflow: hidden; border: 0.5px solid var(--color-border); }
+.tiktok-embed-wrap { margin: 24px 0; border-radius: 3px; overflow: hidden; }
 .tiktok-label      { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 10px; }
 
 /* Utilities */
