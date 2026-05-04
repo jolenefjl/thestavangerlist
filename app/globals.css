@@ -162,7 +162,9 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   flex-shrink: 0;
   margin-left: 24px;
+  transition: opacity 0.15s;
 }
+.section-link:hover { text-decoration: underline; text-underline-offset: 3px; opacity: 0.8; }
 
 /* Card grid — 3 col desktop, 2 tablet, 1 mobile */
 .card-grid {
@@ -176,6 +178,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (min-width: 1024px) {
   .card-grid { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+}
+
+/* Eats page hero */
+.eats-hero {
+  padding: 56px 28px 48px;
+  max-width: 760px;
+  border-bottom: 0.5px solid var(--color-border);
+}
+.eats-hero-headline {
+  font-family: var(--font-spectral), serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.eats-hero-subheading {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 580px;
 }
 
 /* Filter bar */

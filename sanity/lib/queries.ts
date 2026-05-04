@@ -44,6 +44,8 @@ export const siteSettingsQuery = groq`
     homepageLatestTitle,
     eatsEyebrow,
     eatsPageTitle,
+    eatsHeroHeadline,
+    eatsHeroSubheading,
     verdictTitle,
     ratingCaloriesLabel,
     ratingCaloriesSub,

@@ -31,10 +31,15 @@ export default async function EatsPage({ searchParams }: PageProps) {
     <div className="page-bg">
       <Nav />
 
-      {/* ── Page Header ──────────────────────────────────────── */}
-      <div className="section" style={{ paddingTop: 40, paddingBottom: 24 }}>
-        <p className="text-eyebrow" style={{ marginBottom: 10 }}>{settings?.eatsEyebrow ?? "🍽️ Stavanger Eats"}</p>
-        <h1 className="text-h1">{settings?.eatsPageTitle ?? "Restaurant Reviews"}</h1>
+      {/* ── Page Hero ────────────────────────────────────────── */}
+      <div className="eats-hero">
+        <p className="text-eyebrow" style={{ marginBottom: 14 }}>{settings?.eatsEyebrow ?? "Stavanger Eats"}</p>
+        <h1 className="eats-hero-headline">
+          {settings?.eatsHeroHeadline ?? "The best places to eat in and around Stavanger"}
+        </h1>
+        <p className="eats-hero-subheading">
+          {settings?.eatsHeroSubheading ?? "Because eating out is so expensive, I help you ensure every bite is worth your kroner."}
+        </p>
       </div>
 
       {/* ── Cuisine Filter Tabs ───────────────────────────────── */}

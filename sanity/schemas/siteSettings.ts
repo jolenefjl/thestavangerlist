@@ -135,6 +135,20 @@ export const siteSettings = defineType({
       title: "Eats Page — Page Title",
       type: "string",
       initialValue: "Restaurant Reviews",
+      description: "Short title used in browser tab and SEO.",
+    }),
+    defineField({
+      name: "eatsHeroHeadline",
+      title: "Eats Page — Hero Headline",
+      type: "string",
+      initialValue: "The best places to eat in and around Stavanger",
+    }),
+    defineField({
+      name: "eatsHeroSubheading",
+      title: "Eats Page — Hero Subheading",
+      type: "text",
+      rows: 2,
+      initialValue: "Because eating out is so expensive, I help you ensure every bite is worth your kroner.",
     }),
 
     // ── Rating Criteria ───────────────────────────────────────
