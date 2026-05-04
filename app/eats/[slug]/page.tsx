@@ -50,7 +50,7 @@ export default async function ReviewPage({ params }: PageProps) {
       <div className="article-hero">
         {review.heroImage && (
           <Image
-            src={urlFor(review.heroImage).width(2400).height(1400).quality(90).url()}
+            src={urlFor(review.heroImage).quality(90).url()}
             alt={review.heroImage.alt ?? review.name}
             fill
             sizes="100vw"

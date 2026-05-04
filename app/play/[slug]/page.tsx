@@ -80,7 +80,7 @@ export default async function ExperiencePage({ params }: PageProps) {
       <div className="article-hero">
         {!!experience.heroImage && (
           <Image
-            src={urlFor(experience.heroImage as Record<string, unknown>).width(2400).height(1400).quality(90).url()}
+            src={urlFor(experience.heroImage as Record<string, unknown>).quality(90).url()}
             alt={(experience.heroImage as Record<string, unknown>).alt as string ?? experience.name as string}
             fill
             sizes="100vw"

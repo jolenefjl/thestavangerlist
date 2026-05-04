@@ -76,7 +76,7 @@ export default async function InterviewPage({ params }: PageProps) {
       {/* ── Hero Photo ───────────────────────────────────────── */}
       {interview.heroPhoto ? (
         <Image
-          src={urlFor(interview.heroPhoto).width(2800).height(1600).quality(90).url()}
+          src={urlFor(interview.heroPhoto).quality(90).url()}
           alt={(interview.heroPhoto as Record<string, unknown>).alt as string ?? interview.founderName as string}
           width={2800}
           height={1600}
