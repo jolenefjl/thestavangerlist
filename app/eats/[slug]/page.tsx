@@ -149,39 +149,45 @@ export default async function ReviewPage({ params }: PageProps) {
                 <p className="quick-info-value">{review.bestFor.join(", ")}</p>
               </div>
             )}
-            {review.websiteUrl && (
-              <div className="quick-info-item">
-                <p className="quick-info-label">Website</p>
-                <a
-                  href={review.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-info-value"
-                  style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                >
-                  Visit →
-                </a>
-              </div>
-            )}
           </div>
 
-          {/* ── Map card ───────────────────────────────────────── */}
-          {(review.address || review.googleMapsUrl) && (
-            <a
-              href={review.googleMapsUrl as string ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(review.address as string)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="quick-info-map-card"
-            >
-              <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                <circle cx="12" cy="9" r="2.5"/>
-              </svg>
-              <div className="quick-info-map-text">
-                {review.address && <span className="quick-info-map-address">{review.address as string}</span>}
-                <span className="quick-info-map-cta">Open in Google Maps →</span>
-              </div>
-            </a>
+          {/* ── Website + Map cards ─────────────────────────────── */}
+          {(review.websiteUrl || review.address || review.googleMapsUrl) && (
+            <div className="quick-info-cards">
+              {review.websiteUrl && (() => {
+                let domain = review.websiteUrl as string;
+                try { domain = new URL(review.websiteUrl as string).hostname.replace(/^www\./, ""); } catch {}
+                return (
+                  <a href={review.websiteUrl as string} target="_blank" rel="noopener noreferrer" className="quick-info-map-card">
+                    <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <div className="quick-info-map-text">
+                      <span className="quick-info-map-address">{domain}</span>
+                      <span className="quick-info-map-cta">Visit website →</span>
+                    </div>
+                  </a>
+                );
+              })()}
+              {(review.address || review.googleMapsUrl) && (
+                <a
+                  href={review.googleMapsUrl as string ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(review.address as string)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-map-card"
+                >
+                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5"/>
+                  </svg>
+                  <div className="quick-info-map-text">
+                    {review.address && <span className="quick-info-map-address">{review.address as string}</span>}
+                    <span className="quick-info-map-cta">Open in Google Maps →</span>
+                  </div>
+                </a>
+              )}
+            </div>
           )}
         </div>
 

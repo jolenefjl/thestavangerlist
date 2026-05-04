@@ -438,7 +438,9 @@ h1, h2, h3, h4, h5, h6 {
 .quick-info-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 3px; }
 .quick-info-value { font-family: var(--font-spectral), serif; font-size: 14px; font-weight: 300; color: #1F1B18; }
 
-.quick-info-map-card { display: flex; align-items: flex-start; gap: 14px; margin-top: 28px; padding: 18px 20px; background: var(--color-bg-subtle); border: 0.5px solid var(--color-border); border-radius: 3px; text-decoration: none; transition: border-color 0.15s; }
+.quick-info-cards { display: flex; gap: 12px; margin-top: 28px; }
+.quick-info-cards > * { flex: 1; }
+.quick-info-map-card { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; background: var(--color-bg-subtle); border: 0.5px solid var(--color-border); border-radius: 3px; text-decoration: none; transition: border-color 0.15s; }
 .quick-info-map-card:hover { border-color: var(--color-accent); }
 .quick-info-map-pin { flex-shrink: 0; margin-top: 2px; color: var(--color-accent); }
 .quick-info-map-text { display: flex; flex-direction: column; gap: 5px; }
@@ -1277,6 +1279,7 @@ h1, h2, h3, h4, h5, h6 {
   .card-img-small { height: 220px; }
   .card-img-main  { height: 280px; }
   .hero-carousel  { height: clamp(320px, 72vh, 560px); }
+  .quick-info-cards { flex-direction: column; }
   .hero-carousel-title { font-size: clamp(30px, 9vw, 48px); }
   .section-title  { font-size: clamp(24px, 7vw, 34px); }
   .about-headline { font-size: clamp(24px, 8vw, 36px); }
