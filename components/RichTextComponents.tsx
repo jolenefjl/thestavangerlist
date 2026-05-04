@@ -60,7 +60,8 @@ export const richTextComponents: PortableTextComponents = {
           fontFamily: "var(--font-spectral), serif",
           fontSize: 27,
           fontWeight: 300,
-          margin: "64px 0 20px",
+          marginTop: "64px",
+          marginBottom: "20px",
           color: "var(--color-text-primary)",
           lineHeight: 1.15,
         }}
@@ -73,7 +74,7 @@ export const richTextComponents: PortableTextComponents = {
     bullet: ({ children }: { children?: React.ReactNode }) => (
       <ul
         className="article-body-text"
-        style={{ paddingLeft: 20, marginBottom: "1.5em", lineHeight: 1.9 }}
+        style={{ marginBottom: "1.5em", lineHeight: 1.9 }}
       >
         {children}
       </ul>
