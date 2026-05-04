@@ -145,14 +145,17 @@ export default async function ExperiencePage({ params }: PageProps) {
         const videoId = (experience.tiktokUrl as string).match(/\/video\/(\d+)/)?.[1];
         if (!videoId) return null;
         return (
-          <div style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
+          <div className="tiktok-embed-wrap article-body-text" style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
             <p className="tiktok-label" style={{ padding: "12px 0 0" }}>{settings?.watchVideoLabel ?? "Watch the video"}</p>
-            <iframe
-              src={`https://www.tiktok.com/embed/v2/${videoId}`}
-              style={{ width: "100%", height: 700, border: "none" }}
-              allowFullScreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+            <div className="tiktok-frame-wrap">
+              <iframe
+                src={`https://www.tiktok.com/embed/v2/${videoId}`}
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                scrolling="no"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
           </div>
         );
       })()}
@@ -174,27 +177,13 @@ export default async function ExperiencePage({ params }: PageProps) {
                 <p className="quick-info-value">{experience.area as string}</p>
               </div>
             )}
-            {!!(experience.address as string) && (
-              <div className="quick-info-item">
-                <p className="quick-info-label">Address</p>
-                <p className="quick-info-value">{experience.address as string}</p>
-              </div>
-            )}
             {!!(experience.priceRange as string) && (
               <div className="quick-info-item">
                 <p className="quick-info-label">Price</p>
                 <p className="quick-info-value">{experience.priceRange as string}</p>
               </div>
             )}
-            {!!websiteUrl && (
-              <div className="quick-info-item">
-                <p className="quick-info-label">Website</p>
-                <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="quick-info-value" style={{ color: "var(--color-accent)", textDecoration: "none" }}>
-                  Visit →
-                </a>
-              </div>
-            )}
-            {!!bookingUrl && bookingUrl !== websiteUrl && (
+            {!!bookingUrl && (
               <div className="quick-info-item">
                 <p className="quick-info-label">Book</p>
                 <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="quick-info-value" style={{ color: "var(--color-accent)", textDecoration: "none" }}>
@@ -203,6 +192,45 @@ export default async function ExperiencePage({ params }: PageProps) {
               </div>
             )}
           </div>
+
+          {/* ── Website + Map cards ─────────────────────────────── */}
+          {(websiteUrl || experience.address || experience.googleMapsUrl) && (
+            <div className="quick-info-cards">
+              {websiteUrl && (() => {
+                let domain = websiteUrl;
+                try { domain = new URL(websiteUrl).hostname.replace(/^www\./, ""); } catch {}
+                return (
+                  <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="quick-info-map-card">
+                    <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <div className="quick-info-map-text">
+                      <span className="quick-info-map-address">{domain}</span>
+                      <span className="quick-info-map-cta">Visit website →</span>
+                    </div>
+                  </a>
+                );
+              })()}
+              {(experience.address || experience.googleMapsUrl) && (
+                <a
+                  href={experience.googleMapsUrl as string ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(experience.address as string)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-map-card"
+                >
+                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5"/>
+                  </svg>
+                  <div className="quick-info-map-text">
+                    {experience.address && <span className="quick-info-map-address">{experience.address as string}</span>}
+                    <span className="quick-info-map-cta">Open in Google Maps →</span>
+                  </div>
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {/* ── Suggest CTA ────────────────────────────────────── */}

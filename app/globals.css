@@ -1281,6 +1281,9 @@ h1, h2, h3, h4, h5, h6 {
   .card-img-main  { height: 280px; }
   .hero-carousel  { height: clamp(320px, 72vh, 560px); }
   .quick-info-cards { flex-direction: column; }
+  .newsletter-row { flex-wrap: wrap; }
+  .newsletter-row .newsletter-input { flex: 1 1 160px; }
+  .newsletter-row .newsletter-btn   { flex: 1 1 100%; }
   .hero-carousel-title { font-size: clamp(30px, 9vw, 48px); }
   .section-title  { font-size: clamp(24px, 7vw, 34px); }
   .about-headline { font-size: clamp(24px, 8vw, 36px); }
