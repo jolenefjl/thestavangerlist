@@ -35,6 +35,7 @@ const experienceFields = groq`
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     siteName,
+    siteDescription,
     faviconImage,
     ogImage,
     footerTagline,

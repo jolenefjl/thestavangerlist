@@ -28,6 +28,14 @@ export const siteSettings = defineType({
       options: { hotspot: false },
     }),
     defineField({
+      name: "siteDescription",
+      title: "Site Description",
+      type: "text",
+      rows: 2,
+      description: "One or two sentences describing the site. Used as the description in link previews for the homepage and index pages.",
+      initialValue: "The go-to guide for eating and living well in Stavanger.",
+    }),
+    defineField({
       name: "ogImage",
       title: "Default Share Image",
       type: "image",

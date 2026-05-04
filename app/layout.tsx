@@ -23,7 +23,7 @@ const dmSans = Public_Sans({
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await client.fetch(siteSettingsQuery);
   const siteName: string = settings?.siteName ?? "The Stavanger List";
-  const description = "The go-to guide for eating and living well in Stavanger.";
+  const description: string = settings?.siteDescription ?? "The go-to guide for eating and living well in Stavanger.";
 
   const icons: Metadata["icons"] = settings?.faviconImage
     ? { icon: urlFor(settings.faviconImage).width(512).url() }
@@ -37,17 +37,20 @@ export async function generateMetadata(): Promise<Metadata> {
     title: siteName,
     description,
     icons,
-    ...(ogImageUrl && {
-      openGraph: {
-        siteName,
-        description,
+    openGraph: {
+      siteName,
+      title: siteName,
+      description,
+      ...(ogImageUrl && {
         images: [{ url: ogImageUrl, width: 1200, height: 630, alt: siteName }],
-      },
-      twitter: {
-        card: "summary_large_image",
-        images: [ogImageUrl],
-      },
-    }),
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteName,
+      description,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
   };
 }
 

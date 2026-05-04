@@ -43,18 +43,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : review.heroImage
     ? urlFor(review.heroImage as Record<string, unknown>).width(1200).height(630).fit("crop").url()
     : null;
+  const title = `${name} — The Stavanger List`;
+  const desc = description || `Restaurant review: ${name}`;
   return {
-    title: `${name} — The Stavanger List`,
-    description: description || `Restaurant review: ${name}`,
-    ...(ogImageUrl && {
-      openGraph: {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      ...(ogImageUrl && {
         images: [{ url: ogImageUrl, width: 1200, height: 630, alt: name }],
-      },
-      twitter: {
-        card: "summary_large_image",
-        images: [ogImageUrl],
-      },
-    }),
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: desc,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
   };
 }
 
