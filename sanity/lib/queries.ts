@@ -4,6 +4,7 @@ import { groq } from "next-sanity";
 const reviewFields = groq`
   _id,
   name,
+  heroTitle,
   subtitle,
   slug,
   cardTeaser,
@@ -25,7 +26,7 @@ const reviewFields = groq`
 
 // Experience fields (slim, for cards)
 const experienceFields = groq`
-  _id, name, subtitle, slug, cardTeaser, category, area, address, googleMapsUrl, priceRange, heroImage, bestFor,
+  _id, name, heroTitle, subtitle, slug, cardTeaser, category, area, address, googleMapsUrl, priceRange, heroImage, bestFor,
   worthYourTime, worthThePrice, worthTheHype, worthBringingAFriend, worthDoingAgain,
   publishedAt, featured
 `;

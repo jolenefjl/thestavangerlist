@@ -61,7 +61,7 @@ export default async function ReviewPage({ params }: PageProps) {
         <div className="article-hero-overlay" />
         <div className="article-hero-content">
           <span className="article-hero-eyebrow">Stavanger Eats</span>
-          <h1 className="article-hero-title">{review.name}</h1>
+          <h1 className="article-hero-title" style={{ whiteSpace: "pre-line" }}>{review.heroTitle ?? review.name}</h1>
           {review.subtitle && (
             <h2 className="article-hero-subtitle">{review.subtitle}</h2>
           )}

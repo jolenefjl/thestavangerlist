@@ -91,7 +91,7 @@ export default async function ExperiencePage({ params }: PageProps) {
         <div className="article-hero-overlay" />
         <div className="article-hero-content">
           <span className="article-hero-eyebrow">Stavanger Play</span>
-          <h1 className="article-hero-title">{experience.name as string}</h1>
+          <h1 className="article-hero-title" style={{ whiteSpace: "pre-line" }}>{(experience.heroTitle ?? experience.name) as string}</h1>
           {!!(experience.subtitle as string) && (
             <h2 className="article-hero-subtitle">{experience.subtitle as string}</h2>
           )}

@@ -21,6 +21,13 @@ export const review = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "heroTitle",
+      title: "Hero Title (display only)",
+      type: "text",
+      rows: 3,
+      description: "Optional. If set, this replaces the restaurant name in the big hero heading — press Enter to break across two lines. Leave blank to use the restaurant name as-is.",
+    }),
+    defineField({
       name: "subtitle",
       title: "Subtitle",
       type: "string",
