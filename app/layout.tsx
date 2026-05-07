@@ -3,7 +3,7 @@ import { Spectral, Public_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "@/sanity/lib/image"; // still used for ogImage
 import { siteSettingsQuery } from "@/sanity/lib/queries";
 import "./globals.css";
 
@@ -25,9 +25,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteName: string = settings?.siteName ?? "The Stavanger List";
   const description: string = settings?.siteDescription ?? "The go-to guide for eating and living well in Stavanger.";
 
-  const icons: Metadata["icons"] = settings?.faviconImage
-    ? { icon: urlFor(settings.faviconImage).width(512).url() }
-    : { icon: "/favicon.ico" };
+  // /api/icon dynamically redirects to the Sanity favicon (or 404 if none set).
+  // Pointing to a stable URL means the <link rel="icon"> in the HTML never goes stale.
+  const icons: Metadata["icons"] = {
+    icon: [{ url: "/api/icon", type: "image/png", sizes: "512x512" }],
+    apple: [{ url: "/api/icon", type: "image/png", sizes: "512x512" }],
+  };
 
   const ogImageUrl: string | null = settings?.ogImage
     ? urlFor(settings.ogImage).width(1200).height(630).fit("crop").url()
