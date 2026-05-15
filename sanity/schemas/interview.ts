@@ -40,6 +40,20 @@ export const interview = defineType({
       validation: (Rule) => Rule.required(),
     }),
 
+    // ── Article Headline ─────────────────────────────────────
+    defineField({
+      name: "title",
+      title: "Article Title",
+      type: "string",
+      description: "Editorial headline shown in the hero. e.g. 'The chef who brought Hanoi to Stavanger'. Leave blank to use the founder's name.",
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      description: "A short context line shown below the title. e.g. 'Linh Nguyen of Pho Viet on leaving Vietnam for Norway'.",
+    }),
+
     // ── Media ─────────────────────────────────────────────────
     defineField({
       name: "heroPhoto",

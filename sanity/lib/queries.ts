@@ -161,6 +161,7 @@ export const reviewBySlugQuery = groq`
 export const allInterviewsQuery = groq`
   *[_type == "interview"] | order(publishedAt desc) {
     _id,
+    title,
     founderName,
     founderRole,
     restaurantName,
@@ -176,16 +177,15 @@ export const allInterviewsQuery = groq`
 // Into the Kitchen — individual interview
 export const interviewBySlugQuery = groq`
   *[_type == "interview" && slug.current == $slug][0] {
+    title,
+    subtitle,
     founderName,
     founderRole,
     restaurantName,
-    linkedReview-> { name, slug },
+    linkedReview-> { name, slug, cuisine, area, priceRange, websiteUrl, googleMapsUrl, address },
     slug,
     heroPhoto,
     introStory,
-    pullQuote,
-    qAndA,
-    gallery,
     publishedAt,
   }
 `;

@@ -10,19 +10,11 @@ import { interviewBySlugQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import EatsSubNav from "@/components/EatsSubNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { richTextComponents } from "@/components/RichTextComponents";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-function extractText(blocks: unknown[], maxLength = 200): string {
-  if (!Array.isArray(blocks) || !blocks.length) return "";
-  const first = blocks.find((b: unknown) => (b as Record<string, unknown>)._type === "block") as Record<string, unknown> | undefined;
-  if (!first) return "";
-  const text = (first.children as { text?: string }[] ?? []).map((c) => c.text ?? "").join("");
-  return text.length > maxLength ? text.slice(0, maxLength).trim() + "…" : text;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -30,32 +22,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const interview = await client.fetch(interviewBySlugQuery, { slug });
   if (!interview) return {};
 
+  const pageTitle = (interview.title as string | null)
+    ?? (interview.founderName as string);
   const restaurant = (interview.linkedReview as Record<string, unknown> | null)?.name as string
     ?? interview.restaurantName as string ?? "";
-  const title = `${interview.founderName as string}${restaurant ? ` of ${restaurant}` : ""} — Into the Kitchen`;
-  const description = extractText(interview.introStory as unknown[]);
+  const title = `${pageTitle} — The Stavanger List`;
+  const description = restaurant
+    ? `Into the Kitchen with ${interview.founderName as string}${restaurant ? ` of ${restaurant}` : ""}.`
+    : `Into the Kitchen with ${interview.founderName as string}.`;
 
   return { title, description };
 }
-
-const proseComponents = {
-  block: {
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <p style={{ marginBottom: 22 }}>{children}</p>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 20, fontWeight: 300, margin: "32px 0 14px", color: "var(--color-text-primary)" }}>{children}</h3>
-    ),
-  },
-};
-
-const answerComponents = {
-  block: {
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <p style={{ marginBottom: 12, lineHeight: 1.85 }}>{children}</p>
-    ),
-  },
-};
 
 export default async function InterviewPage({ params }: PageProps) {
   const { slug } = await params;
@@ -65,173 +42,162 @@ export default async function InterviewPage({ params }: PageProps) {
   ]);
   if (!interview) notFound();
 
-  const linkedReview = interview.linkedReview as { name: string; slug: { current: string } } | null;
+  const linkedReview = interview.linkedReview as {
+    name: string;
+    slug: { current: string };
+    cuisine?: string;
+    area?: string;
+    priceRange?: string;
+    websiteUrl?: string;
+    googleMapsUrl?: string;
+    address?: string;
+  } | null;
+
   const restaurantName = linkedReview?.name ?? interview.restaurantName as string ?? "";
+  const heroTitle = (interview.title as string | null) ?? interview.founderName as string;
+  const heroSubtitle = (interview.subtitle as string | null)
+    ?? [interview.founderRole, restaurantName].filter(Boolean).join(" · ");
 
   return (
     <div className="page-bg">
       <Nav />
-      <EatsSubNav active="into-the-kitchen" />
 
-      {/* ── Hero Photo ───────────────────────────────────────── */}
-      {interview.heroPhoto ? (
-        <Image
-          src={urlFor(interview.heroPhoto).quality(90).url()}
-          alt={(interview.heroPhoto as Record<string, unknown>).alt as string ?? interview.founderName as string}
-          width={2800}
-          height={1600}
-          sizes="100vw"
-          className="interview-hero-img"
-          priority
-        />
-      ) : (
-        <div style={{ height: "clamp(320px, 55vw, 600px)", background: "var(--color-bg-image)" }} />
-      )}
-
-      {/* ── Header ───────────────────────────────────────────── */}
-      <div style={{ padding: "40px 28px 0", maxWidth: 680, margin: "0 auto" }}>
-        <p className="text-eyebrow" style={{ marginBottom: 10 }}>Into the Kitchen</p>
-        <h1 style={{
-          fontFamily: "var(--font-spectral), serif",
-          fontSize: "clamp(32px, 6vw, 52px)",
-          fontWeight: 300,
-          lineHeight: 1.12,
-          color: "var(--color-text-primary)",
-          marginBottom: 12,
-        }}>
-          {interview.founderName as string}
-        </h1>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 40 }}>
-          {interview.founderRole && (
-            <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}>
-              {interview.founderRole as string}
-            </span>
-          )}
-          {interview.founderRole && restaurantName && (
-            <span style={{ color: "var(--color-border)", fontSize: 12 }}>·</span>
-          )}
-          {restaurantName && (
-            linkedReview ? (
-              <Link
-                href={`/eats/${linkedReview.slug.current}`}
-                style={{ fontSize: 13, color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 500 }}
-              >
-                {restaurantName} →
-              </Link>
-            ) : (
-              <span style={{ fontSize: 13, color: "var(--color-text-muted)", fontFamily: "var(--font-dm-sans), sans-serif" }}>
-                {restaurantName}
-              </span>
-            )
+      {/* ── Hero: Full bleed image with centred overlay text ──── */}
+      <div className="article-hero">
+        {interview.heroPhoto && (
+          <Image
+            src={urlFor(interview.heroPhoto as Record<string, unknown>).quality(90).url()}
+            alt={(interview.heroPhoto as Record<string, unknown>).alt as string ?? heroTitle}
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        )}
+        <div className="article-hero-overlay" />
+        <div className="article-hero-content">
+          <span className="article-hero-eyebrow">Into the Kitchen</span>
+          <h1 className="article-hero-title" style={{ whiteSpace: "pre-line" }}>{heroTitle}</h1>
+          {heroSubtitle && (
+            <h2 className="article-hero-subtitle">{heroSubtitle}</h2>
           )}
         </div>
       </div>
 
-      <div className="divider-full" />
-
-      {/* ── Intro Story ──────────────────────────────────────── */}
+      {/* ── Article Body ─────────────────────────────────────── */}
       {interview.introStory && (
-        <div className="interview-body" style={{ paddingTop: 48, paddingBottom: 16 }}>
-          <div className="interview-prose">
-            <PortableText value={interview.introStory as Parameters<typeof PortableText>[0]["value"]} components={proseComponents} />
-          </div>
+        <div className="article-body">
+          <PortableText
+            value={interview.introStory as Parameters<typeof PortableText>[0]["value"]}
+            components={richTextComponents}
+          />
         </div>
       )}
 
-      {/* ── Pull Quote ───────────────────────────────────────── */}
-      {interview.pullQuote && (
-        <div className="interview-body" style={{ paddingTop: 16, paddingBottom: 16 }}>
-          <blockquote className="pull-quote">
-            <span className="pull-quote-mark">&ldquo;</span>
-            <p className="pull-quote-text">{interview.pullQuote as string}</p>
-          </blockquote>
-        </div>
-      )}
-
-      {/* ── Q&A ──────────────────────────────────────────────── */}
-      {(interview.qAndA as unknown[])?.length > 0 && (
-        <div className="interview-body" style={{ paddingTop: 16, paddingBottom: 48 }}>
-          <div className="divider-full" style={{ margin: "0 0 40px" }} />
-          <div className="qa-section">
-            {(interview.qAndA as Record<string, unknown>[]).map((qa, i) => (
-              <div key={i} className="qa-block">
-                <p className="qa-question">{qa.question as string}</p>
-                <div className="qa-answer">
-                  {!!qa.answer && (
-                    <PortableText
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      value={qa.answer as any}
-                      components={answerComponents}
-                    />
-                  )}
-                </div>
+      {/* ── Quick Info ───────────────────────────────────────── */}
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(20px, 6vw, 48px) 48px" }}>
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 32, marginBottom: 40 }}>
+          <p className="text-eyebrow" style={{ marginBottom: 20 }}>Quick Info</p>
+          <div className="quick-info">
+            {!!(interview.founderName as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">In the Kitchen With</p>
+                <p className="quick-info-value">{interview.founderName as string}</p>
               </div>
-            ))}
+            )}
+            {!!(interview.founderRole as string) && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Role</p>
+                <p className="quick-info-value">{interview.founderRole as string}</p>
+              </div>
+            )}
+            {!!restaurantName && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Restaurant</p>
+                <p className="quick-info-value">{restaurantName}</p>
+              </div>
+            )}
+            {!!linkedReview?.cuisine && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Cuisine</p>
+                <p className="quick-info-value">{linkedReview.cuisine}</p>
+              </div>
+            )}
+            {!!linkedReview?.area && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Area</p>
+                <p className="quick-info-value">{linkedReview.area}</p>
+              </div>
+            )}
+            {!!linkedReview?.priceRange && (
+              <div className="quick-info-item">
+                <p className="quick-info-label">Price</p>
+                <p className="quick-info-value">{linkedReview.priceRange}</p>
+              </div>
+            )}
           </div>
-        </div>
-      )}
 
-      {/* ── Gallery ──────────────────────────────────────────── */}
-      {(interview.gallery as unknown[])?.length > 0 && (
-        <>
-          <div className="divider-full" />
-          <div className="section" style={{ paddingTop: 40, paddingBottom: 0 }}>
-            <p className="text-eyebrow" style={{ marginBottom: 18 }}>{settings?.morePhotosLabel ?? "More Photos"}</p>
-          </div>
-          <div style={{ padding: "0 28px" }}>
-            <div className="interview-gallery">
-              {(interview.gallery as Record<string, unknown>[]).map((img, i) => (
-                <div key={i} className="interview-gallery-item">
-                  <Image
-                    src={urlFor(img).width(900).height(900).quality(85).url()}
-                    alt={(img.alt as string) ?? `${interview.founderName as string} photo ${i + 1}`}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
+          {/* ── Review + Map cards ───────────────────────────── */}
+          {linkedReview && (
+            <div className="quick-info-cards" style={{ marginTop: 28 }}>
+              <Link
+                href={`/eats/${linkedReview.slug.current}`}
+                className="quick-info-map-card"
+              >
+                <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+                <div className="quick-info-map-text">
+                  <span className="quick-info-map-address">{linkedReview.name}</span>
+                  <span className="quick-info-map-cta">Read the review →</span>
                 </div>
-              ))}
+              </Link>
+              {(linkedReview.address || linkedReview.googleMapsUrl) && (
+                <a
+                  href={linkedReview.googleMapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(linkedReview.address ?? linkedReview.name)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-map-card"
+                >
+                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5"/>
+                  </svg>
+                  <div className="quick-info-map-text">
+                    {linkedReview.address && <span className="quick-info-map-address">{linkedReview.address}</span>}
+                    <span className="quick-info-map-cta">Open in Google Maps →</span>
+                  </div>
+                </a>
+              )}
             </div>
-          </div>
-        </>
-      )}
+          )}
+        </div>
 
-      {/* ── Review CTA ───────────────────────────────────────── */}
-      <div className="divider-full" />
-      <div style={{ padding: "40px 28px 48px", maxWidth: 680, margin: "0 auto" }}>
-        {linkedReview ? (
-          <>
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Read the review</p>
-            <h3 style={{ fontFamily: "var(--font-spectral), serif", fontSize: 22, fontWeight: 300, marginBottom: 18, color: "var(--color-text-primary)" }}>
-              My full review of {linkedReview.name}
-            </h3>
-            <Link
-              href={`/eats/${linkedReview.slug.current}`}
-              style={{
-                display: "inline-block",
-                background: "var(--color-dark)",
-                color: "var(--color-light)",
-                padding: "10px 20px",
-                borderRadius: 3,
-                fontSize: 10,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                fontWeight: 600,
-                marginBottom: 28,
-              }}
-            >
-              Read the review →
-            </Link>
-          </>
-        ) : null}
-        <div style={{ marginTop: linkedReview ? 0 : 0, paddingTop: linkedReview ? 28 : 0, borderTop: linkedReview ? "0.5px solid var(--color-border)" : "none" }}>
+        {/* ── Suggest CTA ──────────────────────────────────── */}
+        <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 28 }}>
           <p className="text-eyebrow" style={{ marginBottom: 8 }}>Know someone I should talk to?</p>
-          <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginBottom: 14, fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 400 }}>
+          <h3 className="text-h3" style={{ marginBottom: 8 }}>Suggest someone for Into the Kitchen</h3>
+          <p className="text-body text-muted" style={{ marginBottom: 16 }}>
             I&apos;m always looking for the next great story from Stavanger&apos;s food scene.
           </p>
-          <Link href="/suggest" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-accent)", textDecoration: "none", fontFamily: "var(--font-dm-sans), sans-serif", fontWeight: 600 }}>
-            Suggest someone for Into the Kitchen →
+          <Link
+            href="/suggest"
+            style={{
+              display: "inline-block",
+              background: "var(--color-dark)",
+              color: "var(--color-light)",
+              padding: "10px 20px",
+              borderRadius: 3,
+              fontSize: 10,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "var(--font-dm-sans)",
+              fontWeight: 600,
+            }}
+          >
+            Suggest someone →
           </Link>
         </div>
       </div>
