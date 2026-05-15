@@ -95,7 +95,7 @@ export default async function InterviewPage({ params }: PageProps) {
                   ? { ...block, _questionNumber: ++qaCount }
                   : block
               );
-            })() as Parameters<typeof PortableText>[0]["value"]}
+            })() as unknown as Parameters<typeof PortableText>[0]["value"]}
             components={richTextComponents}
           />
         </div>
