@@ -12,7 +12,7 @@ async function sendNewsletterNotification(email: string, firstName?: string) {
     },
     body: JSON.stringify({
       from: "The Stavanger List <onboarding@resend.dev>",
-      to: ["jolene.fjl@gmail.com"],
+      to: ["jo@thestavangerlist.com"],
       subject: `[TSL] New subscriber: ${firstName ? `${firstName} — ` : ""}${email}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px 0;">

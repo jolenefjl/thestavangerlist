@@ -66,7 +66,7 @@ async function sendNotificationEmail(data: {
     },
     body: JSON.stringify({
       from: "The Stavanger List <onboarding@resend.dev>",
-      to: ["jolene.fjl@gmail.com"],
+      to: ["jo@thestavangerlist.com"],
       subject: `[TSL] New ${typeLabel.toLowerCase()}: ${data.suggestionName}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px 0;">
