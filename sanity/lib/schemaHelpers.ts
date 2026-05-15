@@ -156,3 +156,63 @@ export const standardRichTextOf = [
   photoBlockThree,
   photoBlockFour,
 ];
+
+/** Q&A exchange — embeds inline in a rich text body */
+export const qaBlock = {
+  type: "object",
+  name: "qaBlock",
+  title: "💬 Q&A",
+  fields: [
+    {
+      name: "question",
+      title: "Question",
+      type: "string",
+      validation: (Rule: { required: () => unknown }) => Rule.required(),
+    },
+    {
+      name: "answer",
+      title: "Answer",
+      type: "text",
+      rows: 4,
+      description: "Press Enter for a new paragraph within the answer.",
+    },
+  ],
+  preview: {
+    select: { title: "question" },
+    prepare({ title }: { title?: string }) {
+      return { title: title ? `Q: ${title}` : "Q&A block" };
+    },
+  },
+};
+
+/** Large pull quote — embeds inline in a rich text body */
+export const pullQuote = {
+  type: "object",
+  name: "pullQuote",
+  title: "❝ Pull Quote",
+  fields: [
+    {
+      name: "text",
+      title: "Quote",
+      type: "text",
+      rows: 3,
+    },
+  ],
+  preview: {
+    select: { title: "text" },
+    prepare({ title }: { title?: string }) {
+      return { title: title ? `" ${title}` : "Pull quote" };
+    },
+  },
+};
+
+/** Extended rich text for Into the Kitchen — adds Q&A blocks and pull quotes */
+export const interviewRichTextOf = [
+  standardBlock,
+  qaBlock,
+  pullQuote,
+  photoBlockSingle,
+  photoBlockTwo,
+  photoBlockThree,
+  photoBlockFour,
+];

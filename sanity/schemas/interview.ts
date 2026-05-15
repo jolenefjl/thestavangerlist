@@ -1,5 +1,5 @@
 import { defineType, defineField } from "sanity";
-import { standardRichTextOf } from "../lib/schemaHelpers";
+import { interviewRichTextOf } from "../lib/schemaHelpers";
 
 export const interview = defineType({
   name: "interview",
@@ -69,44 +69,10 @@ export const interview = defineType({
     // ── Content ───────────────────────────────────────────────
     defineField({
       name: "introStory",
-      title: "Intro Story",
+      title: "Body Copy",
       type: "array",
-      of: standardRichTextOf,
-    }),
-    defineField({
-      name: "pullQuote",
-      title: "Pull Quote",
-      type: "string",
-      description: "One standout quote — displayed large on the page",
-    }),
-    defineField({
-      name: "qAndA",
-      title: "Q&A",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          name: "qaBlock",
-          title: "Q&A Block",
-          fields: [
-            defineField({
-              name: "question",
-              title: "Question",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: "answer",
-              title: "Answer",
-              type: "array",
-              of: standardRichTextOf,
-            }),
-          ],
-          preview: {
-            select: { title: "question" },
-          },
-        },
-      ],
+      of: interviewRichTextOf,
+      description: "Write freely — mix paragraphs, Q&A exchanges, pull quotes, and photos in any order using the + button.",
     }),
     defineField({
       name: "gallery",

@@ -191,5 +191,28 @@ export const richTextComponents: PortableTextComponents = {
         )}
       </figure>
     ),
+
+    // ── Interview block types ────────────────────────────────────
+    qaBlock: ({ value }: { value: { question?: string; answer?: string } }) => (
+      <div className="article-body-text qa-block">
+        {value.question && <p className="qa-question">{value.question}</p>}
+        {value.answer && (
+          <div className="qa-answer">
+            {value.answer.split("\n").filter(Boolean).map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    ),
+
+    pullQuote: ({ value }: { value: { text?: string } }) => (
+      value.text ? (
+        <blockquote className="article-body-text pull-quote">
+          <span className="pull-quote-mark">&ldquo;</span>
+          <p className="pull-quote-text">{value.text}</p>
+        </blockquote>
+      ) : null
+    ),
   },
 };
