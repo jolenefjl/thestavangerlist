@@ -54,25 +54,23 @@ export const richTextComponents: PortableTextComponents = {
       </p>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2
-        style={{
-          display: "block",
-          maxWidth: "680px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "64px",
-          marginBottom: "20px",
-          paddingLeft: "clamp(20px, 6vw, 48px)",
-          paddingRight: "clamp(20px, 6vw, 48px)",
-          fontFamily: "var(--font-spectral), serif",
-          fontSize: "27px",
-          fontWeight: 300,
-          color: "var(--color-text-primary)",
-          lineHeight: 1.15,
-        }}
-      >
-        {children}
-      </h2>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "64px", marginBottom: "20px" }}>
+        <h2
+          style={{
+            width: "100%",
+            maxWidth: "680px",
+            paddingLeft: "clamp(20px, 6vw, 48px)",
+            paddingRight: "clamp(20px, 6vw, 48px)",
+            fontFamily: "var(--font-spectral), serif",
+            fontSize: "27px",
+            fontWeight: 300,
+            color: "var(--color-text-primary)",
+            lineHeight: 1.15,
+          }}
+        >
+          {children}
+        </h2>
+      </div>
     ),
   },
   list: {
