@@ -58,7 +58,8 @@ async function sendNotificationEmail(data: {
     )
     .join("");
 
-  await fetch("https://api.resend.com/emails", {
+  console.log("Resend: attempting to send to jo@thestavangerlist.com, key prefix:", resendKey.slice(0, 8));
+  const resendRes = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${resendKey}`,
@@ -87,6 +88,8 @@ async function sendNotificationEmail(data: {
       `,
     }),
   });
+  const resendBody = await resendRes.json().catch(() => ({}));
+  console.log("Resend response:", resendRes.status, JSON.stringify(resendBody));
 }
 
 async function subscribeToKit(email: string) {
