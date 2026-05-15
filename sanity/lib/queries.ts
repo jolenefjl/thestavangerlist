@@ -162,6 +162,7 @@ export const allInterviewsQuery = groq`
   *[_type == "interview"] | order(publishedAt desc) {
     _id,
     title,
+    subtitle,
     founderName,
     founderRole,
     restaurantName,
