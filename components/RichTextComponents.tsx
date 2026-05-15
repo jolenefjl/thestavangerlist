@@ -55,15 +55,10 @@ export const richTextComponents: PortableTextComponents = {
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
       <h2
+        className="article-body-text"
         style={{
-          display: "block",
-          maxWidth: 680,
-          marginLeft: "auto",
-          marginRight: "auto",
           marginTop: 64,
           marginBottom: 20,
-          paddingLeft: "clamp(20px, 6vw, 48px)",
-          paddingRight: "clamp(20px, 6vw, 48px)",
           fontFamily: "var(--font-spectral), serif",
           fontSize: 27,
           fontWeight: 300,
