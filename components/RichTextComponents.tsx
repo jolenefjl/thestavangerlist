@@ -54,23 +54,7 @@ export const richTextComponents: PortableTextComponents = {
       </p>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "64px", marginBottom: "20px" }}>
-        <h2
-          style={{
-            width: "100%",
-            maxWidth: "680px",
-            paddingLeft: "clamp(20px, 6vw, 48px)",
-            paddingRight: "clamp(20px, 6vw, 48px)",
-            fontFamily: "var(--font-spectral), serif",
-            fontSize: "27px",
-            fontWeight: 300,
-            color: "var(--color-text-primary)",
-            lineHeight: 1.15,
-          }}
-        >
-          {children}
-        </h2>
-      </div>
+      <h2 className="article-h2">{children}</h2>
     ),
   },
   list: {
@@ -196,20 +180,37 @@ export const richTextComponents: PortableTextComponents = {
     ),
 
     // ── Interview block types ────────────────────────────────────
-    qaBlock: ({ value }: { value: { question?: string; answer?: string } }) => (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div className="qa-block" style={{ width: "100%", maxWidth: "680px", paddingLeft: "clamp(20px, 6vw, 48px)", paddingRight: "clamp(20px, 6vw, 48px)" }}>
-          {value.question && <p className="qa-question">{value.question}</p>}
-          {value.answer && (
-            <div className="qa-answer">
-              {value.answer.split("\n").filter(Boolean).map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
-          )}
+    qaBlock: ({ value }: { value: { question?: string; answer?: string; eyebrow?: string; _questionNumber?: number } }) => {
+      const label = value.eyebrow
+        || (value._questionNumber
+          ? `Question ${String(value._questionNumber).padStart(2, "0")}`
+          : "Q&A");
+      return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <section
+            className="qa-block"
+            style={{
+              width: "100%",
+              maxWidth: "680px",
+              paddingLeft: "clamp(20px, 6vw, 48px)",
+              paddingRight: "clamp(20px, 6vw, 48px)",
+            }}
+          >
+            <p className="qa__eyebrow">{label}</p>
+            {value.question && (
+              <h3 className="qa__question">{value.question}</h3>
+            )}
+            {value.answer && (
+              <div className="qa__answer">
+                {value.answer.split("\n").filter(Boolean).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            )}
+          </section>
         </div>
-      </div>
-    ),
+      );
+    },
 
     pullQuote: ({ value }: { value: { text?: string } }) => (
       value.text ? (

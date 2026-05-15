@@ -665,26 +665,47 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
-.qa-section { margin: 48px 0; }
-.qa-block   { margin-bottom: 36px; }
-.qa-question {
-  font-size: 10px;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 600;
-  margin-bottom: 10px;
+/* ── Q&A blocks (Into the Kitchen) ─────────────────────── */
+.qa-block {
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid #d4c4ab;
 }
-.qa-answer {
-  font-size: 15px;
+.qa__eyebrow {
   font-family: var(--font-dm-sans), sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c2553a;
+  margin: 0 0 14px;
+  line-height: 1;
+}
+.qa__question {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #2a1f17;
+  margin: 0 0 26px;
+  text-wrap: pretty;
+}
+.qa__answer {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.8;
   color: #3F3A36;
 }
-.qa-answer p { margin-bottom: 12px; }
-.qa-answer p:last-child { margin-bottom: 0; }
+.qa__answer p { margin-bottom: 16px; }
+.qa__answer p:last-child { margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .qa__question { font-size: 26px; line-height: 1.22; }
+  .qa-block { padding-top: 26px; margin-top: 30px; }
+}
 
 .interview-gallery {
   display: grid;
@@ -1086,6 +1107,22 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
   padding-left: clamp(20px, 6vw, 48px);
   padding-right: clamp(20px, 6vw, 48px);
+}
+
+.article-h2 {
+  display: block;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 64px;
+  margin-bottom: 20px;
+  padding-left: clamp(20px, 6vw, 48px);
+  padding-right: clamp(20px, 6vw, 48px);
+  font-family: var(--font-spectral), Georgia, serif;
+  font-size: 27px;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  line-height: 1.15;
 }
 
 /* ── Photo Blocks ──────────────────────────────────────── */

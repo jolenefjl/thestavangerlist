@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Spectral, Public_Sans } from "next/font/google";
+import { Spectral, Public_Sans, Cormorant_Garamond } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { client } from "@/sanity/lib/client";
@@ -18,6 +18,13 @@ const dmSans = Public_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-dm-sans",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500"],
+  style: ["italic"],
+  variable: "--font-cormorant",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -65,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spectral.variable} ${dmSans.variable}`}
+      className={`${spectral.variable} ${dmSans.variable} ${cormorant.variable}`}
     >
       <body className="min-h-full flex flex-col">
         {children}

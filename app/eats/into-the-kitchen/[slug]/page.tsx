@@ -88,7 +88,14 @@ export default async function InterviewPage({ params }: PageProps) {
       {interview.introStory && (
         <div className="article-body">
           <PortableText
-            value={interview.introStory as Parameters<typeof PortableText>[0]["value"]}
+            value={(() => {
+              let qaCount = 0;
+              return (interview.introStory as Record<string, unknown>[]).map((block) =>
+                block._type === "qaBlock"
+                  ? { ...block, _questionNumber: ++qaCount }
+                  : block
+              );
+            })() as Parameters<typeof PortableText>[0]["value"]}
             components={richTextComponents}
           />
         </div>

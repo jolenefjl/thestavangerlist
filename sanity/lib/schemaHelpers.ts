@@ -164,9 +164,16 @@ export const qaBlock = {
   title: "💬 Q&A",
   fields: [
     {
+      name: "eyebrow",
+      title: "Label (optional)",
+      type: "string",
+      description: "Leave blank to auto-number (Question 01, 02…). Or use a theme label like 'On rejection' or 'On the move to Bryne'.",
+    },
+    {
       name: "question",
       title: "Question",
       type: "string",
+      description: "Write in sentence case. Aim for one or two lines — shorter questions look best.",
       validation: (Rule: { required: () => unknown }) => Rule.required(),
     },
     {
