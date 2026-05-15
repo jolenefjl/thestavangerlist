@@ -20,7 +20,7 @@ export default function SuggestInterviewPage() {
           whyLabel="Why they'd make a great story"
           whyPlaceholder="What makes their story worth telling?"
           emailHint="optional — if you want to be kept in the loop"
-          successMessage="Thanks — I'll look into it."
+          successMessage="Thanks for the tip! Looking forward to checking it out :)"
         />
       </div>
       <Footer />

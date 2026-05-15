@@ -15,7 +15,7 @@ export default function SuggestPlayPage() {
           locationLabel="Location"
           locationPlaceholder="e.g. Stavanger Sentrum, Sandnes"
           whyLabel="Why you recommend it"
-          successMessage="Thanks for the suggestion — I'll check it out."
+          successMessage="Thanks for the tip! Looking forward to checking it out :)"
         />
       </div>
       <Footer />

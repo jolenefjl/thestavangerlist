@@ -822,7 +822,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Suggest form */
 .suggest-form     { max-width: 520px; }
 .suggest-field    { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
-.suggest-label    { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; color: var(--color-text-hint); }
+.suggest-label    { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-dm-sans), sans-serif; color: #6B6259; }
 .suggest-input    { font-family: var(--font-dm-sans), sans-serif; font-size: 14px; font-weight: 400; color: #3F3A36; background: transparent; border: none; border-bottom: 0.5px solid var(--color-border); padding: 8px 0; width: 100%; outline: none; transition: border-color 0.15s; }
 .suggest-input:focus { border-bottom-color: var(--color-accent); }
 .suggest-textarea { resize: vertical; min-height: 100px; }

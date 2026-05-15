@@ -124,7 +124,7 @@ export default function SuggestForm({
 
       <div className="suggest-field">
         <label className="suggest-label" htmlFor="suggest-email">
-          Your email <span style={{ opacity: 0.5 }}>({emailHint})</span>
+          Your email <span style={{ color: "#8C857F" }}>({emailHint})</span>
         </label>
         <input
           id="suggest-email"
@@ -145,7 +145,7 @@ export default function SuggestForm({
               onChange={(e) => setSubscribe(e.target.checked)}
               style={{ width: 14, height: 14, accentColor: "var(--color-accent)", cursor: "pointer", flexShrink: 0 }}
             />
-            <span style={{ fontSize: 12, fontFamily: "var(--font-dm-sans)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+            <span style={{ fontSize: 12, fontFamily: "var(--font-dm-sans)", color: "#6B6259", lineHeight: 1.5 }}>
               Also subscribe me to The Stavanger List newsletter
             </span>
           </label>
