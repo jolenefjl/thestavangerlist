@@ -612,7 +612,7 @@ h1, h2, h3, h4, h5, h6 {
 .interview-card-body       { padding: 16px; }
 .interview-card-restaurant { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px; font-family: var(--font-dm-sans), sans-serif; font-weight: 500; }
 .interview-card-name       { font-family: var(--font-spectral), serif; font-size: 18px; font-weight: 400; color: #1F1B18; margin-bottom: 4px; line-height: 1.25; }
-.interview-card-role       { font-size: 11px; color: #8C857F; margin-bottom: 10px; font-family: var(--font-dm-sans), sans-serif; }
+.interview-card-role       { font-size: 13px; color: #8C857F; margin-bottom: 10px; font-family: var(--font-dm-sans), sans-serif; line-height: 1.5; }
 .interview-card-excerpt    { font-size: 13px; color: #8C857F; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-family: var(--font-dm-sans), sans-serif; }
 
 /* Interview page */
