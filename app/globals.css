@@ -315,6 +315,9 @@ h1, h2, h3, h4, h5, h6 {
 .rating-dots { display: flex; gap: 1px; align-items: center; }
 .rating-dot  { font-size: 14px; line-height: 1; color: var(--color-accent); }
 .rating-dot.empty { color: var(--color-accent-light); }
+.rating-dot-half { position: relative; display: inline-block; font-size: 14px; line-height: 1; width: 1em; }
+.rating-dot-half-fill  { position: absolute; left: 0; top: 0; width: 50%; overflow: hidden; color: var(--color-accent); }
+.rating-dot-half-empty { color: var(--color-accent-light); }
 
 /* Lists index page rows */
 .list-row {
