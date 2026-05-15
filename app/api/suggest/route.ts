@@ -89,9 +89,21 @@ async function sendNotificationEmail(data: {
   });
 }
 
+async function subscribeToKit(email: string) {
+  const apiSecret = process.env.KIT_API_SECRET;
+  const formId = process.env.KIT_FORM_ID;
+  if (!apiSecret || !formId) return;
+
+  await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ api_secret: apiSecret, email }),
+  });
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { suggestionName, location, whyRecommend, submitterEmail, type } = body;
+  const { suggestionName, location, whyRecommend, submitterEmail, subscribeToNewsletter, type } = body;
 
   const docType = type ?? "experience";
   let savedToSanity = false;
@@ -121,6 +133,11 @@ export async function POST(req: NextRequest) {
     emailSent = true;
   } catch (err) {
     console.error("Suggest: email notification failed:", err);
+  }
+
+  // ── Kit newsletter opt-in ────────────────────────────────
+  if (subscribeToNewsletter && submitterEmail) {
+    subscribeToKit(submitterEmail).catch(console.error);
   }
 
   if (savedToSanity || emailSent) {

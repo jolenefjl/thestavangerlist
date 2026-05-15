@@ -9,6 +9,7 @@ export default function SuggestPage() {
   const [location, setLocation] = useState("");
   const [whyRecommend, setWhyRecommend] = useState("");
   const [email, setEmail] = useState("");
+  const [subscribe, setSubscribe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -27,6 +28,7 @@ export default function SuggestPage() {
           location,
           whyRecommend,
           submitterEmail: email || undefined,
+          subscribeToNewsletter: subscribe,
           type: "experience",
         }),
       });
@@ -41,6 +43,7 @@ export default function SuggestPage() {
       setLocation("");
       setWhyRecommend("");
       setEmail("");
+      setSubscribe(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -112,6 +115,22 @@ export default function SuggestPage() {
                 autoComplete="email"
               />
             </div>
+
+            {!!email && (
+              <div style={{ marginBottom: 28, marginTop: -8 }}>
+                <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+                  <input
+                    type="checkbox"
+                    checked={subscribe}
+                    onChange={(e) => setSubscribe(e.target.checked)}
+                    style={{ width: 14, height: 14, accentColor: "var(--color-accent)", cursor: "pointer", flexShrink: 0 }}
+                  />
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-dm-sans)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+                    Also subscribe me to The Stavanger List newsletter
+                  </span>
+                </label>
+              </div>
+            )}
 
             {!!error && (
               <p style={{ fontSize: 12, color: "var(--color-accent)", fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}>
