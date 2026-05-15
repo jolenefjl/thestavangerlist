@@ -182,7 +182,7 @@ export default async function InterviewPage({ params }: PageProps) {
             I&apos;m always looking for the next great story from Stavanger&apos;s food scene.
           </p>
           <Link
-            href="/suggest"
+            href="/eats/into-the-kitchen/suggest"
             style={{
               display: "inline-block",
               background: "var(--color-dark)",
