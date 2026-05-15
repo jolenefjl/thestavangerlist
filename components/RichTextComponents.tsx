@@ -197,24 +197,28 @@ export const richTextComponents: PortableTextComponents = {
 
     // ── Interview block types ────────────────────────────────────
     qaBlock: ({ value }: { value: { question?: string; answer?: string } }) => (
-      <div className="article-body-text qa-block">
-        {value.question && <p className="qa-question">{value.question}</p>}
-        {value.answer && (
-          <div className="qa-answer">
-            {value.answer.split("\n").filter(Boolean).map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
-        )}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="qa-block" style={{ width: "100%", maxWidth: "680px", paddingLeft: "clamp(20px, 6vw, 48px)", paddingRight: "clamp(20px, 6vw, 48px)" }}>
+          {value.question && <p className="qa-question">{value.question}</p>}
+          {value.answer && (
+            <div className="qa-answer">
+              {value.answer.split("\n").filter(Boolean).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     ),
 
     pullQuote: ({ value }: { value: { text?: string } }) => (
       value.text ? (
-        <blockquote className="article-body-text pull-quote">
-          <span className="pull-quote-mark">&ldquo;</span>
-          <p className="pull-quote-text">{value.text}</p>
-        </blockquote>
+        <div style={{ display: "flex", justifyContent: "center", margin: "48px 0" }}>
+          <blockquote className="pull-quote" style={{ width: "100%", maxWidth: "680px", paddingLeft: "clamp(20px, 6vw, 48px)", paddingRight: "clamp(20px, 6vw, 48px)", margin: 0 }}>
+            <span className="pull-quote-mark">&ldquo;</span>
+            <p className="pull-quote-text">{value.text}</p>
+          </blockquote>
+        </div>
       ) : null
     ),
   },
