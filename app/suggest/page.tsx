@@ -60,9 +60,10 @@ export default function SuggestRestaurantPage() {
         <h1 className="text-h1" style={{ marginBottom: 28 }}>Suggest a restaurant</h1>
 
         {success ? (
-          <div style={{ maxWidth: 520 }}>
+          <div style={{ maxWidth: 520, borderTop: "0.5px solid var(--color-border)", paddingTop: 28 }}>
+            <p className="text-eyebrow" style={{ marginBottom: 10, color: "var(--color-accent)" }}>Sent</p>
             <p style={{ fontSize: 15, fontFamily: "var(--font-dm-sans)", fontWeight: 400, color: "var(--color-text-primary)", lineHeight: 1.75 }}>
-              Thanks for the suggestion. I will check it out.
+              Thanks for the suggestion — I&apos;ll check it out.
             </p>
           </div>
         ) : (
@@ -133,7 +134,7 @@ export default function SuggestRestaurantPage() {
             )}
 
             {!!error && (
-              <p style={{ fontSize: 12, color: "var(--color-accent)", fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}>
+              <p style={{ fontSize: 13, color: "#c0392b", fontFamily: "var(--font-dm-sans)", fontWeight: 400, marginBottom: 12, lineHeight: 1.5 }}>
                 {error}
               </p>
             )}
