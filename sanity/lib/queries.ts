@@ -169,7 +169,6 @@ export const allInterviewsQuery = groq`
     linkedReview-> { name, slug },
     slug,
     heroPhoto,
-    introStory,
     publishedAt,
     featured
   }

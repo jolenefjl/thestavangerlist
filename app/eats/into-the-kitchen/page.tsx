@@ -9,13 +9,6 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
-function extractExcerpt(blocks: unknown[], maxLength = 160): string {
-  if (!Array.isArray(blocks) || !blocks.length) return "";
-  const first = blocks.find((b: unknown) => (b as Record<string, unknown>)._type === "block") as Record<string, unknown> | undefined;
-  if (!first) return "";
-  const text = (first.children as { text?: string }[] ?? []).map((c) => c.text ?? "").join("");
-  return text.length > maxLength ? text.slice(0, maxLength).trim() + "…" : text;
-}
 
 export default async function IntoTheKitchenPage() {
   const [interviews, settings] = await Promise.all([
@@ -53,7 +46,6 @@ export default async function IntoTheKitchenPage() {
               const restaurant = (interview.linkedReview as Record<string, unknown> | null)?.name as string
                 ?? interview.restaurantName as string
                 ?? "";
-              const excerpt = extractExcerpt(interview.introStory as unknown[]);
 
               return (
                 <Link key={interview._id as string} href={`/eats/into-the-kitchen/${slug}`} className="interview-card">
@@ -78,7 +70,6 @@ export default async function IntoTheKitchenPage() {
                         {(interview.subtitle as string) || String(interview.founderRole)}
                       </p>
                     )}
-                    {excerpt && <p className="interview-card-excerpt">{excerpt}</p>}
                   </div>
                 </Link>
               );
