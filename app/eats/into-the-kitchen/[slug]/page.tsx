@@ -209,23 +209,23 @@ export default async function InterviewPage({ params }: PageProps) {
                   </div>
                 </a>
               )}
-              {(linkedReview?.websiteUrl || (interview.websiteUrl as string | null)) && (
-                <a
-                  href={(linkedReview?.websiteUrl ?? interview.websiteUrl) as string}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-info-map-card"
-                >
-                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                  </svg>
-                  <div className="quick-info-map-text">
-                    <span className="quick-info-map-address">{linkedReview?.name ?? restaurantName}</span>
-                    <span className="quick-info-map-cta">Visit website →</span>
-                  </div>
-                </a>
-              )}
+              {(linkedReview?.websiteUrl || (interview.websiteUrl as string | null)) && (() => {
+                const url = (linkedReview?.websiteUrl ?? interview.websiteUrl) as string;
+                let domain = url;
+                try { domain = new URL(url).hostname.replace(/^www\./, ""); } catch {}
+                return (
+                  <a href={url} target="_blank" rel="noopener noreferrer" className="quick-info-map-card">
+                    <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <div className="quick-info-map-text">
+                      <span className="quick-info-map-address">{domain}</span>
+                      <span className="quick-info-map-cta">Visit website →</span>
+                    </div>
+                  </a>
+                );
+              })()}
             </div>
           )}
         </div>
