@@ -187,6 +187,9 @@ export const interviewBySlugQuery = groq`
     heroPhoto,
     introStory,
     publishedAt,
+    seoTitle,
+    seoDescription,
+    ogImage,
   }
 `;
 

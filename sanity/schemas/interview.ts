@@ -103,6 +103,28 @@ export const interview = defineType({
       type: "boolean",
       initialValue: false,
     }),
+
+    // ── SEO overrides ─────────────────────────────────────────
+    defineField({
+      name: "seoTitle",
+      title: "SEO Title",
+      type: "string",
+      description: "Overrides the page title in Google results and browser tabs. Leave blank to use the article title automatically. Keep under 60 characters.",
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO Description",
+      type: "text",
+      rows: 3,
+      description: "Overrides the description shown in Google results and link previews. Leave blank to use the auto-generated description. Aim for 120–155 characters.",
+    }),
+    defineField({
+      name: "ogImage",
+      title: "Share Image",
+      type: "image",
+      description: "Overrides the image shown when the link is shared on social media or in messages (iMessage, WhatsApp, Instagram, LinkedIn etc). Leave blank to use the hero photo automatically. Recommended: 1200×630px landscape crop.",
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     select: {

@@ -26,13 +26,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ?? (interview.founderName as string);
   const restaurant = (interview.linkedReview as Record<string, unknown> | null)?.name as string
     ?? interview.restaurantName as string ?? "";
-  const title = `${pageTitle} — The Stavanger List`;
-  const description = restaurant
+
+  // Auto-generated fallbacks
+  const autoTitle = `${pageTitle} — The Stavanger List`;
+  const autoDescription = restaurant
     ? `Into the Kitchen with ${interview.founderName as string} of ${restaurant}.`
     : `Into the Kitchen with ${interview.founderName as string}.`;
 
-  const ogImageUrl: string | null = interview.heroPhoto
-    ? urlFor(interview.heroPhoto as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+  // Use manual overrides from Sanity if set, otherwise fall back to auto values
+  const title = (interview.seoTitle as string | null)
+    ? `${interview.seoTitle as string} — The Stavanger List`
+    : autoTitle;
+  const description = (interview.seoDescription as string | null) ?? autoDescription;
+
+  // ogImage override → hero photo → null
+  const ogImageSource = interview.ogImage ?? interview.heroPhoto;
+  const ogImageUrl: string | null = ogImageSource
+    ? urlFor(ogImageSource as Record<string, unknown>).width(1200).height(630).fit("crop").url()
     : null;
 
   return {
