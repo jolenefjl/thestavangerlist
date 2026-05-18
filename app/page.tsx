@@ -79,9 +79,13 @@ export default async function Home() {
       {latestInterviews?.length > 0 && (
         <div className="section-band">
           <section className="hp-section hp-section-padded">
-            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Into the Kitchen</p>
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>
+              {settings?.homepageKitchenEyebrow ?? "Into the Kitchen"}
+            </p>
             <div className="section-header">
-              <h2 className="section-title">Behind the plates</h2>
+              <h2 className="section-title">
+                {settings?.homepageKitchenTitle ?? "Behind the plates"}
+              </h2>
               <Link href="/eats/into-the-kitchen" className="section-link">View all →</Link>
             </div>
             <div className="card-grid">

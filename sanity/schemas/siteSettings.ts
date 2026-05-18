@@ -189,6 +189,22 @@ export const siteSettings = defineType({
       description: "Choose up to 6 experiences to feature in the Play section on the homepage",
     }),
 
+    // ── Into the Kitchen Section ──────────────────────────────
+    defineField({
+      name: "homepageKitchenEyebrow",
+      title: "Homepage — Into the Kitchen Eyebrow",
+      type: "string",
+      initialValue: "Into the Kitchen",
+      description: "Small label above the section heading (e.g. 'Into the Kitchen')",
+    }),
+    defineField({
+      name: "homepageKitchenTitle",
+      title: "Homepage — Into the Kitchen Section Heading",
+      type: "string",
+      initialValue: "Behind the plates",
+      description: "Large heading for the interview section on the homepage",
+    }),
+
     // ── Stavanger Lists Section ───────────────────────────────
     defineField({
       name: "homepageListsTitle",

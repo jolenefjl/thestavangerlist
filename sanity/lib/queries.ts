@@ -77,6 +77,8 @@ export const siteSettingsQuery = groq`
     instagramUrl,
     tiktokUrl,
     homepagePlayTitle,
+    homepageKitchenEyebrow,
+    homepageKitchenTitle,
     homepageListsTitle,
     featuredReviews[]-> {
       ${reviewFields}
