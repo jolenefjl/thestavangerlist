@@ -89,14 +89,15 @@ export const siteSettingsQuery = groq`
     featuredCarouselItems[]-> {
       _type,
       _id,
-      "title": coalesce(name, title),
-      "subtitle": subtitle,
+      "title": coalesce(title, name, founderName),
+      "subtitle": coalesce(subtitle, founderRole),
       slug,
-      heroImage,
+      "heroImage": coalesce(heroImage, heroPhoto),
       "tag": select(
         _type == "review" => "STAVANGER EATS",
         _type == "experience" => "STAVANGER PLAY",
         _type == "topList" => "STAVANGER LISTS",
+        _type == "interview" => "INTO THE KITCHEN",
         "FEATURED"
       )
     },

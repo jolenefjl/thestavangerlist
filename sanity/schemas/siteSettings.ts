@@ -167,7 +167,7 @@ export const siteSettings = defineType({
       name: "featuredCarouselItems",
       title: "Homepage — Featured Carousel",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "review" }, { type: "experience" }, { type: "topList" }] }],
+      of: [{ type: "reference", to: [{ type: "review" }, { type: "experience" }, { type: "topList" }, { type: "interview" }] }],
       validation: (Rule) => Rule.max(6),
       description: "Choose 3–6 items from any content type. Drag to reorder. Each slide uses the item's hero image automatically.",
     }),

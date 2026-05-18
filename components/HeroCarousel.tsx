@@ -19,6 +19,7 @@ function getHref(item: CarouselItem): string {
   if (item._type === "review") return `/eats/${item.slug.current}`;
   if (item._type === "experience") return `/play/${item.slug.current}`;
   if (item._type === "topList") return `/lists/${item.slug.current}`;
+  if (item._type === "interview") return `/eats/into-the-kitchen/${item.slug.current}`;
   return "/";
 }
 
