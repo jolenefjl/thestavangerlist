@@ -157,6 +157,22 @@ export const reviewBySlugQuery = groq`
   }
 `;
 
+// Into the Kitchen — latest 3 for homepage
+export const latestInterviewsQuery = groq`
+  *[_type == "interview"] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    subtitle,
+    founderName,
+    founderRole,
+    restaurantName,
+    linkedReview-> { name, slug },
+    slug,
+    heroPhoto,
+    publishedAt,
+  }
+`;
+
 // Into the Kitchen — interview index
 export const allInterviewsQuery = groq`
   *[_type == "interview"] | order(publishedAt desc) {

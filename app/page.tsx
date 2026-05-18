@@ -5,12 +5,14 @@ import { client } from "@/sanity/lib/client";
 import {
   siteSettingsQuery,
   latestReviewsQuery,
+  latestInterviewsQuery,
   featuredExperiencesQuery,
   latestListsQuery,
 } from "@/sanity/lib/queries";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReviewCard from "@/components/ReviewCard";
+import InterviewCard from "@/components/InterviewCard";
 import ExperienceCard from "@/components/ExperienceCard";
 import ListCard from "@/components/ListCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
@@ -18,10 +20,11 @@ import HeroCarousel from "@/components/HeroCarousel";
 import type { CarouselItem } from "@/components/HeroCarousel";
 
 export default async function Home() {
-  const [settings, latestReviews, featuredExperiencesFallback, latestListsFallback] =
+  const [settings, latestReviews, latestInterviews, featuredExperiencesFallback, latestListsFallback] =
     await Promise.all([
       client.fetch(siteSettingsQuery),
       client.fetch(latestReviewsQuery),
+      client.fetch(latestInterviewsQuery),
       client.fetch(featuredExperiencesQuery),
       client.fetch(latestListsQuery),
     ]);
@@ -50,7 +53,6 @@ export default async function Home() {
         <HeroCarousel items={carouselItems} />
       )}
 
-
       {/* ── Stavanger Eats — Latest Reviews ──────────────────── */}
       {latestReviews?.length > 0 && (
         <section className="hp-section hp-section-padded">
@@ -71,6 +73,24 @@ export default async function Home() {
             ))}
           </div>
         </section>
+      )}
+
+      {/* ── Into the Kitchen — Latest Interviews ─────────────── */}
+      {latestInterviews?.length > 0 && (
+        <div className="section-band">
+          <section className="hp-section hp-section-padded">
+            <p className="text-eyebrow" style={{ marginBottom: 10 }}>Into the Kitchen</p>
+            <div className="section-header">
+              <h2 className="section-title">Behind the plates</h2>
+              <Link href="/eats/into-the-kitchen" className="section-link">View all →</Link>
+            </div>
+            <div className="card-grid">
+              {(latestInterviews as Parameters<typeof InterviewCard>[0]["interview"][]).map((interview) => (
+                <InterviewCard key={interview._id} interview={interview} />
+              ))}
+            </div>
+          </section>
+        </div>
       )}
 
       {/* ── Stavanger Play — Featured Experiences ─────────────── */}

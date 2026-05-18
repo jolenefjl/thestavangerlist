@@ -1,12 +1,10 @@
 export const dynamic = "force-dynamic";
 
-import Link from "next/link";
-import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { allInterviewsQuery, siteSettingsQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import InterviewCard from "@/components/InterviewCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 
@@ -41,38 +39,9 @@ export default async function IntoTheKitchenPage() {
           </div>
         ) : (
           <div className="card-grid">
-            {interviews.map((interview: Record<string, unknown>) => {
-              const slug = (interview.slug as { current: string }).current;
-              const restaurant = (interview.linkedReview as Record<string, unknown> | null)?.name as string
-                ?? interview.restaurantName as string
-                ?? "";
-
-              return (
-                <Link key={interview._id as string} href={`/eats/into-the-kitchen/${slug}`} className="interview-card">
-                  {interview.heroPhoto ? (
-                    <Image
-                      src={urlFor(interview.heroPhoto).width(600).height(560).url()}
-                      alt={(interview.heroPhoto as Record<string, unknown>).alt as string ?? interview.founderName as string}
-                      width={600}
-                      height={560}
-                      className="interview-card-img"
-                    />
-                  ) : (
-                    <div className="interview-card-img" />
-                  )}
-                  <div className="interview-card-body">
-                    <p className="interview-card-name">
-                      {(interview.title as string) || (interview.founderName as string)}
-                    </p>
-                    {!!(interview.subtitle || interview.founderRole) && (
-                      <p className="interview-card-role">
-                        {(interview.subtitle as string) || String(interview.founderRole)}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
+            {(interviews as Parameters<typeof InterviewCard>[0]["interview"][]).map((interview) => (
+              <InterviewCard key={interview._id} interview={interview} />
+            ))}
           </div>
         )}
       </section>
