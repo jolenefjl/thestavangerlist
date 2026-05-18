@@ -28,10 +28,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ?? interview.restaurantName as string ?? "";
   const title = `${pageTitle} — The Stavanger List`;
   const description = restaurant
-    ? `Into the Kitchen with ${interview.founderName as string}${restaurant ? ` of ${restaurant}` : ""}.`
+    ? `Into the Kitchen with ${interview.founderName as string} of ${restaurant}.`
     : `Into the Kitchen with ${interview.founderName as string}.`;
 
-  return { title, description };
+  const ogImageUrl: string | null = interview.heroPhoto
+    ? urlFor(interview.heroPhoto as Record<string, unknown>).width(1200).height(630).fit("crop").url()
+    : null;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(ogImageUrl && {
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: pageTitle }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+  };
 }
 
 export default async function InterviewPage({ params }: PageProps) {
