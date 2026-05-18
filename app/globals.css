@@ -1157,10 +1157,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 640px) {
-  .photo-block-grid-2,
-  .photo-block-grid-3,
-  .photo-block-grid-4 { grid-template-columns: 1fr; }
-  .photo-block-img-wrap-portrait { aspect-ratio: 4 / 3; }
+  .photo-block { padding-left: 12px; padding-right: 12px; }
+  .photo-block-grid-2 { gap: 4px; }
+  .photo-block-grid-3 { gap: 4px; }
+  .photo-block-grid-4 { gap: 4px; }
 }
 
 /* ── List card eyebrow ─────────────────────────────────── */
