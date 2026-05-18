@@ -104,6 +104,13 @@ export const interview = defineType({
       initialValue: false,
     }),
 
+    defineField({
+      name: "websiteUrl",
+      title: "Restaurant Website URL",
+      type: "url",
+      description: "Only needed if this interview has no linked review, or if you want to override the review's website link.",
+    }),
+
     // ── SEO overrides ─────────────────────────────────────────
     defineField({
       name: "seoTitle",

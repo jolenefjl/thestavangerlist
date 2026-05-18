@@ -174,23 +174,25 @@ export default async function InterviewPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* ── Review + Map cards ───────────────────────────── */}
-          {linkedReview && (
+          {/* ── Review + Map + Website cards ─────────────────── */}
+          {(linkedReview || interview.websiteUrl) && (
             <div className="quick-info-cards" style={{ marginTop: 28 }}>
-              <Link
-                href={`/eats/${linkedReview.slug.current}`}
-                className="quick-info-map-card"
-              >
-                <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
-                <div className="quick-info-map-text">
-                  <span className="quick-info-map-address">{linkedReview.name}</span>
-                  <span className="quick-info-map-cta">Read the review →</span>
-                </div>
-              </Link>
-              {(linkedReview.address || linkedReview.googleMapsUrl) && (
+              {linkedReview && (
+                <Link
+                  href={`/eats/${linkedReview.slug.current}`}
+                  className="quick-info-map-card"
+                >
+                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                  <div className="quick-info-map-text">
+                    <span className="quick-info-map-address">{linkedReview.name}</span>
+                    <span className="quick-info-map-cta">Read the review →</span>
+                  </div>
+                </Link>
+              )}
+              {linkedReview && (linkedReview.address || linkedReview.googleMapsUrl) && (
                 <a
                   href={linkedReview.googleMapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(linkedReview.address ?? linkedReview.name)}`}
                   target="_blank"
@@ -204,6 +206,23 @@ export default async function InterviewPage({ params }: PageProps) {
                   <div className="quick-info-map-text">
                     {linkedReview.address && <span className="quick-info-map-address">{linkedReview.address}</span>}
                     <span className="quick-info-map-cta">Open in Google Maps →</span>
+                  </div>
+                </a>
+              )}
+              {(linkedReview?.websiteUrl || (interview.websiteUrl as string | null)) && (
+                <a
+                  href={(linkedReview?.websiteUrl ?? interview.websiteUrl) as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="quick-info-map-card"
+                >
+                  <svg className="quick-info-map-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                  <div className="quick-info-map-text">
+                    <span className="quick-info-map-address">{linkedReview?.name ?? restaurantName}</span>
+                    <span className="quick-info-map-cta">Visit website →</span>
                   </div>
                 </a>
               )}
