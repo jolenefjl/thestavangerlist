@@ -98,13 +98,6 @@ export const interview = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
-      name: "featured",
-      title: "Featured",
-      type: "boolean",
-      initialValue: false,
-    }),
-
-    defineField({
       name: "websiteUrl",
       title: "Restaurant Website URL",
       type: "url",
