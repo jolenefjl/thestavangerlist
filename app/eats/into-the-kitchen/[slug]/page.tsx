@@ -131,6 +131,57 @@ export default async function InterviewPage({ params }: PageProps) {
         </div>
       )}
 
+      {/* ── Video Embed ──────────────────────────────────────── */}
+      {(interview.tiktokUrl || interview.instagramUrl) && (() => {
+        const tiktokUrl = interview.tiktokUrl as string | null;
+        const instagramUrl = interview.instagramUrl as string | null;
+
+        // TikTok takes priority if both are set
+        if (tiktokUrl) {
+          const videoId = tiktokUrl.match(/\/video\/(\d+)/)?.[1];
+          if (!videoId) return null;
+          return (
+            <div className="tiktok-embed-wrap article-body-text" style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
+              <p className="tiktok-label" style={{ padding: "12px 0 0" }}>Watch the Interview</p>
+              <div className="tiktok-frame-wrap">
+                <iframe
+                  src={`https://www.tiktok.com/embed/v2/${videoId}`}
+                  style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                  scrolling="no"
+                  allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                />
+              </div>
+            </div>
+          );
+        }
+
+        if (instagramUrl) {
+          // Extract shortcode from /reel/CODE/ or /p/CODE/
+          const shortcode = instagramUrl.match(/\/(?:reel|p)\/([A-Za-z0-9_-]+)/)?.[1];
+          if (!shortcode) return null;
+          const embedSrc = instagramUrl.includes("/reel/")
+            ? `https://www.instagram.com/reel/${shortcode}/embed/`
+            : `https://www.instagram.com/p/${shortcode}/embed/`;
+          return (
+            <div className="tiktok-embed-wrap article-body-text" style={{ maxWidth: 720, margin: "0 auto 48px", padding: "0 clamp(20px, 6vw, 48px)" }}>
+              <p className="tiktok-label" style={{ padding: "12px 0 0" }}>Watch the Interview</p>
+              <div className="tiktok-frame-wrap">
+                <iframe
+                  src={embedSrc}
+                  style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                  scrolling="no"
+                  allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                />
+              </div>
+            </div>
+          );
+        }
+
+        return null;
+      })()}
+
       {/* ── Quick Info ───────────────────────────────────────── */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(20px, 6vw, 48px) 48px" }}>
         <div style={{ borderTop: "0.5px solid var(--color-border)", paddingTop: 32, marginBottom: 40 }}>

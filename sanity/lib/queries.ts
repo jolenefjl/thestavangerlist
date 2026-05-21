@@ -206,6 +206,8 @@ export const interviewBySlugQuery = groq`
     heroPhoto,
     introStory,
     publishedAt,
+    tiktokUrl,
+    instagramUrl,
     websiteUrl,
     seoTitle,
     seoDescription,

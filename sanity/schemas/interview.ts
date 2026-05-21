@@ -90,6 +90,20 @@ export const interview = defineType({
       ],
     }),
 
+    // ── Video ─────────────────────────────────────────────────
+    defineField({
+      name: "tiktokUrl",
+      title: "TikTok Video URL",
+      type: "url",
+      description: "Paste the full TikTok video URL, e.g. https://www.tiktok.com/@username/video/123456789",
+    }),
+    defineField({
+      name: "instagramUrl",
+      title: "Instagram Reel or Post URL",
+      type: "url",
+      description: "Paste the full Instagram URL, e.g. https://www.instagram.com/reel/ABC123/ or /p/ABC123/",
+    }),
+
     // ── Meta ──────────────────────────────────────────────────
     defineField({
       name: "publishedAt",
