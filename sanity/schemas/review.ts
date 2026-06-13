@@ -211,6 +211,13 @@ export const review = defineType({
       description: "One or two sentences. What would bring you back?",
     }),
     defineField({
+      name: "author",
+      title: "Reviewed By",
+      type: "reference",
+      to: [{ type: "author" }],
+      description: "The author of this review.",
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published Date",
       type: "datetime",

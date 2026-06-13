@@ -238,6 +238,32 @@ export default async function ReviewPage({ params }: PageProps) {
               )}
             </div>
           )}
+
+          {/* ── Reviewed By ─────────────────────────────────────── */}
+          {review.author && (
+            <div className="quick-info-map-card" style={{ marginTop: 12, cursor: "default" }}>
+              {review.author.photo && (
+                <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: "50%", overflow: "hidden", position: "relative" }}>
+                  <Image
+                    src={urlFor(review.author.photo as Record<string, unknown>).width(88).height(88).fit("crop").url()}
+                    alt={(review.author.photo as Record<string, unknown>).alt as string ?? review.author.name as string}
+                    fill
+                    sizes="44px"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              )}
+              <div className="quick-info-map-text">
+                <span className="quick-info-map-address" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <span style={{ fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-text-hint)", lineHeight: 1 }}>Reviewed by</span>
+                  {review.author.name as string}
+                </span>
+                {review.author.bio && (
+                  <span className="quick-info-map-cta" style={{ fontStyle: "normal" }}>{review.author.bio as string}</span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* ── Suggest CTA ────────────────────────────────────── */}

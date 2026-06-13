@@ -156,7 +156,12 @@ export const reviewBySlugQuery = groq`
     websiteUrl,
     tiktokUrl,
     gallery,
-    body
+    body,
+    author-> {
+      name,
+      bio,
+      photo
+    }
   }
 `;
 
