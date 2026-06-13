@@ -241,27 +241,50 @@ export default async function ReviewPage({ params }: PageProps) {
 
           {/* ── Reviewed By ─────────────────────────────────────── */}
           {review.author && (
-            <div className="quick-info-map-card" style={{ marginTop: 12, cursor: "default" }}>
+            <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 16, padding: "18px 20px", background: "var(--color-bg-subtle)", border: "0.5px solid var(--color-border)", borderRadius: 3 }}>
               {review.author.photo && (
-                <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: "50%", overflow: "hidden", position: "relative" }}>
+                <div style={{ flexShrink: 0, width: 56, height: 56, borderRadius: "50%", overflow: "hidden", position: "relative" }}>
                   <Image
-                    src={urlFor(review.author.photo as Record<string, unknown>).width(88).height(88).fit("crop").url()}
+                    src={urlFor(review.author.photo as Record<string, unknown>).width(112).height(112).fit("crop").url()}
                     alt={(review.author.photo as Record<string, unknown>).alt as string ?? review.author.name as string}
                     fill
-                    sizes="44px"
+                    sizes="56px"
                     style={{ objectFit: "cover" }}
                   />
                 </div>
               )}
-              <div className="quick-info-map-text">
-                <span className="quick-info-map-address" style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-text-hint)", lineHeight: 1 }}>Reviewed by</span>
-                  {review.author.name as string}
-                </span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600, color: "var(--color-accent)", marginBottom: 3, lineHeight: 1 }}>Reviewed by</p>
+                <p style={{ fontSize: 16, fontFamily: "var(--font-spectral)", fontWeight: 600, color: "var(--color-text)", marginBottom: 4, lineHeight: 1.2 }}>{review.author.name as string}</p>
                 {review.author.bio && (
-                  <span className="quick-info-map-cta" style={{ fontStyle: "normal" }}>{review.author.bio as string}</span>
+                  <p style={{ fontSize: 13, fontFamily: "var(--font-dm-sans)", color: "var(--color-text-muted)", lineHeight: 1.5, margin: 0 }}>{review.author.bio as string}</p>
                 )}
               </div>
+              {(review.author.instagramUrl || review.author.tiktokUrl || review.author.email) && (
+                <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+                  {review.author.instagramUrl && (
+                    <a href={review.author.instagramUrl as string} target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: "50%", border: "0.5px solid var(--color-border)", color: "var(--color-text-muted)", transition: "border-color 0.15s, color 0.15s" }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                      </svg>
+                    </a>
+                  )}
+                  {review.author.tiktokUrl && (
+                    <a href={review.author.tiktokUrl as string} target="_blank" rel="noopener noreferrer" aria-label="TikTok" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: "50%", border: "0.5px solid var(--color-border)", color: "var(--color-text-muted)", transition: "border-color 0.15s, color 0.15s" }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+                      </svg>
+                    </a>
+                  )}
+                  {review.author.email && (
+                    <a href={`mailto:${review.author.email as string}`} aria-label="Email" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: "50%", border: "0.5px solid var(--color-border)", color: "var(--color-text-muted)", transition: "border-color 0.15s, color 0.15s" }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>

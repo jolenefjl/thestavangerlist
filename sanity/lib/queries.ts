@@ -160,7 +160,10 @@ export const reviewBySlugQuery = groq`
     author-> {
       name,
       bio,
-      photo
+      photo,
+      instagramUrl,
+      tiktokUrl,
+      email
     }
   }
 `;

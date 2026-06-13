@@ -31,6 +31,21 @@ export const author = defineType({
       rows: 2,
       description: "One or two sentences. Shown under the author name on reviews.",
     }),
+    defineField({
+      name: "instagramUrl",
+      title: "Instagram URL",
+      type: "url",
+    }),
+    defineField({
+      name: "tiktokUrl",
+      title: "TikTok URL",
+      type: "url",
+    }),
+    defineField({
+      name: "email",
+      title: "Email Address",
+      type: "string",
+    }),
   ],
   preview: {
     select: {
